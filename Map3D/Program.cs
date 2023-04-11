@@ -1,23 +1,28 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-namespace Map3D
+﻿namespace Map3D
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+
+            int mapScale = 100;
+            int mapMinXY = mapScale / -2;
+            int mapMaxXY = mapScale / 2;
+
             Random rand = new Random();
-            Map map = new Map(201, 2);
 
-            for (int i = 0; i < rand.Next(1000); i++)
+            Sector sector = new Sector(new Coordinate(0, 0, 0));
+
+            for (int i = 0; i < rand.Next(1, 100); i++)
             {
-                int randX = rand.Next(-99, 100);
-                int randY = rand.Next(-99, 100);
-                int randZ = rand.Next(-99, 100);
+                int randX = rand.Next(mapMinXY, mapMaxXY + 1);
+                int randY = rand.Next(mapMinXY, mapMaxXY + 1);
+                int randZ = rand.Next(mapMinXY, mapMaxXY + 1);
 
-                map.SetCoordinate(randX, randY, randZ);
+                sector.SetStellarObjectCoordinate(randX, randY, randZ);
             }
-            map.PrintCoordinates();
+            sector.PrintSector();
+            sector.PrintStellarObjectsCoordinates();
         }
     }
 
@@ -46,50 +51,38 @@ namespace Map3D
             return zCoord;
         }
     }
-    class Map
+    class Sector
     {
-        private List<Coordinate> coordinates = new List<Coordinate>();
-        private int mapScaleFormat;
-        private int innerBorderRadius;
-        private int mapMaxX;
-        private int mapMinX;
-        private int mapMaxY;
-        private int mapMinY;
-        private int mapMaxZ;
-        private int mapMinZ;
+        private List<Coordinate> stellarObjects = new List<Coordinate>();
+        private Coordinate sectorPosition;
+        private const int sectorScaleFormat = 100;
+        private int sectorMaxX = sectorScaleFormat / 2;
+        private int sectorMinX = sectorScaleFormat / -2;
+        private int sectorMaxY = sectorScaleFormat / 2;
+        private int sectorMinY = sectorScaleFormat / -2;
+        private int sectorMaxZ = sectorScaleFormat / 2;
+        private int sectorMinZ = sectorScaleFormat / -2;
 
-        public Map(int mapScaleFormat, int innerBorderRadius)
+        public Sector(Coordinate sectorPosition)
         {
-            if (mapScaleFormat % 2 != 0)
-            {
-                mapScaleFormat++;
-                Console.WriteLine($"MapScale Format nicht zulässig! Format wurde auf {mapScaleFormat} aufgerundet!");
-            }
-            this.mapScaleFormat = mapScaleFormat;
-            this.innerBorderRadius = innerBorderRadius;
-            this.mapMaxX = mapScaleFormat / 2;
-            this.mapMinX = mapScaleFormat / -2;
-            this.mapMaxY = mapScaleFormat / 2;
-            this.mapMinY = mapScaleFormat / -2;
-            this.mapMaxZ = mapScaleFormat / 2;
-            this.mapMinZ = mapScaleFormat / -2;
+            this.sectorPosition = sectorPosition;
         }
 
-        public bool SetCoordinate(int x, int y, int z)
+        public bool SetStellarObjectCoordinate(int x, int y, int z)
         {
-            if (x <= mapScaleFormat && y <= mapScaleFormat && z <= mapScaleFormat)
+            if (x <= sectorScaleFormat && y <= sectorScaleFormat && z <= sectorScaleFormat)
             {
-                foreach (var coordinate in coordinates)
+                foreach (var stellarObject in stellarObjects)
                 {
-                    if (coordinate.GetCoordinateX() == x &&
-                        coordinate.GetCoordinateY() == y && 
-                        coordinate.GetCoordinateZ() == z)
+                    if (stellarObject.GetCoordinateX() == x &&
+                        stellarObject.GetCoordinateY() == y &&
+                        stellarObject.GetCoordinateZ() == z)
                     {
                         return false;
                     }
                 }
-                coordinates.Add(new Coordinate(x, y, z));
-                coordinates = coordinates.OrderBy(p => p.GetCoordinateX())
+                stellarObjects.Add(new Coordinate(x, y, z));
+                stellarObjects = stellarObjects.OrderBy(p => p.GetCoordinateX())
                                          .ThenBy(p => p.GetCoordinateY())
                                          .ThenBy(p => p.GetCoordinateZ())
                                          .ToList<Coordinate>();
@@ -100,24 +93,47 @@ namespace Map3D
                 return false;
             }
         }
-        public List<Coordinate> GetCoordinates()
+        public List<Coordinate> GetPlanetCoordinates()
         {
-            return coordinates;
+            return stellarObjects;
         }
-        public void PrintCoordinates()
+        public void PrintStellarObjectsCoordinates()
         {
-            foreach (var coordinate in coordinates)
+            foreach (var stellarObject in stellarObjects)
             {
                 Console.WriteLine(
-                    $"{coordinate.GetCoordinateX(),2} \t" +
-                    $"{coordinate.GetCoordinateY(),2} \t" +
-                    $"{coordinate.GetCoordinateZ(),2}");
+                    $"{stellarObject.GetCoordinateX(),3} \t" +
+                    $"{stellarObject.GetCoordinateY(),3} \t" +
+                    $"{stellarObject.GetCoordinateZ(),3}");
             }
         }
-        public void PrintMap()
+        public void PrintSector()
         {
-            // for(y){ for (x) print Z at X,Y}}
-            // Printing will get our of scale (xy)
+            bool stellarObjectPrinted = false;
+            for (int y = sectorMinY; y <= sectorMaxY; y++)
+            {
+                for (int x = sectorMinX; x <= sectorMaxX; x++)
+                {
+                    foreach (var stellarObject in stellarObjects)
+                    {
+                        if (stellarObject.GetCoordinateX() == x && stellarObject.GetCoordinateY() == y)
+                        {
+                            Console.Write(
+                                $"{stellarObject.GetCoordinateX(),3}|" +
+                                $"{stellarObject.GetCoordinateY(),3}|" +
+                                $"{stellarObject.GetCoordinateZ(),3}");
+                            stellarObjectPrinted = true;
+                            break;
+                        }
+                    }
+                    if (!stellarObjectPrinted)
+                    {
+                        Console.Write(" ");
+                    }
+                    stellarObjectPrinted = false;
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
