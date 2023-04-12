@@ -1,16 +1,10 @@
-﻿namespace Map3D
+﻿namespace Spaceship
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            //Travel travel = new Travel(new Coordinate(20, 20, 20));
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    Console.Clear();
-            //    travel.TravelAnimation();
-            //    Thread.Sleep(33);
-            //}
+
             World world = new World();
             world.CreateSector(new Coordinate(0, 0, 0));
             world.CreateSector(new Coordinate(0, 0, 1));
@@ -22,6 +16,43 @@
             }
 
         }
+    }
+    class Spaceship
+    {
+        private string name;
+        private double speedMax;
+        private double enginePower;
+        private double fuelMax;
+        private double fuel;
+        private double weight;
+        private double fuelConsumption;
+        private Coordinate positionInSector;
+        private Coordinate positionInWorld;
+
+        public Spaceship(string name, double speedMax, double weight, double fuelMax, double enginePower, Coordinate positionInSector, Coordinate positionInWorld)
+        {
+            this.name = name;
+            this.speedMax = speedMax;
+            this.fuelMax = fuelMax;
+            fuel = fuelMax;
+            this.weight = weight;
+            fuelConsumption = weight / 1000 * enginePower;
+            this.positionInSector = positionInSector;
+            this.positionInWorld = positionInWorld;
+        }
+        public void Travel(Coordinate travelDestination)
+        {
+            Travel travel = new Travel(travelDestination, positionInSector, positionInWorld, fuelConsumption, speedMax);
+            if (fuel - travel.CalcFuelConsumption() > 0)
+            {
+                Console.WriteLine("Treibstoff reicht nicht aus");
+            }
+            else
+            {
+                travel.TravelWithAnimation();
+            }
+        }
+
     }
 
 

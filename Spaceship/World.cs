@@ -1,18 +1,12 @@
-﻿namespace Map3D
+﻿namespace Spaceship
 {
     class World
     {
         List<Sector> sectors = new List<Sector>();
 
-        public bool CreateSector(Coordinate SectorCoordinate)
+        public void CreateSector(Coordinate SectorCoordinate)
         {
-
-            if (SectorListContains(SectorCoordinate))
-            {
-                return false;
-            }
             sectors.Add(new Sector(SectorCoordinate));
-            return true;
         }
         private bool SectorListContains(Coordinate SectorCoordinate)
         {

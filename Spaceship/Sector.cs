@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Map3D
+namespace Spaceship
 {
     class Sector
     {
@@ -33,7 +33,7 @@ namespace Map3D
 
                 SetStellarObjectCoordinate(randX, randY, randZ);
             }
-        }     
+        }
         public Coordinate GetSectorPosition()
         {
             return sectorPosition;
@@ -55,7 +55,7 @@ namespace Map3D
                 stellarObjects = stellarObjects.OrderBy(p => p.GetCoordinateX())
                                          .ThenBy(p => p.GetCoordinateY())
                                          .ThenBy(p => p.GetCoordinateZ())
-                                         .ToList<Coordinate>();
+                                         .ToList();
                 return true;
             }
             else

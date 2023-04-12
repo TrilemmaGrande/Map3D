@@ -1,33 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Map3D
+﻿namespace Spaceship
 {
     class Travel
     {
         private Coordinate travelDestination;
         private double travelTime;
         private double travelDistance;
+        private double speed;
+        private double fuelConsumption;
 
-        public Travel(Coordinate travelTarget)
+        public Travel(Coordinate travelDestination, Coordinate spaceshipPositionInSector, Coordinate spaceshipPositionInWorld, double fuelConsumption, double speed)
         {
-            this.travelDestination = travelTarget;
-            //this.travelDistance = Spaceship.Position -> travelTarget
-            //this.travelTime =  travelDistance / Spaceship.Speed
-            //Spaceship.Fuel -= travelDistance * Spaceship.FuelConsumption
+            this.travelDestination = travelDestination;
+            travelDistance = CalcDistance(spaceshipPositionInSector, travelDestination);
+            travelTime = travelDistance / speed;
+            this.speed = speed;
+            this.fuelConsumption = fuelConsumption;
         }
-
+        public double CalcDistance(Coordinate start, Coordinate destination)
+        {
+            return Math.Sqrt(
+                 Math.Pow(start.GetCoordinateX() - destination.GetCoordinateX(), 2) +
+                 Math.Pow(start.GetCoordinateY() - destination.GetCoordinateY(), 2) +
+                 Math.Pow(start.GetCoordinateZ() - destination.GetCoordinateZ(), 2));
+        }
+        public double CalcFuelConsumption()
+        {
+            return travelDistance / speed * fuelConsumption;
+        }
+        public Coordinate TravelWithAnimation()
+        {
+            for (int i = 0; i < travelTime; i++)
+            {
+                Console.Clear();
+                TravelAnimation();
+                Thread.Sleep(33);
+            }
+            return travelDestination;
+        }
         public void TravelAnimation()
         {
             string[] bottomLeft = { "  ", "  ", " /", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
             string[] topLeft = { " `", "  ", " \\", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
             string[] topRight = { " ´", "  ", " /", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
-            string[] bottomRight = { "  ", " \\", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
+            string[] bottomRight = { "  ", " \\", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
             string[] middleHorizontal = { " _", "- ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
-            string[] middleVertikal = { " |", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
+            string[] middleVertikal = { " |", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
 
             Random rand = new Random();
 
@@ -49,7 +66,7 @@ namespace Map3D
                     }
                     else if (y < -5 && x > 5)
                     {
-                        Console.Write(bottomRight[rand.Next(0, 14)]);
+                        Console.Write(bottomRight[rand.Next(0, 15)]);
                     }
                     else if ((x < -5 || x > 5) && y < 5 && y > -5 && y != 0)
                     {
@@ -57,7 +74,7 @@ namespace Map3D
                     }
                     else if ((y < -5 || y > 5) && x > -5 && x < 5)
                     {
-                        Console.Write(middleVertikal[rand.Next(0, 14)]);
+                        Console.Write(middleVertikal[rand.Next(0, 15)]);
                     }
                     else if (y > -5 && y < 5 && x > -5 && x < 5)
                     {
