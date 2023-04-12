@@ -53,11 +53,11 @@
             Coordinate positionInSector = GetNewPositionInSector();
             Coordinate positionInWorld = GetNewPositionInWorld();
             string newPositionInSector = 
-                                        $"{positionInSector.GetCoordinateX(),17}|" +
+                                        $"{positionInSector.GetCoordinateX(),3}|" +
                                         $"{positionInSector.GetCoordinateY(),3}|" +
                                         $"{positionInSector.GetCoordinateZ(),3}";
             string newPositionInWorld = 
-                                        $"{positionInWorld.GetCoordinateX(),17}|" +
+                                        $"{positionInWorld.GetCoordinateX(),3}|" +
                                         $"{positionInWorld.GetCoordinateY(),3}|" +
                                         $"{positionInWorld.GetCoordinateZ(),3}";
 
@@ -95,11 +95,15 @@
                     {
                         Console.Write("  ");
                     }
-                    if (y == 1 && x == 15)
+                    else
+                    {
+                        Console.Write("  ");
+                    }
+                    if (y == 1 && x == -5)
                     {
                         Console.Write(newPositionInWorld);
                     }
-                    if (y == 0 && x == 15)
+                    if (y == 0 && x == -5)
                     {
                         Console.Write(newPositionInSector);
                     }

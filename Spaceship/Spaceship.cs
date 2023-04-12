@@ -1,4 +1,6 @@
-﻿namespace Spaceship
+﻿using System.Reflection;
+
+namespace Spaceship
 {
     class Spaceship
     {
@@ -48,7 +50,7 @@
                 {
                     world.CreateSector(destination);
                     SetSector(world.GetSectorFromSectorList(destination));
-                }
+                }              
                 positionInWorld = travel.GetNewPositionInWorld();
                 positionInSector = travel.GetNewPositionInSector();
                 travel.TravelWithAnimation();
