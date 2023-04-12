@@ -1,9 +1,11 @@
 ﻿namespace Spaceship
 {
     //TODO:
-    //TravelingInSector and TravelingInWorld Methods
-    //Create new Sector if travelled there first time.
+    //ASAP: Traveling in Sectors generate new Sectors. Maybe Refactoring the whole thing.
+    //Somehow output of StellarObjects is fucked up. 
+    //Create fuckin Planets...
     //Maybe in Traveling dynamically adjust time/fuelConsumption with enginePower and speedMax for EcoTraveling (more Time = less Fuelconsumption), only MaxSpeed right now.
+    //Code is written, make it beautiful!
 
     internal class Program
     {
