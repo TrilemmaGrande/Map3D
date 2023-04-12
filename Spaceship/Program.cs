@@ -1,5 +1,8 @@
 ﻿namespace Spaceship
 {
+    //TODO:
+    //TravelingInSector and TravelingInWorld Methods
+    //Maybe in Traveling dynamically adjust time/fuelConsumption with enginePower and speedMax for EcoTraveling (more Time = less Fuelconsumption)
     internal class Program
     {
         static void Main(string[] args)
@@ -40,9 +43,9 @@
             this.positionInSector = positionInSector;
             this.positionInWorld = positionInWorld;
         }
-        public void Travel(Coordinate travelDestination)
+        public void Travel(ITravelingType travelingType, Coordinate destination)
         {
-            Travel travel = new Travel(travelDestination, positionInSector, positionInWorld, fuelConsumption, speedMax);
+            Traveling travel = new Traveling(travelingType, fuelConsumption, speedMax, positionInSector, positionInWorld, destination);
             if (fuel - travel.CalcFuelConsumption() > 0)
             {
                 Console.WriteLine("Treibstoff reicht nicht aus");
