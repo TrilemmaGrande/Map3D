@@ -10,6 +10,7 @@ namespace Spaceship
     {
         public double CalcDistance(Coordinate spaceshipPositionInSector, Coordinate spaceshipPositionInWorld, Coordinate destination)
         {
+            //this is only point to point in sector, but not from point to sector.
             return Math.Sqrt(
                  Math.Pow(spaceshipPositionInSector.GetCoordinateX() - destination.GetCoordinateX(), 2) +
                  Math.Pow(spaceshipPositionInSector.GetCoordinateY() - destination.GetCoordinateY(), 2) +

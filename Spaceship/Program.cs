@@ -2,7 +2,9 @@
 {
     //TODO:
     //TravelingInSector and TravelingInWorld Methods
-    //Maybe in Traveling dynamically adjust time/fuelConsumption with enginePower and speedMax for EcoTraveling (more Time = less Fuelconsumption)
+    //Create new Sector if travelled there first time.
+    //Maybe in Traveling dynamically adjust time/fuelConsumption with enginePower and speedMax for EcoTraveling (more Time = less Fuelconsumption), only MaxSpeed right now.
+
     internal class Program
     {
         static void Main(string[] args)
@@ -53,6 +55,7 @@
             else
             {
                 travel.TravelWithAnimation();
+                fuel -= travel.CalcFuelConsumption();
             }
         }
 
