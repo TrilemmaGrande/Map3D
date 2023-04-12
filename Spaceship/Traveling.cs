@@ -14,6 +14,7 @@
         {
             this.speed = speed;
             this.travelingType = travelingType;
+            this.destination = destination;
             this.fuelConsumption = fuelConsumption;
             this.spaceshipPositionInWorld = spaceshipPositionInWorld;
             this.spaceshipPositionInSector = spaceshipPositionInSector;
