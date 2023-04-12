@@ -16,8 +16,8 @@ namespace Spaceship
                  Math.Pow(spaceshipPositionInSector.GetCoordinateZ() - destination.GetCoordinateZ(), 2));
         }
         public Coordinate CalcNewPositionInSector(Coordinate spaceshipPositionInSector, Coordinate destination)
-        {
-            return spaceshipPositionInSector;
+        {           
+            return destination;
         }
         public Coordinate CalcNewPositionInWorld(Coordinate spaceshipPositionInWorld, Coordinate destination)
         {

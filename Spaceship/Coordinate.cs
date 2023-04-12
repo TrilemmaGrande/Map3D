@@ -30,5 +30,9 @@ namespace Spaceship
         {
             return zCoord;
         }
+        public string GetCoordinateString()
+        {
+            return $"{xCoord}|{yCoord}|{zCoord}";
+        }
     }
 }

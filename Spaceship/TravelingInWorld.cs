@@ -12,9 +12,9 @@ namespace Spaceship
         {
             //this is only point to point in sector, but not from point to sector.
             return Math.Sqrt(
-                 Math.Pow(spaceshipPositionInSector.GetCoordinateX() - destination.GetCoordinateX(), 2) +
-                 Math.Pow(spaceshipPositionInSector.GetCoordinateY() - destination.GetCoordinateY(), 2) +
-                 Math.Pow(spaceshipPositionInSector.GetCoordinateZ() - destination.GetCoordinateZ(), 2));
+                 Math.Pow(spaceshipPositionInWorld.GetCoordinateX() - destination.GetCoordinateX(), 2) +
+                 Math.Pow(spaceshipPositionInWorld.GetCoordinateY() - destination.GetCoordinateY(), 2) +
+                 Math.Pow(spaceshipPositionInWorld.GetCoordinateZ() - destination.GetCoordinateZ(), 2));
         }
         public Coordinate CalcNewPositionInSector(Coordinate spaceshipPositionInSector, Coordinate destination)
         {
@@ -22,7 +22,7 @@ namespace Spaceship
         }
         public Coordinate CalcNewPositionInWorld(Coordinate spaceshipPositionInWorld, Coordinate destination)
         {
-            return spaceshipPositionInWorld;
+            return destination;
         }
     }
 }

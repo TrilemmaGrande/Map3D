@@ -2,13 +2,15 @@
 {
     class World
     {
-        List<Sector> sectors = new List<Sector>();
+        private static List<Sector> sectors = new List<Sector>();
+        private static Spaceship playerSpaceShip;
+        private static List<Spaceship> spaceships = new List<Spaceship>();
 
         public void CreateSector(Coordinate SectorCoordinate)
         {
             sectors.Add(new Sector(SectorCoordinate));
         }
-        private bool SectorListContains(Coordinate SectorCoordinate)
+        public bool SectorListContains(Coordinate SectorCoordinate)
         {
             foreach (var sector in sectors)
             {
@@ -22,6 +24,26 @@
         public List<Sector> GetSectors()
         {
             return sectors;
+        }
+        public Sector GetSectorFromSectorList(Coordinate coordinate)
+        {
+            foreach (var sector in sectors)
+            {
+                if (sector.GetSectorPosition() == coordinate)
+                {
+                    return sector;
+                }
+            }
+            return null;
+        }
+        public void CreatePlayerSpaceship(string name, double speedMax, double weight, double fuelMax, double enginePower, Coordinate positionInSector, Coordinate positionInWorld)
+        {
+            playerSpaceShip = new Spaceship(name, speedMax, weight, fuelMax, enginePower, positionInSector, positionInWorld, this);
+            spaceships.Add(playerSpaceShip);
+        }
+        public Spaceship GetPlayerSpaceship()
+        {
+            return playerSpaceShip;
         }
     }
 }

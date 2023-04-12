@@ -9,60 +9,22 @@
     {
         static void Main(string[] args)
         {
-
             World world = new World();
-            world.CreateSector(new Coordinate(0, 0, 0));
-            world.CreateSector(new Coordinate(0, 0, 1));
-
-            foreach (var sector in world.GetSectors())
-            {
-                sector.PrintStellarObjectsMap();
-                sector.PrintStellarObjectsCoordinates();
-            }
-
+            Spaceship spaceShip;
+            //layerSpaceShip = new Spaceship(name, speedMax, weight, fuelMax, enginePower, positionInSector, positionInWorld, this);
+            world.CreatePlayerSpaceship("Apollo1", 100, 1, 10000, 1, new Coordinate(10, 10, 20), new Coordinate(0, 0, 0));
+            spaceShip = world.GetPlayerSpaceship();
+            Console.WriteLine(spaceShip.GetSector().GetSectorPosition().GetCoordinateString());
+            Console.WriteLine(spaceShip.GetPositionInSector().GetCoordinateString());
+            Console.WriteLine(spaceShip.GetPositionInWorld().GetCoordinateString());
+            spaceShip.Travel(new TravelingInSector(), new Coordinate(20, 20, 20));
+            Console.WriteLine(spaceShip.GetSector().GetSectorPosition().GetCoordinateString());
+            Console.WriteLine(spaceShip.GetPositionInSector().GetCoordinateString());
+            Console.WriteLine(spaceShip.GetPositionInWorld().GetCoordinateString());
+            spaceShip.Travel(new TravelingInWorld(), new Coordinate(0, 0, 1));
+            Console.WriteLine(spaceShip.GetSector().GetSectorPosition().GetCoordinateString());
+            Console.WriteLine(spaceShip.GetPositionInSector().GetCoordinateString());
+            Console.WriteLine(spaceShip.GetPositionInWorld().GetCoordinateString());
         }
     }
-    class Spaceship
-    {
-        private string name;
-        private double speedMax;
-        private double enginePower;
-        private double fuelMax;
-        private double fuel;
-        private double weight;
-        private double fuelConsumption;
-        private Coordinate positionInSector;
-        private Coordinate positionInWorld;
-
-        public Spaceship(string name, double speedMax, double weight, double fuelMax, double enginePower, Coordinate positionInSector, Coordinate positionInWorld)
-        {
-            this.name = name;
-            this.speedMax = speedMax;
-            this.fuelMax = fuelMax;
-            fuel = fuelMax;
-            this.weight = weight;
-            fuelConsumption = weight / 1000 * enginePower;
-            this.positionInSector = positionInSector;
-            this.positionInWorld = positionInWorld;
-        }
-        public void Travel(ITravelingType travelingType, Coordinate destination)
-        {
-            Traveling travel = new Traveling(travelingType, fuelConsumption, speedMax, positionInSector, positionInWorld, destination);
-            if (fuel - travel.CalcFuelConsumption() > 0)
-            {
-                Console.WriteLine("Treibstoff reicht nicht aus");
-            }
-            else
-            {
-                travel.TravelWithAnimation();
-                fuel -= travel.CalcFuelConsumption();
-            }
-        }
-
-    }
-
-
-
-
-
 }
