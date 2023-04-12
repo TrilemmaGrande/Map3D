@@ -19,9 +19,9 @@
             this.name = name;
             this.speedMax = speedMax;
             this.fuelMax = fuelMax;
-            fuel = fuelMax;
+            this.fuel = fuelMax;
             this.weight = weight;
-            fuelConsumption = weight / 10000 * enginePower;
+            fuelConsumption = weight / 1000 * enginePower;
             this.positionInSector = positionInSector;
             this.positionInWorld = positionInWorld;
             this.world = world;
@@ -38,9 +38,8 @@
         public void Travel(ITravelingType travelingType, Coordinate destination)
         {
             Traveling travel = new Traveling(travelingType, fuelConsumption, speedMax, positionInSector, positionInWorld, destination);
-            if (fuel - travel.CalcFuelConsumption() > 0)
+            if (fuel - travel.CalcFuelConsumption() < 0)
             {
-                Console.WriteLine($"Treibstoffverbrauch: { travel.CalcFuelConsumption()}");
                 Console.WriteLine("Treibstoff reicht nicht aus");
             }
             else

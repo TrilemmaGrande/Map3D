@@ -12,12 +12,12 @@
             World world = new World();
             Spaceship spaceShip;
             //layerSpaceShip = new Spaceship(name, speedMax, weight, fuelMax, enginePower, positionInSector, positionInWorld, this);
-            world.CreatePlayerSpaceship("Apollo1", 100, 1, 10000, 1, new Coordinate(10, 10, 20), new Coordinate(0, 0, 0));
+            world.CreatePlayerSpaceship("Apollo1", 100, 10, 100000, 100, new Coordinate(10, 10, 20), new Coordinate(0, 0, 0));
             spaceShip = world.GetPlayerSpaceship();
             Console.WriteLine(spaceShip.GetSector().GetSectorPosition().GetCoordinateString());
             Console.WriteLine(spaceShip.GetPositionInSector().GetCoordinateString());
             Console.WriteLine(spaceShip.GetPositionInWorld().GetCoordinateString());
-            spaceShip.Travel(new TravelingInSector(), new Coordinate(20, 20, 20));
+            spaceShip.Travel(new TravelingInSector(), new Coordinate(11, 20, 20));
             Console.WriteLine(spaceShip.GetSector().GetSectorPosition().GetCoordinateString());
             Console.WriteLine(spaceShip.GetPositionInSector().GetCoordinateString());
             Console.WriteLine(spaceShip.GetPositionInWorld().GetCoordinateString());

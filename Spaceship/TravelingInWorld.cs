@@ -18,7 +18,7 @@ namespace Spaceship
         }
         public Coordinate CalcNewPositionInSector(Coordinate spaceshipPositionInSector, Coordinate destination)
         {
-            return spaceshipPositionInSector;
+            return destination;
         }
         public Coordinate CalcNewPositionInWorld(Coordinate spaceshipPositionInWorld, Coordinate destination)
         {

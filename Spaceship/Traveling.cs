@@ -22,7 +22,6 @@
         }
         public double CalcFuelConsumption()
         {
-            Console.WriteLine($"Traveldistance: {travelDistance}");
             return travelDistance / speed * fuelConsumption;
         }
         public void TravelWithAnimation()
@@ -50,14 +49,16 @@
             string[] bottomRight =      { "  ", " \\", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
             string[] middleHorizontal = { " _", "- ", "  ",  "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
             string[] middleVertikal =   { " |", "  ", "  ",  "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
+            Coordinate positionInSector = GetNewPositionInSector();
+            Coordinate positionInWorld = GetNewPositionInWorld();
             string newPositionInSector = 
-                                        $"{GetNewPositionInSector().GetCoordinateX(),17}|" +
-                                        $"{GetNewPositionInSector().GetCoordinateY(),3}|" +
-                                        $"{GetNewPositionInSector().GetCoordinateZ(),3}";
+                                        $"{positionInSector.GetCoordinateX(),17}|" +
+                                        $"{positionInSector.GetCoordinateY(),3}|" +
+                                        $"{positionInSector.GetCoordinateZ(),3}";
             string newPositionInWorld = 
-                                        $"{GetNewPositionInWorld().GetCoordinateX(),17}|" +
-                                        $"{GetNewPositionInWorld().GetCoordinateY(),3}|" +
-                                        $"{GetNewPositionInWorld().GetCoordinateZ(),3}";
+                                        $"{positionInWorld.GetCoordinateX(),17}|" +
+                                        $"{positionInWorld.GetCoordinateY(),3}|" +
+                                        $"{positionInWorld.GetCoordinateZ(),3}";
 
             Random rand = new Random();
 
