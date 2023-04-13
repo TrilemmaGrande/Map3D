@@ -19,20 +19,11 @@
             this.spaceshipPositionInWorld = spaceshipPositionInWorld;
             this.spaceshipPositionInSector = spaceshipPositionInSector;
             travelDistance = travelingType.CalcDistance(spaceshipPositionInSector, spaceshipPositionInWorld, destination);
-            travelTime = travelDistance / speed;
+            travelTime = travelingType.CalcTravelTime(travelDistance, speed);
         }
         public double CalcFuelConsumption()
         {
             return travelDistance / speed * fuelConsumption;
-        }
-        public void TravelWithAnimation()
-        {
-            for (int i = 0; i < travelTime; i++)
-            {
-                Console.Clear();
-                TravelAnimation();
-                Thread.Sleep(33);
-            }
         }
         public Coordinate GetNewPositionInSector()
         {
@@ -44,72 +35,7 @@
         }
         public void TravelAnimation()
         {
-            string[] bottomLeft =       { "  ", "  ", " /",  "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
-            string[] topLeft =          { " `", "  ", " \\", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
-            string[] topRight =         { " ´", "  ", " /",  "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
-            string[] bottomRight =      { "  ", " \\", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
-            string[] middleHorizontal = { " _", "- ", "  ",  "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
-            string[] middleVertikal =   { " |", "  ", "  ",  "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
-            Coordinate positionInSector = GetNewPositionInSector();
-            Coordinate positionInWorld = GetNewPositionInWorld();
-            string newPositionInSector = 
-                                        $"{positionInSector.GetCoordinateX(),3}|" +
-                                        $"{positionInSector.GetCoordinateY(),3}|" +
-                                        $"{positionInSector.GetCoordinateZ(),3}";
-            string newPositionInWorld = 
-                                        $"{positionInWorld.GetCoordinateX(),3}|" +
-                                        $"{positionInWorld.GetCoordinateY(),3}|" +
-                                        $"{positionInWorld.GetCoordinateZ(),3}";
-
-            Random rand = new Random();
-
-            for (int y = 20; y >= -20; y--)
-            {
-                for (int x = -20; x < 20; x++)
-                {
-                    if (y < -5 && x < -5)
-                    {
-                        Console.Write(bottomLeft[rand.Next(0, 15)]);
-                    }
-                    else if (y > 5 && x < -5)
-                    {
-                        Console.Write(topLeft[rand.Next(0, 15)]);
-                    }
-                    else if (y > 5 && x > 5)
-                    {
-                        Console.Write(topRight[rand.Next(0, 15)]);
-                    }
-                    else if (y < -5 && x > 5)
-                    {
-                        Console.Write(bottomRight[rand.Next(0, 15)]);
-                    }
-                    else if ((x < -5 || x > 5) && y < 5 && y > -5 && y != 0)
-                    {
-                        Console.Write(middleHorizontal[rand.Next(0, 15)]);
-                    }
-                    else if ((y < -5 || y > 5) && x > -5 && x < 5)
-                    {
-                        Console.Write(middleVertikal[rand.Next(0, 15)]);
-                    }
-                    else if (y > -5 && y < 5 && x > -5 && x < 5)
-                    {
-                        Console.Write("  ");
-                    }
-                    else
-                    {
-                        Console.Write("  ");
-                    }
-                    if (y == 1 && x == -5)
-                    {
-                        Console.Write(newPositionInWorld);
-                    }
-                    if (y == 0 && x == -5)
-                    {
-                        Console.Write(newPositionInSector);
-                    }
-                }
-                Console.WriteLine();
-            }
+            travelingType.TravelWithAnimation(travelTime, GetNewPositionInSector(), GetNewPositionInWorld());
         }
     }
 }

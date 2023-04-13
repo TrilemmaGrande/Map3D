@@ -15,13 +15,21 @@ namespace Spaceship
                  Math.Pow(spaceshipPositionInSector.GetCoordinateY() - destination.GetCoordinateY(), 2) +
                  Math.Pow(spaceshipPositionInSector.GetCoordinateZ() - destination.GetCoordinateZ(), 2));
         }
+        public double CalcTravelTime(double travelDistance, double speed)
+        {
+            return travelDistance / speed;
+        }
         public Coordinate CalcNewPositionInSector(Coordinate spaceshipPositionInSector, Coordinate destination)
         {           
             return destination;
         }
         public Coordinate CalcNewPositionInWorld(Coordinate spaceshipPositionInWorld, Coordinate destination)
         {
-            return destination;
+            return spaceshipPositionInWorld;
+        }
+        public void TravelWithAnimation(double travelTime, Coordinate spaceshipPositionInSector, Coordinate spaceshipPositionInWorld)
+        {
+
         }
     }
 }

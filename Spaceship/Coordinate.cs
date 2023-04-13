@@ -30,9 +30,15 @@ namespace Spaceship
         {
             return zCoord;
         }
-        public string GetCoordinateString()
+        public string CoordinateToString()
         {
-            return $"{xCoord}|{yCoord}|{zCoord}";
+            return $"{xCoord,3}|{yCoord,3}|{zCoord,3}";
+        }
+        public void SetCoordinate(int x, int y, int z)
+        {
+            this.xCoord = x;
+            this.yCoord = y;
+            this.zCoord = z;
         }
     }
 }

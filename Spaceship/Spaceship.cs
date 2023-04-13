@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace Spaceship
+﻿namespace Spaceship
 {
     class Spaceship
     {
@@ -46,17 +44,10 @@ namespace Spaceship
             }
             else
             {
-                if (!world.SectorListContains(destination))
-                {
-                    world.CreateSector(destination);
-                    SetSector(world.GetSectorFromSectorList(destination));
-                }              
                 positionInWorld = travel.GetNewPositionInWorld();
                 positionInSector = travel.GetNewPositionInSector();
-                travel.TravelWithAnimation();
                 fuel -= travel.CalcFuelConsumption();
-                sector.PrintStellarObjectsMap();
-
+                travel.TravelAnimation();
             }
         }
         public Coordinate GetPositionInWorld()
@@ -74,6 +65,14 @@ namespace Spaceship
         private void SetSector(Sector sector)
         {
             this.sector = sector;
+        }
+        public void SetFuel(double fuel)
+        {
+            this.fuel = fuel;
+        }
+        public double GetFuel()
+        {
+            return fuel;
         }
     }
 }
