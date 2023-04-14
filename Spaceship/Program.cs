@@ -50,7 +50,7 @@
                 Console.Clear();
                 if (userInput == "1")
                 {
-                    TravelMenu(spaceShip);
+                    TravelMenu(spaceShip, world);
                 }
                 else if (userInput == "2")
                 {
@@ -75,7 +75,7 @@
                 }
             }
         }
-        static void TravelMenu(Spaceship spaceShip)
+        static void TravelMenu(Spaceship spaceShip, World world)
         {
             bool travelMenu = true;
             Coordinate travelDestination;
@@ -93,7 +93,7 @@
                 }
                 else if (userInput == "2")
                 {
-                    TravelInWorld(spaceShip);
+                    TravelInWorld(spaceShip, world);
                     travelMenu = false;
                 }
                 else if (userInput == "0")
@@ -120,7 +120,7 @@
             spaceShip.Travel(new TravelingInSector(), travelDestination);
 
         }
-        static void TravelInWorld(Spaceship spaceShip)
+        static void TravelInWorld(Spaceship spaceShip, World world)
         {
             bool travelInSector = true;
             string[] destination = new string[3];
@@ -130,7 +130,21 @@
             string userInput = Console.ReadLine();
             destination = userInput.Split(",");
             travelDestination = new Coordinate(Convert.ToInt32(destination[0]), Convert.ToInt32(destination[1]), Convert.ToInt32(destination[2]));
+            travelDestination = CheckCoordinateFromList(travelDestination, world);
             spaceShip.Travel(new TravelingInWorld(), travelDestination);
+        }
+        static Coordinate CheckCoordinateFromList(Coordinate inputCoordinate, World world)
+        {
+            foreach (var coordinate in world.GetSectors())
+            {
+                if (inputCoordinate.GetCoordinateX() == coordinate.GetSectorPosition().GetCoordinateX() &&
+                    inputCoordinate.GetCoordinateY() == coordinate.GetSectorPosition().GetCoordinateY() &&
+                    inputCoordinate.GetCoordinateZ() == coordinate.GetSectorPosition().GetCoordinateZ())
+                {
+                    return coordinate.GetSectorPosition();
+                }
+            }
+            return inputCoordinate;
         }
     }
 }
