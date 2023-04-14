@@ -37,7 +37,7 @@
         }
         public void Travel(ITravelingType travelingType, Coordinate destination)
         {
-            Traveling travel = new Traveling(travelingType, fuelConsumption, speedMax, positionInSector, positionInWorld, destination);
+            Traveling travel = new Traveling(travelingType, fuelConsumption, speedMax, positionInSector, positionInWorld, destination, world);
             if (fuel - travel.CalcFuelConsumption() < 0)
             {
                 Console.WriteLine("Treibstoff reicht nicht aus");

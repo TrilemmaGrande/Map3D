@@ -23,9 +23,8 @@ namespace Spaceship
         {
             return spaceshipPositionInSector;
         }
-        public Coordinate CalcNewPositionInWorld(Coordinate spaceshipPositionInWorld, Coordinate destination)
+        public Coordinate CalcNewPositionInWorld(Coordinate spaceshipPositionInWorld, Coordinate destination, World world)
         {
-            World world = new World();
             if (!world.SectorListContains(destination))
             {
                 world.CreateSector(destination);                

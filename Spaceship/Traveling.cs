@@ -10,9 +10,11 @@
         private double travelDistance;
         private double speed;
         private double fuelConsumption;
-        public Traveling(ITravelingType travelingType, double fuelConsumption, double speed, Coordinate spaceshipPositionInSector, Coordinate spaceshipPositionInWorld, Coordinate destination)
+        private World world;
+        public Traveling(ITravelingType travelingType, double fuelConsumption, double speed, Coordinate spaceshipPositionInSector, Coordinate spaceshipPositionInWorld, Coordinate destination, World world)
         {
             this.speed = speed;
+            this.world = world;
             this.travelingType = travelingType;
             this.destination = destination;
             this.fuelConsumption = fuelConsumption;
@@ -31,7 +33,7 @@
         }
         public Coordinate GetNewPositionInWorld()
         {
-            return travelingType.CalcNewPositionInWorld(spaceshipPositionInWorld, destination);
+            return travelingType.CalcNewPositionInWorld(spaceshipPositionInWorld, destination, world);
         }
         public void TravelAnimation()
         {
