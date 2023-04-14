@@ -109,7 +109,6 @@
         }
         static void TravelInSector(Spaceship spaceShip)
         {
-            bool travelInSector = true;
             string[] destination = new string[3];
             Coordinate travelDestination;
 
@@ -122,7 +121,6 @@
         }
         static void TravelInWorld(Spaceship spaceShip, World world)
         {
-            bool travelInSector = true;
             string[] destination = new string[3];
             Coordinate travelDestination;
 

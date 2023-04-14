@@ -58,14 +58,6 @@
         {
             return positionInSector;
         }
-        public Sector GetSector()
-        {
-            return sector;
-        }
-        private void SetSector(Sector sector)
-        {
-            this.sector = sector;
-        }
         public void SetFuel(double fuel)
         {
             this.fuel = fuel;

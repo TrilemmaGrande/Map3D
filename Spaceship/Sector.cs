@@ -8,7 +8,7 @@ namespace Spaceship
 {
     class Sector
     {
-        private List<Coordinate> stellarObjects = new List<Coordinate>();
+        private List<StellarObject> stellarObjects = new List<StellarObject>();
         private Coordinate sectorPosition;
         private const int sectorScaleFormat = 100;
         private const int maxStellarObjects = 20;
@@ -44,17 +44,17 @@ namespace Spaceship
             {
                 foreach (var stellarObject in stellarObjects)
                 {
-                    if (stellarObject.GetCoordinateX() == x &&
-                        stellarObject.GetCoordinateY() == y &&
-                        stellarObject.GetCoordinateZ() == z)
+                    if (stellarObject.GetCoordinate().GetCoordinateX() == x &&
+                        stellarObject.GetCoordinate().GetCoordinateY() == y &&
+                        stellarObject.GetCoordinate().GetCoordinateZ() == z)
                     {
                         return false;
                     }
                 }
-                stellarObjects.Add(new Coordinate(x, y, z));
-                stellarObjects = stellarObjects.OrderBy(p => p.GetCoordinateX())
-                                         .ThenBy(p => p.GetCoordinateY())
-                                         .ThenBy(p => p.GetCoordinateZ())
+                stellarObjects.Add(new StellarObject(new Coordinate(x, y, z)));
+                stellarObjects = stellarObjects.OrderBy(p => p.GetCoordinate().GetCoordinateX())
+                                         .ThenBy(p => p.GetCoordinate().GetCoordinateY())
+                                         .ThenBy(p => p.GetCoordinate().GetCoordinateZ())
                                          .ToList();
                 return true;
             }
@@ -63,18 +63,14 @@ namespace Spaceship
                 return false;
             }
         }
-        public List<Coordinate> GetStellarObjectsCoordinates()
-        {
-            return stellarObjects;
-        }
         public void PrintStellarObjectsCoordinates()
         {
             foreach (var stellarObject in stellarObjects)
             {
                 Console.WriteLine(
-                    $"{stellarObject.GetCoordinateX(),3} \t" +
-                    $"{stellarObject.GetCoordinateY(),3} \t" +
-                    $"{stellarObject.GetCoordinateZ(),3}");
+                    $"{stellarObject.GetCoordinate().GetCoordinateX(),3} \t" +
+                    $"{stellarObject.GetCoordinate().GetCoordinateY(),3} \t" +
+                    $"{stellarObject.GetCoordinate().GetCoordinateZ(),3}");
             }
         }
         public void PrintStellarObjectsMap()
@@ -86,12 +82,12 @@ namespace Spaceship
                 {
                     foreach (var stellarObject in stellarObjects)
                     {
-                        if (stellarObject.GetCoordinateX() == x && stellarObject.GetCoordinateY() == y)
+                        if (stellarObject.GetCoordinate().GetCoordinateX() == x && stellarObject.GetCoordinateY() == y)
                         {
                             Console.Write(
-                                $"{stellarObject.GetCoordinateX(),3}|" +
-                                $"{stellarObject.GetCoordinateY(),3}|" +
-                                $"{stellarObject.GetCoordinateZ(),3}");
+                                $"{stellarObject.GetCoordinate().GetCoordinateX(),3}|" +
+                                $"{stellarObject.GetCoordinate().GetCoordinateY(),3}|" +
+                                $"{stellarObject.GetCoordinate().GetCoordinateZ(),3}");
                             stellarObjectPrinted = true;
                             break;
                         }
