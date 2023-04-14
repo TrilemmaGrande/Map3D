@@ -135,13 +135,13 @@
         }
         static Coordinate CheckCoordinateFromList(Coordinate inputCoordinate, World world)
         {
-            foreach (var coordinate in world.GetSectors())
+            foreach (var sector in world.GetSectors())
             {
-                if (inputCoordinate.GetCoordinateX() == coordinate.GetSectorPosition().GetCoordinateX() &&
-                    inputCoordinate.GetCoordinateY() == coordinate.GetSectorPosition().GetCoordinateY() &&
-                    inputCoordinate.GetCoordinateZ() == coordinate.GetSectorPosition().GetCoordinateZ())
+                if (inputCoordinate.GetCoordinateX() == sector.GetSectorPosition().GetCoordinateX() &&
+                    inputCoordinate.GetCoordinateY() == sector.GetSectorPosition().GetCoordinateY() &&
+                    inputCoordinate.GetCoordinateZ() == sector.GetSectorPosition().GetCoordinateZ())
                 {
-                    return coordinate.GetSectorPosition();
+                    return sector.GetSectorPosition();
                 }
             }
             return inputCoordinate;
