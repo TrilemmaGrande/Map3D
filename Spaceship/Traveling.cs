@@ -5,21 +5,23 @@
         private Coordinate destination;
         private Coordinate spaceshipPositionInSector;
         private Coordinate spaceshipPositionInWorld;
+        private Spaceship spaceship;
         private ITravelingType travelingType;
         private double travelTime;
         private double travelDistance;
         private double speed;
         private double fuelConsumption;
         private World world;
-        public Traveling(ITravelingType travelingType, double fuelConsumption, double speed, Coordinate spaceshipPositionInSector, Coordinate spaceshipPositionInWorld, Coordinate destination, World world)
+        public Traveling(ITravelingType travelingType, Spaceship spaceship, Coordinate destination)
         {
-            this.speed = speed;
-            this.world = world;
+            this.spaceship = spaceship;
+            this.speed = spaceship.GetSpeedMax();
+            this.world = spaceship.GetWorld();
             this.travelingType = travelingType;
             this.destination = destination;
-            this.fuelConsumption = fuelConsumption;
-            this.spaceshipPositionInWorld = spaceshipPositionInWorld;
-            this.spaceshipPositionInSector = spaceshipPositionInSector;
+            this.fuelConsumption = spaceship.GetFuelConsumption();
+            this.spaceshipPositionInWorld = spaceship.GetPositionInWorld();
+            this.spaceshipPositionInSector = spaceship.GetPositionInSector();
             travelDistance = travelingType.CalcDistance(spaceshipPositionInSector, spaceshipPositionInWorld, destination);
             travelTime = travelingType.CalcTravelTime(travelDistance, speed);
         }

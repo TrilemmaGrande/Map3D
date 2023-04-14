@@ -27,19 +27,6 @@
 
             world.CreatePlayerSpaceship(spaceShipName, spaceShipSpeedMax, spaceShipWeight, spaceShipFuelMax, spaceShipEnginePower, spaceShipSpawnPoint, spaceShipSpawnSector);
             spaceShip = world.GetPlayerSpaceship();
-            //Console.WriteLine(spaceShip.GetSector().GetSectorPosition().GetCoordinateString());
-            //Console.WriteLine(spaceShip.GetPositionInSector().GetCoordinateString());
-            //Console.WriteLine(spaceShip.GetPositionInWorld().GetCoordinateString());
-            //Thread.Sleep(1000);
-            //spaceShip.Travel(new TravelingInSector(), new Coordinate(11, 20, 20));
-            //Console.WriteLine(spaceShip.GetSector().GetSectorPosition().GetCoordinateString());
-            //Console.WriteLine(spaceShip.GetPositionInSector().GetCoordinateString());
-            //Console.WriteLine(spaceShip.GetPositionInWorld().GetCoordinateString());
-            //world.GetSectorFromSectorList(spaceShip.GetPositionInWorld()).PrintStellarObjectsMap();
-            //spaceShip.Travel(new TravelingInWorld(), new Coordinate(0, 0, 1));
-            //Console.WriteLine(spaceShip.GetSector().GetSectorPosition().GetCoordinateString());
-            //Console.WriteLine(spaceShip.GetPositionInSector().GetCoordinateString());
-            //Console.WriteLine(spaceShip.GetPositionInWorld().GetCoordinateString());
 
             while (gameRunning)
             {
