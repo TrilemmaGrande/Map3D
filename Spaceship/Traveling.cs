@@ -3,15 +3,13 @@
     class Traveling
     {
         private Coordinate destination;
-        private Coordinate spaceshipPositionInSector;
-        private Sector spaceshipPositionInWorld;
         private Spaceship spaceship;
         private ITravelingType travelingType;
         private double travelTime;
         private double travelDistance;
         private double speed;
         private double fuelConsumption;
-        private World world;
+
         public Traveling(ITravelingType travelingType, Spaceship spaceship, Coordinate destination)
         {
             this.spaceship = spaceship;

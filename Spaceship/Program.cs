@@ -68,7 +68,9 @@
             Coordinate travelDestination;
             while (travelMenu)
             {
-                Console.WriteLine($"sector: {spaceShip.GetPositionInWorld().GetSectorCoordinate().CoordinateToString()} \t coordinate: {spaceShip.GetPositionInSector().CoordinateToString()} \tfuel: {spaceShip.GetFuel()} ");
+                Console.WriteLine(
+                    $"sector: {spaceShip.GetPositionInWorld().GetSectorCoordinate().CoordinateToString()} \t " +
+                    $"coordinate: {spaceShip.GetPositionInSector().CoordinateToString()} \tfuel: {spaceShip.GetFuel()} ");
                 Console.WriteLine();
                 Console.WriteLine("1 = travel in Sector \t 2 = travel to new Sector \t 0 = return");
                 string userInput = Console.ReadLine();
