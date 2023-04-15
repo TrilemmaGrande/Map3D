@@ -10,11 +10,10 @@
         private double weight;
         private double fuelConsumption;
         private Coordinate positionInSector;
-        private Coordinate positionInWorld;
         private Sector sector;
         private World world;
 
-        public Spaceship(string name, double speedMax, double weight, double fuelMax, double enginePower, Coordinate positionInSector, Coordinate positionInWorld, World world)
+        public Spaceship(string name, double speedMax, double weight, double fuelMax, double enginePower, Coordinate positionInSector, Sector sector, World world)
         {
             this.name = name;
             this.speedMax = speedMax;
@@ -23,17 +22,7 @@
             this.weight = weight;
             fuelConsumption = weight / 1000 * enginePower;
             this.positionInSector = positionInSector;
-            this.positionInWorld = positionInWorld;
-            this.world = world;
-            if (!world.SectorListContains(positionInWorld))
-            {
-                world.CreateSector(positionInWorld);
-                this.sector = world.GetSectorFromSectorList(positionInWorld);
-            }
-            else
-            {
-                this.sector = world.GetSectorFromSectorList(positionInWorld);
-            }
+            this.world = world;            
         }
         public void Travel(ITravelingType travelingType, Coordinate destination)
         {
@@ -44,15 +33,15 @@
             }
             else
             {
-                positionInWorld = travel.GetNewPositionInWorld();
+                sector = travel.GetNewPositionInWorld();
                 positionInSector = travel.GetNewPositionInSector();
                 fuel -= travel.CalcFuelConsumption();
                 travel.TravelAnimation();
             }
         }
-        public Coordinate GetPositionInWorld()
+        public Sector GetPositionInWorld()
         {
-            return positionInWorld;
+            return sector;
         }
         public Coordinate GetPositionInSector()
         {
@@ -78,5 +67,7 @@
         {
             return fuelConsumption;
         }
+      
+
     }
 }

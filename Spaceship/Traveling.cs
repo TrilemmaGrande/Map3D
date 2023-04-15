@@ -4,7 +4,7 @@
     {
         private Coordinate destination;
         private Coordinate spaceshipPositionInSector;
-        private Coordinate spaceshipPositionInWorld;
+        private Sector spaceshipPositionInWorld;
         private Spaceship spaceship;
         private ITravelingType travelingType;
         private double travelTime;
@@ -15,31 +15,38 @@
         public Traveling(ITravelingType travelingType, Spaceship spaceship, Coordinate destination)
         {
             this.spaceship = spaceship;
-            this.speed = spaceship.GetSpeedMax();
-            this.world = spaceship.GetWorld();
             this.travelingType = travelingType;
             this.destination = destination;
-            this.fuelConsumption = spaceship.GetFuelConsumption();
-            this.spaceshipPositionInWorld = spaceship.GetPositionInWorld();
-            this.spaceshipPositionInSector = spaceship.GetPositionInSector();
-            travelDistance = travelingType.CalcDistance(spaceshipPositionInSector, spaceshipPositionInWorld, destination);
-            travelTime = travelingType.CalcTravelTime(travelDistance, speed);
+            travelDistance = travelingType.CalcDistance(this);
+            travelTime = travelDistance / speed;
         }
         public double CalcFuelConsumption()
         {
-            return travelDistance / speed * fuelConsumption;
+            return travelDistance / spaceship.GetSpeedMax() * spaceship.GetFuelConsumption();
         }
         public Coordinate GetNewPositionInSector()
         {
-            return travelingType.CalcNewPositionInSector(spaceshipPositionInSector, destination);
+            return travelingType.CalcNewPositionInSector(this);
         }
-        public Coordinate GetNewPositionInWorld()
+        public Sector GetNewPositionInWorld()
         {
-            return travelingType.CalcNewPositionInWorld(spaceshipPositionInWorld, destination, world);
+            return travelingType.CalcNewPositionInWorld(this);
         }
         public void TravelAnimation()
         {
-            travelingType.TravelWithAnimation(travelTime, GetNewPositionInSector(), GetNewPositionInWorld());
+            travelingType.TravelWithAnimation(this);
+        }
+        public double GetTravelTime()
+        {
+            return travelTime;
+        }
+        public Coordinate GetDestination()
+        {
+            return destination;
+        }
+        public Spaceship GetSpaceship()
+        {
+            return spaceship;
         }
     }
 }

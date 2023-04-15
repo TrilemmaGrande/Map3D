@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 namespace Spaceship
 {
     internal interface ITravelingType
-    {
-        public double CalcDistance(Coordinate spaceshipPositionInSector, Coordinate spaceshipPositionInWorld, Coordinate destination);
-        public Coordinate CalcNewPositionInSector(Coordinate spaceshipPositionInSector, Coordinate destination);
-        public Coordinate CalcNewPositionInWorld(Coordinate spaceshipPositionInWorld, Coordinate destination, World world);
-        public double CalcTravelTime(double travelDistance, double speed);
-        public void TravelWithAnimation(double travelTime, Coordinate spaceshipPositionInSector, Coordinate spaceshipPositionInWorld);
+    {        
+        public double CalcDistance(Traveling traveling);
+        public Coordinate CalcNewPositionInSector(Traveling traveling));
+        public Sector CalcNewPositionInWorld(Traveling traveling));
+        public void TravelWithAnimation(Traveling traveling));
     }
 }

@@ -14,7 +14,7 @@
             bool gameRunning = true;
 
             Coordinate spaceShipSpawnPoint = new Coordinate(5, 10, 10);
-            Coordinate spaceShipSpawnSector = new Coordinate(1, 1, 1);
+            Sector spaceShipSpawnSector = new Sector(new Coordinate(1, 1, 1));
 
             string spaceShipName = "Apollo1";
             double spaceShipSpeedMax = 10.00;
@@ -30,7 +30,7 @@
 
             while (gameRunning)
             {
-                Console.WriteLine($"sector: {spaceShip.GetPositionInWorld().CoordinateToString()} \t coordinate: {spaceShip.GetPositionInSector().CoordinateToString()} \tfuel: {spaceShip.GetFuel()} ");
+                Console.WriteLine($"sector: {spaceShip.GetPositionInWorld().GetSectorCoordinate().CoordinateToString()} \t coordinate: {spaceShip.GetPositionInSector().CoordinateToString()} \tfuel: {spaceShip.GetFuel()} ");
                 Console.WriteLine();
                 Console.WriteLine("1 = travel \t 2 = map of this sector \t 3 = coordinates in this sector  \t 4 = refuel \t 0 = quit");
                 string userInput = Console.ReadLine();
@@ -41,11 +41,11 @@
                 }
                 else if (userInput == "2")
                 {
-                    world.GetSectorFromSectorList(spaceShip.GetPositionInWorld()).PrintStellarObjectsMap();
+                    world.GetSectorFromSectorList(spaceShip.GetPositionInWorld().GetSectorCoordinate()).PrintStellarObjectsMap();
                 }
                 else if (userInput == "3")
                 {
-                    world.GetSectorFromSectorList(spaceShip.GetPositionInWorld()).PrintStellarObjectsCoordinates();
+                    world.GetSectorFromSectorList(spaceShip.GetPositionInWorld().GetSectorCoordinate()).PrintStellarObjectsCoordinates();
                 }
                 else if (userInput == "4")
                 {
@@ -68,7 +68,7 @@
             Coordinate travelDestination;
             while (travelMenu)
             {
-                Console.WriteLine($"sector: {spaceShip.GetPositionInWorld().CoordinateToString()} \t coordinate: {spaceShip.GetPositionInSector().CoordinateToString()} \tfuel: {spaceShip.GetFuel()} ");
+                Console.WriteLine($"sector: {spaceShip.GetPositionInWorld().GetSectorCoordinate().CoordinateToString()} \t coordinate: {spaceShip.GetPositionInSector().CoordinateToString()} \tfuel: {spaceShip.GetFuel()} ");
                 Console.WriteLine();
                 Console.WriteLine("1 = travel in Sector \t 2 = travel to new Sector \t 0 = return");
                 string userInput = Console.ReadLine();
@@ -122,11 +122,11 @@
         {
             foreach (var sector in world.GetSectors())
             {
-                if (inputCoordinate.GetCoordinateX() == sector.GetSectorPosition().GetCoordinateX() &&
-                    inputCoordinate.GetCoordinateY() == sector.GetSectorPosition().GetCoordinateY() &&
-                    inputCoordinate.GetCoordinateZ() == sector.GetSectorPosition().GetCoordinateZ())
+                if (inputCoordinate.GetCoordinateX() == sector.GetSectorCoordinate().GetCoordinateX() &&
+                    inputCoordinate.GetCoordinateY() == sector.GetSectorCoordinate().GetCoordinateY() &&
+                    inputCoordinate.GetCoordinateZ() == sector.GetSectorCoordinate().GetCoordinateZ())
                 {
-                    return sector.GetSectorPosition();
+                    return sector.GetSectorCoordinate();
                 }
             }
             return inputCoordinate;

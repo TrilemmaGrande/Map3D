@@ -10,36 +10,46 @@
         {
             sectors.Add(new Sector(SectorCoordinate));
         }
-        public bool SectorListContains(Coordinate SectorCoordinate)
+        public bool SectorListContains(Sector searchedSector)
         {
             foreach (var sector in sectors)
             {
-                if (sector.GetSectorPosition() == SectorCoordinate)
+                if (sector.GetSectorCoordinate().GetCoordinateX() == searchedSector.GetSectorCoordinate().GetCoordinateX() &&
+                    sector.GetSectorCoordinate().GetCoordinateY() == searchedSector.GetSectorCoordinate().GetCoordinateY() &&
+                    sector.GetSectorCoordinate().GetCoordinateZ() == searchedSector.GetSectorCoordinate().GetCoordinateZ())
                 {
                     return true;
                 }
             }
             return false;
         }
+        public Sector GetSectorFromSectorList(Coordinate inputCoordinate)
+        {
+            foreach (var sector in sectors)
+            {
+                if (sector.GetSectorCoordinate().GetCoordinateX() == inputCoordinate.GetCoordinateX() &&
+                    sector.GetSectorCoordinate().GetCoordinateY() == inputCoordinate.GetCoordinateY() &&
+                    sector.GetSectorCoordinate().GetCoordinateZ() == inputCoordinate.GetCoordinateZ())
+                    return sector;
+            }
+            return null;
+        }
         public List<Sector> GetSectors()
         {
             return sectors;
         }
-        public Sector GetSectorFromSectorList(Coordinate coordinate)
+        public void CreatePlayerSpaceship(string name, double speedMax, double weight, double fuelMax, double enginePower, Coordinate positionInSector, Sector sector)
         {
-            foreach (var sector in sectors)
+            if (SectorListContains(sector))
             {
-                if (sector.GetSectorPosition() == coordinate)
-                {
-                    return sector;
-                }
+                sector = GetSectorFromSectorList(sector.GetSectorCoordinate());
             }
-            return null;
-        }
-        public void CreatePlayerSpaceship(string name, double speedMax, double weight, double fuelMax, double enginePower, Coordinate positionInSector, Coordinate positionInWorld)
-        {
-            playerSpaceShip = new Spaceship(name, speedMax, weight, fuelMax, enginePower, positionInSector, positionInWorld, this);
-            spaceships.Add(playerSpaceShip);
+            else
+            {
+                sectors.Add(sector);
+            }
+            playerSpaceShip = new Spaceship(name, speedMax, weight, fuelMax, enginePower, positionInSector, sector, this);
+            spaceships.Add(playerSpaceShip);            
         }
         public Spaceship GetPlayerSpaceship()
         {

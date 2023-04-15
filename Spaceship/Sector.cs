@@ -34,7 +34,7 @@ namespace Spaceship
                 SetStellarObjectCoordinate(randX, randY, randZ);
             }
         }
-        public Coordinate GetSectorPosition()
+        public Coordinate GetSectorCoordinate()
         {
             return sectorPosition;
         }
@@ -82,7 +82,7 @@ namespace Spaceship
                 {
                     foreach (var stellarObject in stellarObjects)
                     {
-                        if (stellarObject.GetCoordinate().GetCoordinateX() == x && stellarObject.GetCoordinateY() == y)
+                        if (stellarObject.GetCoordinate().GetCoordinateX() == x && stellarObject.GetCoordinate().GetCoordinateY() == y)
                         {
                             Console.Write(
                                 $"{stellarObject.GetCoordinate().GetCoordinateX(),3}|" +

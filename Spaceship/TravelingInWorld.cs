@@ -8,32 +8,36 @@ namespace Spaceship
 {
     internal class TravelingInWorld : ITravelingType
     {
-        public double CalcDistance(Coordinate spaceshipPositionInSector, Coordinate spaceshipPositionInWorld, Coordinate destination)
+        public double CalcDistance(Traveling traveling)
         {
+            Sector spaceshipPositionInWorld = traveling.GetSpaceship().GetPositionInWorld();
+            Coordinate destination = traveling.GetDestination();
+
             return Math.Sqrt(
-                 Math.Pow(spaceshipPositionInWorld.GetCoordinateX() - destination.GetCoordinateX(), 2) +
-                 Math.Pow(spaceshipPositionInWorld.GetCoordinateY() - destination.GetCoordinateY(), 2) +
-                 Math.Pow(spaceshipPositionInWorld.GetCoordinateZ() - destination.GetCoordinateZ(), 2)) * 100;
+                 Math.Pow(spaceshipPositionInWorld.GetSectorCoordinate().GetCoordinateX() - destination.GetCoordinateX(), 2) +
+                 Math.Pow(spaceshipPositionInWorld.GetSectorCoordinate().GetCoordinateY() - destination.GetCoordinateY(), 2) +
+                 Math.Pow(spaceshipPositionInWorld.GetSectorCoordinate().GetCoordinateZ() - destination.GetCoordinateZ(), 2)) * 100;
         }
-        public double CalcTravelTime(double travelDistance, double speed)
+        public Coordinate CalcNewPositionInSector(Traveling traveling)
         {
-            return travelDistance / speed;
+            return traveling.GetSpaceship().GetPositionInSector();
         }
-        public Coordinate CalcNewPositionInSector(Coordinate spaceshipPositionInSector, Coordinate destination)
+        public Sector CalcNewPositionInWorld(Traveling traveling)
         {
-            return spaceshipPositionInSector;
-        }
-        public Coordinate CalcNewPositionInWorld(Coordinate spaceshipPositionInWorld, Coordinate destination, World world)
-        {
-            if (!world.SectorListContains(destination))
+            World world = traveling.GetSpaceship().GetWorld();
+            Coordinate destination = traveling.GetDestination();
+
+            Sector destinationSector = world.GetSectorFromSectorList(destination);
+            if (destinationSector == null)
             {
-                world.CreateSector(destination);                
+                world.CreateSector(destination);
+                destinationSector = world.GetSectorFromSectorList(destination);
             }          
-            return destination;
+            return destinationSector;
         }
-        public void TravelWithAnimation(double travelTime, Coordinate spaceshipPositionInSector, Coordinate spaceshipPositionInWorld)
+        public void TravelWithAnimation(Traveling traveling)
         {
-            new TravelAnimation(travelTime, spaceshipPositionInSector, spaceshipPositionInWorld).StartTravelAnimation();
+            new TravelAnimation(traveling.GetTravelTime(), traveling.GetNewPositionInSector(), traveling.GetNewPositionInWorld()).StartTravelAnimation();
         }
     }
 }
