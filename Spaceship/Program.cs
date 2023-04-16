@@ -121,18 +121,5 @@
             travelDestination = new Coordinate(Convert.ToInt32(destination[0]), Convert.ToInt32(destination[1]), Convert.ToInt32(destination[2]));
             spaceShip.Travel(new TravelingInWorld(), travelDestination);
         }
-        //static Coordinate CheckCoordinateFromList(Coordinate inputCoordinate)
-        //{
-        //    foreach (var sector in world.GetSectors())
-        //    {
-        //        if (inputCoordinate.GetCoordinateX() == sector.GetSectorCoordinate().GetCoordinateX() &&
-        //            inputCoordinate.GetCoordinateY() == sector.GetSectorCoordinate().GetCoordinateY() &&
-        //            inputCoordinate.GetCoordinateZ() == sector.GetSectorCoordinate().GetCoordinateZ())
-        //        {
-        //            return sector.GetSectorCoordinate();
-        //        }
-        //    }
-        //    return inputCoordinate;
-        //}
     }
 }
