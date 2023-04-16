@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spaceship
+﻿namespace Spaceship
 {
     class Sector
     {
@@ -38,30 +32,13 @@ namespace Spaceship
         {
             return sectorPosition;
         }
-        public bool SetStellarObjectCoordinate(int x, int y, int z)
+        public void SetStellarObjectCoordinate(int x, int y, int z)
         {
-            if (x <= sectorScaleFormat && y <= sectorScaleFormat && z <= sectorScaleFormat)
-            {
-                foreach (var stellarObject in stellarObjects)
-                {
-                    if (stellarObject.GetCoordinate().GetCoordinateX() == x &&
-                        stellarObject.GetCoordinate().GetCoordinateY() == y &&
-                        stellarObject.GetCoordinate().GetCoordinateZ() == z)
-                    {
-                        return false;
-                    }
-                }
-                stellarObjects.Add(new StellarObject(new Coordinate(x, y, z)));
-                stellarObjects = stellarObjects.OrderBy(p => p.GetCoordinate().GetCoordinateX())
-                                         .ThenBy(p => p.GetCoordinate().GetCoordinateY())
-                                         .ThenBy(p => p.GetCoordinate().GetCoordinateZ())
-                                         .ToList();
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            stellarObjects.Add(new StellarObject(new Coordinate(x, y, z)));
+            stellarObjects = stellarObjects.OrderBy(p => p.GetCoordinate().GetCoordinateX())
+                                     .ThenBy(p => p.GetCoordinate().GetCoordinateY())
+                                     .ThenBy(p => p.GetCoordinate().GetCoordinateZ())
+                                     .ToList();
         }
         public void PrintStellarObjectsCoordinates()
         {
