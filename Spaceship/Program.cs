@@ -98,25 +98,25 @@
         }
         static void TravelInSector(Spaceship spaceShip)
         {
-            string[] destination = new string[3];
-            Coordinate travelDestination;
-
             Console.WriteLine("travel destination: (\"x,y,z\") between -50 and +50");
             string userInput = Console.ReadLine();
-            destination = userInput.Split(",");
-            travelDestination = new Coordinate(Convert.ToInt32(destination[0]), Convert.ToInt32(destination[1]), Convert.ToInt32(destination[2]));
+            string[] destination = userInput.Split(",");
+            Coordinate travelDestination = new Coordinate(
+                Convert.ToInt32(destination[0]), 
+                Convert.ToInt32(destination[1]), 
+                Convert.ToInt32(destination[2]));
             spaceShip.Travel(new TravelingInSector(), travelDestination);
 
         }
         static void TravelInWorld(Spaceship spaceShip)
         {
-            string[] destination = new string[3];
-            Coordinate travelDestination;
-
             Console.WriteLine("travel destination: (\"x,y,z\") between -50 and +50");
             string userInput = Console.ReadLine();
-            destination = userInput.Split(",");
-            travelDestination = new Coordinate(Convert.ToInt32(destination[0]), Convert.ToInt32(destination[1]), Convert.ToInt32(destination[2]));
+            string[] destination = userInput.Split(",");
+            Coordinate travelDestination = new Coordinate(
+                Convert.ToInt32(destination[0]), 
+                Convert.ToInt32(destination[1]), 
+                Convert.ToInt32(destination[2]));
             spaceShip.Travel(new TravelingInWorld(), travelDestination);
         }
     }
