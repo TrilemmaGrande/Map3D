@@ -7,8 +7,6 @@
         private ITravelingType travelingType;
         private double travelTime;
         private double travelDistance;
-        private double speed;
-        private double fuelConsumption;
 
         public Traveling(ITravelingType travelingType, Spaceship spaceship, Coordinate destination)
         {
@@ -16,7 +14,7 @@
             this.travelingType = travelingType;
             this.destination = destination;
             travelDistance = travelingType.CalcDistance(this);
-            travelTime = travelDistance / speed;
+            travelTime = travelDistance / spaceship.GetSpeedMax();
         }
         public double CalcFuelConsumption()
         {

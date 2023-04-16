@@ -67,7 +67,6 @@
         static void TravelMenu(Spaceship spaceShip)
         {
             bool travelMenu = true;
-            Coordinate travelDestination;
             while (travelMenu)
             {
                 Console.WriteLine(

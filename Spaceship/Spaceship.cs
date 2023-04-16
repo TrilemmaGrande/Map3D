@@ -17,11 +17,13 @@
         {
             this.name = name;
             this.speedMax = speedMax;
+            this.enginePower = enginePower;
             this.fuelMax = fuelMax;
             this.fuel = fuelMax;
             this.weight = weight;
             fuelConsumption = weight / 1000 * enginePower;
             this.positionInSector = positionInSector;
+            this.sector = sector;
             this.world = world;            
         }
         public void Travel(ITravelingType travelingType, Coordinate destination)

@@ -30,7 +30,9 @@
                 if (sector.GetSectorCoordinate().GetCoordinateX() == inputCoordinate.GetCoordinateX() &&
                     sector.GetSectorCoordinate().GetCoordinateY() == inputCoordinate.GetCoordinateY() &&
                     sector.GetSectorCoordinate().GetCoordinateZ() == inputCoordinate.GetCoordinateZ())
+                {
                     return sector;
+                }
             }
             return null;
         }
