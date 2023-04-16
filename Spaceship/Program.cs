@@ -31,14 +31,15 @@
 
             while (gameRunning)
             {
-                Console.WriteLine($"sector: {spaceShip.GetPositionInWorld().GetSectorCoordinate().CoordinateToString()} \t coordinate: {spaceShip.GetPositionInSector().CoordinateToString()} \tfuel: {spaceShip.GetFuel()} ");
+                Console.WriteLine($"sector: {spaceShip.GetPositionInWorld().GetSectorCoordinate().CoordinateToString()} \t " +
+                    $"coordinate: {spaceShip.GetPositionInSector().CoordinateToString()} \tfuel: {spaceShip.GetFuel()} ");
                 Console.WriteLine();
                 Console.WriteLine("1 = travel \t 2 = map of this sector \t 3 = coordinates in this sector  \t 4 = refuel \t 0 = quit");
                 string userInput = Console.ReadLine();
                 Console.Clear();
                 if (userInput == "1")
                 {
-                    TravelMenu(spaceShip, world);
+                    TravelMenu(spaceShip);
                 }
                 else if (userInput == "2")
                 {
@@ -63,7 +64,7 @@
                 }
             }
         }
-        static void TravelMenu(Spaceship spaceShip, World world)
+        static void TravelMenu(Spaceship spaceShip)
         {
             bool travelMenu = true;
             Coordinate travelDestination;
@@ -83,7 +84,7 @@
                 }
                 else if (userInput == "2")
                 {
-                    TravelInWorld(spaceShip, world);
+                    TravelInWorld(spaceShip);
                     travelMenu = false;
                 }
                 else if (userInput == "0")
@@ -109,7 +110,7 @@
             spaceShip.Travel(new TravelingInSector(), travelDestination);
 
         }
-        static void TravelInWorld(Spaceship spaceShip, World world)
+        static void TravelInWorld(Spaceship spaceShip)
         {
             string[] destination = new string[3];
             Coordinate travelDestination;
@@ -118,21 +119,20 @@
             string userInput = Console.ReadLine();
             destination = userInput.Split(",");
             travelDestination = new Coordinate(Convert.ToInt32(destination[0]), Convert.ToInt32(destination[1]), Convert.ToInt32(destination[2]));
-            travelDestination = CheckCoordinateFromList(travelDestination, world);
             spaceShip.Travel(new TravelingInWorld(), travelDestination);
         }
-        static Coordinate CheckCoordinateFromList(Coordinate inputCoordinate, World world)
-        {
-            foreach (var sector in world.GetSectors())
-            {
-                if (inputCoordinate.GetCoordinateX() == sector.GetSectorCoordinate().GetCoordinateX() &&
-                    inputCoordinate.GetCoordinateY() == sector.GetSectorCoordinate().GetCoordinateY() &&
-                    inputCoordinate.GetCoordinateZ() == sector.GetSectorCoordinate().GetCoordinateZ())
-                {
-                    return sector.GetSectorCoordinate();
-                }
-            }
-            return inputCoordinate;
-        }
+        //static Coordinate CheckCoordinateFromList(Coordinate inputCoordinate)
+        //{
+        //    foreach (var sector in world.GetSectors())
+        //    {
+        //        if (inputCoordinate.GetCoordinateX() == sector.GetSectorCoordinate().GetCoordinateX() &&
+        //            inputCoordinate.GetCoordinateY() == sector.GetSectorCoordinate().GetCoordinateY() &&
+        //            inputCoordinate.GetCoordinateZ() == sector.GetSectorCoordinate().GetCoordinateZ())
+        //        {
+        //            return sector.GetSectorCoordinate();
+        //        }
+        //    }
+        //    return inputCoordinate;
+        //}
     }
 }
