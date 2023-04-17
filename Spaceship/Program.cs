@@ -99,9 +99,10 @@
         static void Travel(Spaceship spaceShip, ITravelingType travelingType)
         {
             Console.WriteLine("travel destination: (\"x,y,z\") between -50 and +50");
-            if (spaceShip.GetFuel() - spaceShip.CalcTravelingFuelConsumption() >= 0)
+            Coordinate destination = userInputToCoordinate();
+            if (spaceShip.GetFuel() - spaceShip.CalcTravelingFuelConsumption(travelingType, destination) >= 0)
             {
-                spaceShip.Travel(travelingType, userInputToCoordinate());
+                spaceShip.Travel(travelingType, destination);
             }
             else
             {
