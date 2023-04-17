@@ -27,12 +27,13 @@ namespace Spaceship
         }
         public void StartTravelAnimation()
         {
-            Console.Clear();
+            Console.SetCursorPosition('\b', '\b');
             for (int i = 0; i < travelTime; i++)
             {                
                 PrintTravelAnimation();
-                Console.SetCursorPosition(Console.WindowLeft, Console.WindowTop);
+                Console.SetCursorPosition('\b','\b');
             }
+            Console.Clear();
         }       
         public void PrintTravelAnimation()
         {
