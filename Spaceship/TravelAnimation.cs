@@ -9,14 +9,21 @@ namespace Spaceship
     internal class TravelAnimation
     {
         double travelTime;
-        Coordinate positionInSector;
-        Sector positionInWorld;
+        string newPositionInSector;
+        string newPositionInWorld;
+        Random rand = new Random();
 
         public TravelAnimation(double travelTime, Coordinate positionInSector, Sector positionInWorld)
         {
             this.travelTime = travelTime;
-            this.positionInSector = positionInSector;
-            this.positionInWorld = positionInWorld;
+            this.newPositionInSector =
+                                        $"{positionInSector.GetCoordinateX(),3}|" +
+                                        $"{positionInSector.GetCoordinateY(),3}|" +
+                                        $"{positionInSector.GetCoordinateZ(),3}";
+            this.newPositionInWorld =
+                                        $"{positionInWorld.GetSectorCoordinate().GetCoordinateX(),3}|" +
+                                        $"{positionInWorld.GetSectorCoordinate().GetCoordinateY(),3}|" +
+                                        $"{positionInWorld.GetSectorCoordinate().GetCoordinateZ(),3}";
         }
         public void StartTravelAnimation()
         {
@@ -24,8 +31,7 @@ namespace Spaceship
             for (int i = 0; i < travelTime; i++)
             {                
                 PrintTravelAnimation();
-                Thread.Sleep(33);
-                Console.Clear();
+                Console.SetCursorPosition(Console.WindowLeft, Console.WindowTop);
             }
         }       
         public void PrintTravelAnimation()
@@ -36,17 +42,6 @@ namespace Spaceship
             string[] bottomRight = { "  ", " \\", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
             string[] middleHorizontal = { " _", "- ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
             string[] middleVertikal = { " |", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };
-
-            string newPositionInSector =
-                                        $"{positionInSector.GetCoordinateX(),3}|" +
-                                        $"{positionInSector.GetCoordinateY(),3}|" +
-                                        $"{positionInSector.GetCoordinateZ(),3}";
-            string newPositionInWorld =
-                                        $"{positionInWorld.GetSectorCoordinate().GetCoordinateX(),3}|" +
-                                        $"{positionInWorld.GetSectorCoordinate().GetCoordinateY(),3}|" +
-                                        $"{positionInWorld.GetSectorCoordinate().GetCoordinateZ(),3}";
-
-            Random rand = new Random();
 
             for (int y = 20; y >= -20; y--)
             {
