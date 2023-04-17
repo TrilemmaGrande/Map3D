@@ -28,18 +28,15 @@
         }
         public void Travel(ITravelingType travelingType, Coordinate destination)
         {
-            Traveling travel = new Traveling(travelingType, this, destination);
-            if (fuel - travel.CalcFuelConsumption() < 0)
-            {
-                Console.WriteLine("Treibstoff reicht nicht aus");
-            }
-            else
-            {
-                sector = travel.GetNewPositionInWorld();
-                positionInSector = travel.GetNewPositionInSector();
-                fuel -= travel.CalcFuelConsumption();
-                travel.TravelAnimation();
-            }
+            Traveling travel = new Traveling(travelingType, this, destination);      
+            sector = travel.GetNewPositionInWorld();
+            positionInSector = travel.GetNewPositionInSector();
+            fuel -= travel.CalcFuelConsumption();
+            travel.TravelAnimation();
+        }
+        public double CalcTravelingFuelConsumption(ITravelingType travelingType, Coordinate destination)
+        {
+            return new Traveling(travelingType, this, destination).CalcFuelConsumption();
         }
         public Sector GetPositionInWorld()
         {

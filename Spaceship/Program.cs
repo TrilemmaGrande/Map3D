@@ -77,12 +77,12 @@
                 Console.Clear();
                 if (userInput == "1")
                 {
-                    TravelInSector(spaceShip);
+                    Travel(spaceShip, new TravelingInSector());
                     travelMenu = false;
                 }
                 else if (userInput == "2")
                 {
-                    TravelInWorld(spaceShip);
+                    Travel(spaceShip, new TravelingInWorld());
                     travelMenu = false;
                 }
                 else if (userInput == "0")
@@ -96,28 +96,27 @@
                 }
             }
         }
-        static void TravelInSector(Spaceship spaceShip)
+        static void Travel(Spaceship spaceShip, ITravelingType travelingType)
         {
             Console.WriteLine("travel destination: (\"x,y,z\") between -50 and +50");
-            string userInput = Console.ReadLine();
-            string[] destination = userInput.Split(",");
-            Coordinate travelDestination = new Coordinate(
-                Convert.ToInt32(destination[0]), 
-                Convert.ToInt32(destination[1]), 
-                Convert.ToInt32(destination[2]));
-            spaceShip.Travel(new TravelingInSector(), travelDestination);
-
+            if (spaceShip.GetFuel() - spaceShip.CalcTravelingFuelConsumption() >= 0)
+            {
+                spaceShip.Travel(travelingType, userInputToCoordinate());
+            }
+            else
+            {
+                Console.WriteLine("Treibstoff reicht nicht aus");
+            }
         }
-        static void TravelInWorld(Spaceship spaceShip)
+        static Coordinate userInputToCoordinate()
         {
-            Console.WriteLine("travel destination: (\"x,y,z\") between -50 and +50");
             string userInput = Console.ReadLine();
             string[] destination = userInput.Split(",");
             Coordinate travelDestination = new Coordinate(
-                Convert.ToInt32(destination[0]), 
-                Convert.ToInt32(destination[1]), 
+                Convert.ToInt32(destination[0]),
+                Convert.ToInt32(destination[1]),
                 Convert.ToInt32(destination[2]));
-            spaceShip.Travel(new TravelingInWorld(), travelDestination);
+            return travelDestination;
         }
     }
 }
