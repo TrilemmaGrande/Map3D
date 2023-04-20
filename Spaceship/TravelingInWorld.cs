@@ -20,7 +20,9 @@ namespace Spaceship
         }
         public Coordinate CalcNewPositionInSector(Traveling traveling)
         {
-            return traveling.GetSpaceship().GetPositionInSector();
+            Random rand = new Random();
+            Coordinate randCoord = new Coordinate(rand.Next(-50, 51), rand.Next(-50, 51), rand.Next(-50, 51));
+            return randCoord;
         }
         public Sector CalcNewPositionInWorld(Traveling traveling)
         {

@@ -80,13 +80,13 @@ namespace Spaceship
                     {
                         Console.Write("  ");
                     }
-                    if (y == 1 && x == -5)
+                    if (y == 1 && x == -10)
                     {
-                        Console.Write(newPositionInWorld);
+                        Console.Write("Sector:\t" + newPositionInWorld);
                     }
-                    if (y == 0 && x == -5)
+                    if (y == 0 && x == -10)
                     {
-                        Console.Write(newPositionInSector);
+                        Console.Write("Pos:\t" + newPositionInSector);
                     }
                 }
                 Console.WriteLine();
