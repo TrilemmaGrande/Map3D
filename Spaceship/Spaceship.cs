@@ -11,9 +11,8 @@
         private double fuelConsumption;
         private Coordinate positionInSector;
         private Sector sector;
-        private World world;
 
-        public Spaceship(string name, double speedMax, double weight, double fuelMax, double enginePower, Coordinate positionInSector, Sector sector, World world)
+        public Spaceship(string name, double speedMax, double weight, double fuelMax, double enginePower, Coordinate positionInSector, Sector sector)
         {
             this.name = name;
             this.speedMax = speedMax;
@@ -24,7 +23,7 @@
             fuelConsumption = weight / 1000 * enginePower;
             this.positionInSector = positionInSector;
             this.sector = sector;
-            this.world = world;            
+        
         }
         public void Travel(ITravelingType travelingType, Coordinate destination)
         {
@@ -58,15 +57,9 @@
         {
             return speedMax;
         }
-        public World GetWorld()
-        {
-            return world;
-        }
         public double GetFuelConsumption()
         {
             return fuelConsumption;
-        }
-      
-
+        }    
     }
 }

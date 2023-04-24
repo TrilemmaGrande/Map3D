@@ -26,7 +26,7 @@ namespace Spaceship
         }
         public Sector CalcNewPositionInWorld(Traveling traveling)
         {
-            World world = traveling.GetSpaceship().GetWorld();
+            World world = new World();
             Coordinate destination = traveling.GetDestination();
 
             Sector destinationSector = world.GetSectorFromSectorList(destination);

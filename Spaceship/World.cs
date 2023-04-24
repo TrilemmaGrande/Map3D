@@ -50,7 +50,7 @@
             {
                 sectors.Add(sector);
             }
-            playerSpaceShip = new Spaceship(name, speedMax, weight, fuelMax, enginePower, positionInSector, sector, this);
+            playerSpaceShip = new Spaceship(name, speedMax, weight, fuelMax, enginePower, positionInSector, sector);
             spaceships.Add(playerSpaceShip);            
         }
         public Spaceship GetPlayerSpaceship()
