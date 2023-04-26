@@ -16,13 +16,17 @@ namespace ProjectSpaceship
             this.coordinate = coordinate;
         }
 
-        public virtual Coordinate GetCoordinate()
+        public virtual Coordinate GetStellarObjectCoordinate()
         {
             return coordinate;
         } 
         public virtual string GetOwner()
         {
             return owner;
+        }
+        public virtual string GetStellarType()
+        {
+            return type;
         }
     }
 }

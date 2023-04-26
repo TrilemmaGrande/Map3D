@@ -35,13 +35,50 @@ namespace ProjectSpaceship
 
             while (gameRunning)
             {
+                string userInput;
                 Console.WriteLine($"sector: {spaceship.GetPosition().GetSector().GetSectorCoordinate().CoordinateToString()} \t " +
                     $"coordinate: {spaceship.GetPosition().GetCoordinate().CoordinateToString()} \tfuel: {spaceship.GetFuel()} ");
                 Console.WriteLine();
-                Console.WriteLine("1 = travel \t 2 = scan sector \t 3 = refuel \t 0 = quit");
-                string userInput = Console.ReadLine();
+                if (spaceship.GetPosition().GetSector().StellarObjectListContains(spaceship.GetPosition().GetCoordinate()))
+                {
+                    if (spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()).GetStellarType() == "Spacestation")
+                    {
+                        Console.WriteLine("we found a spacestation!");
+                        Console.WriteLine("1 = travel \t 2 = scan sector \t 3 = refuel \t 0 = quit");
+                        userInput = Console.ReadLine();
+                        Console.Clear();
+                        if (userInput == "1")
+                        {
+                            TravelMenu(world);
+                        }
+                        else if (userInput == "2")
+                        {
+                            world.GetSectorFromSectorList(spaceship.GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsMap();
+                            world.GetSectorFromSectorList(spaceship.GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsCoordinates();
+                            Console.WriteLine();
+                        }
+                        else if (userInput == "3")
+                        {
+                            world.GetPlayerSpaceship().SetFuel(spaceship.GetFuelMax());
+                        }
+                        else if (userInput == "0")
+                        {
+                            gameRunning = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("input invalid!");
+                            continue;
+                        }
+                    }
+                }
+                Console.WriteLine($"sector: {spaceship.GetPosition().GetSector().GetSectorCoordinate().CoordinateToString()} \t " +
+                 $"coordinate: {spaceship.GetPosition().GetCoordinate().CoordinateToString()} \tfuel: {spaceship.GetFuel()} ");
+                Console.WriteLine();
+                Console.WriteLine("1 = travel \t 2 = scan sector \t 0 = quit");
+                userInput = Console.ReadLine();
                 Console.Clear();
-                if (userInput == "1") 
+                if (userInput == "1")
                 {
                     TravelMenu(world);
                 }
@@ -50,11 +87,7 @@ namespace ProjectSpaceship
                     world.GetSectorFromSectorList(spaceship.GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsMap();
                     world.GetSectorFromSectorList(spaceship.GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsCoordinates();
                     Console.WriteLine();
-                }
-                else if (userInput == "3")
-                {
-                    world.GetPlayerSpaceship().SetFuel(spaceship.GetFuelMax());
-                }
+                }            
                 else if (userInput == "0")
                 {
                     gameRunning = false;

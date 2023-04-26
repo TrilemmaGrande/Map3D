@@ -48,9 +48,9 @@ namespace ProjectSpaceship
         }
         public void OrderStellarObjectsByCoordinates()
         {
-            stellarObjects = stellarObjects.OrderBy(p => p.GetCoordinate().GetCoordinateX())
-                                    .ThenBy(p => p.GetCoordinate().GetCoordinateY())
-                                    .ThenBy(p => p.GetCoordinate().GetCoordinateZ())
+            stellarObjects = stellarObjects.OrderBy(p => p.GetStellarObjectCoordinate().GetCoordinateX())
+                                    .ThenBy(p => p.GetStellarObjectCoordinate().GetCoordinateY())
+                                    .ThenBy(p => p.GetStellarObjectCoordinate().GetCoordinateZ())
                                     .ToList();
         }
         public void PrintStellarObjectsCoordinates()
@@ -59,10 +59,10 @@ namespace ProjectSpaceship
             foreach (var stellarObject in stellarObjects)
             {
                 Console.WriteLine(
-                    $"{stellarObject.GetCoordinate().GetCoordinateX(),3} \t" +
-                    $"{stellarObject.GetCoordinate().GetCoordinateY(),3} \t" +
-                    $"{stellarObject.GetCoordinate().GetCoordinateZ(),3} \t" +
-                    $"{stellarObject.GetType()}");
+                    $"{stellarObject.GetStellarObjectCoordinate().GetCoordinateX(),3} \t" +
+                    $"{stellarObject.GetStellarObjectCoordinate().GetCoordinateY(),3} \t" +
+                    $"{stellarObject.GetStellarObjectCoordinate().GetCoordinateZ(),3} \t" +
+                    $"{stellarObject.GetStellarType()}");
             }
         }
         public void PrintStellarObjectsMap()
@@ -75,12 +75,12 @@ namespace ProjectSpaceship
                 {
                     foreach (var stellarObject in stellarObjects)
                     {
-                        if (stellarObject.GetCoordinate().GetCoordinateX() == x && stellarObject.GetCoordinate().GetCoordinateY() == y)
+                        if (stellarObject.GetStellarObjectCoordinate().GetCoordinateX() == x && stellarObject.GetStellarObjectCoordinate().GetCoordinateY() == y)
                         {
                             Console.Write(
-                                $"{stellarObject.GetCoordinate().GetCoordinateX(),3}|" +
-                                $"{stellarObject.GetCoordinate().GetCoordinateY(),3}|" +
-                                $"{stellarObject.GetCoordinate().GetCoordinateZ(),3}");
+                                $"{stellarObject.GetStellarObjectCoordinate().GetCoordinateX(),3}|" +
+                                $"{stellarObject.GetStellarObjectCoordinate().GetCoordinateY(),3}|" +
+                                $"{stellarObject.GetStellarObjectCoordinate().GetCoordinateZ(),3}");
                             stellarObjectPrinted = true;
                             break;
                         }
@@ -93,6 +93,45 @@ namespace ProjectSpaceship
                 }
                 Console.WriteLine();
             }
+        }
+        public bool StellarObjectListContains(StellarObject searchedStellarObject)
+        {
+            foreach (var stellarObject in stellarObjects)
+            {
+                if (stellarObject.GetStellarObjectCoordinate().GetCoordinateX() == searchedStellarObject.GetStellarObjectCoordinate().GetCoordinateX() &&
+                    stellarObject.GetStellarObjectCoordinate().GetCoordinateY() == searchedStellarObject.GetStellarObjectCoordinate().GetCoordinateY() &&
+                    stellarObject.GetStellarObjectCoordinate().GetCoordinateZ() == searchedStellarObject.GetStellarObjectCoordinate().GetCoordinateZ())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public bool StellarObjectListContains(Coordinate searchedCoordinate)
+        {
+            foreach (var stellarObject in stellarObjects)
+            {
+                if (stellarObject.GetStellarObjectCoordinate().GetCoordinateX() == searchedCoordinate.GetCoordinateX() &&
+                    stellarObject.GetStellarObjectCoordinate().GetCoordinateY() == searchedCoordinate.GetCoordinateY() &&
+                    stellarObject.GetStellarObjectCoordinate().GetCoordinateZ() == searchedCoordinate.GetCoordinateZ())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public StellarObject GetStellarObjectFromSectorList(Coordinate inputCoordinate)
+        {
+            foreach (var stellarObject in stellarObjects)
+            {
+                if (stellarObject.GetStellarObjectCoordinate().GetCoordinateX() == inputCoordinate.GetCoordinateX() &&
+                    stellarObject.GetStellarObjectCoordinate().GetCoordinateY() == inputCoordinate.GetCoordinateY() &&
+                    stellarObject.GetStellarObjectCoordinate().GetCoordinateZ() == inputCoordinate.GetCoordinateZ())
+                {
+                    return stellarObject;
+                }
+            }
+            return null;
         }
     }
 }
