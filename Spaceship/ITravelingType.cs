@@ -10,7 +10,7 @@ namespace Spaceship
     {        
         public double CalcDistance(Traveling traveling);
         public Coordinate CalcNewPositionInSector(Traveling traveling);
-        public Sector CalcNewPositionInWorld(Traveling traveling);
+        public Coordinate CalcNewPositionInWorld(Traveling traveling);
         public void TravelWithAnimation(Traveling traveling);
     }
 }

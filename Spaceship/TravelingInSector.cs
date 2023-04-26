@@ -10,7 +10,7 @@ namespace Spaceship
     {
         public double CalcDistance(Traveling traveling)
         {
-            Coordinate spaceshipPositionInSector = traveling.GetSpaceship().GetPositionInSector();
+            Coordinate spaceshipPositionInSector = traveling.GetSpaceship().GetPosition().GetCoordinate();
             Coordinate destination = traveling.GetDestination();
 
             return Math.Sqrt(
@@ -23,9 +23,9 @@ namespace Spaceship
         {           
             return traveling.GetDestination();
         }
-        public Sector CalcNewPositionInWorld(Traveling traveling)
+        public Coordinate CalcNewPositionInWorld(Traveling traveling)
         {
-            return traveling.GetSpaceship().GetPositionInWorld();
+            return traveling.GetSpaceship().GetPosition().GetSector().GetSectorCoordinate();
         }
         public void TravelWithAnimation(Traveling traveling)
         {

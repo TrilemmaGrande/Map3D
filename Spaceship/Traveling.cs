@@ -24,7 +24,7 @@
         {
             return travelingType.CalcNewPositionInSector(this);
         }
-        public Sector GetNewPositionInWorld()
+        public Coordinate GetNewPositionInWorld()
         {
             return travelingType.CalcNewPositionInWorld(this);
         }

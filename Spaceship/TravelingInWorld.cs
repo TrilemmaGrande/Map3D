@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spaceship;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace Spaceship
     {
         public double CalcDistance(Traveling traveling)
         {
-            Sector spaceshipPositionInWorld = traveling.GetSpaceship().GetPositionInWorld();
+            Sector spaceshipPositionInWorld = traveling.GetSpaceship().GetPosition().GetSector();
             Coordinate destination = traveling.GetDestination();
 
             return Math.Sqrt(
@@ -24,18 +25,9 @@ namespace Spaceship
             Coordinate randCoord = new Coordinate(rand.Next(-50, 51), rand.Next(-50, 51), rand.Next(-50, 51));
             return randCoord;
         }
-        public Sector CalcNewPositionInWorld(Traveling traveling)
+        public Coordinate CalcNewPositionInWorld(Traveling traveling)
         {
-            World world = new World();
-            Coordinate destination = traveling.GetDestination();
-
-            Sector destinationSector = world.GetSectorFromSectorList(destination);
-            if (destinationSector == null)
-            {
-                world.CreateSector(destination);
-                destinationSector = world.GetSectorFromSectorList(destination);
-            }          
-            return destinationSector;
+            return traveling.GetDestination();
         }
         public void TravelWithAnimation(Traveling traveling)
         {

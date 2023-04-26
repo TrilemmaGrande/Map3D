@@ -23,32 +23,30 @@
             double spaceShipEnginePower = 100.00;
 
             World world = new World();
-            Spaceship spaceShip;
+            Spaceship spaceship;
 
-            world.CreatePlayerSpaceship(spaceShipName, spaceShipSpeedMax, spaceShipWeight, spaceShipFuelMax, spaceShipEnginePower, spaceShipSpawnPoint, spaceShipSpawnSector);
-            spaceShip = world.GetPlayerSpaceship();
+            world.CreatePlayerSpaceship(spaceShipName, spaceShipSpeedMax, spaceShipWeight, spaceShipFuelMax, spaceShipEnginePower, new Position(spaceShipSpawnSector, spaceShipSpawnPoint));
+            spaceship = world.GetPlayerSpaceship();
 
             while (gameRunning)
             {
-                Console.WriteLine($"sector: {spaceShip.GetPositionInWorld().GetSectorCoordinate().CoordinateToString()} \t " +
-                    $"coordinate: {spaceShip.GetPositionInSector().CoordinateToString()} \tfuel: {spaceShip.GetFuel()} ");
+                Console.WriteLine($"sector: {spaceship.GetPosition().GetSector().GetSectorCoordinate().CoordinateToString()} \t " +
+                    $"coordinate: {spaceship.GetPosition().GetCoordinate().CoordinateToString()} \tfuel: {spaceship.GetFuel()} ");
                 Console.WriteLine();
-                Console.WriteLine("1 = travel \t 2 = map of this sector \t 3 = coordinates in this sector  \t 4 = refuel \t 0 = quit");
+                Console.WriteLine("1 = travel \t 2 = scan sector \t 3 = refuel \t 0 = quit");
                 string userInput = Console.ReadLine();
                 Console.Clear();
-                if (userInput == "1")
+                if (userInput == "1") 
                 {
-                    TravelMenu(spaceShip);
+                    TravelMenu(world);
                 }
                 else if (userInput == "2")
                 {
-                    world.GetSectorFromSectorList(spaceShip.GetPositionInWorld().GetSectorCoordinate()).PrintStellarObjectsMap();
+                    world.GetSectorFromSectorList(spaceship.GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsMap();
+                    world.GetSectorFromSectorList(spaceship.GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsCoordinates();
+                    Console.WriteLine();
                 }
                 else if (userInput == "3")
-                {
-                    world.GetSectorFromSectorList(spaceShip.GetPositionInWorld().GetSectorCoordinate()).PrintStellarObjectsCoordinates();
-                }
-                else if (userInput == "4")
                 {
                     world.GetPlayerSpaceship().SetFuel(spaceShipFuelMax);
                 }
@@ -63,26 +61,26 @@
                 }
             }
         }
-        static void TravelMenu(Spaceship spaceShip)
+        static void TravelMenu(World world)
         {
             bool travelMenu = true;
             while (travelMenu)
             {
                 Console.WriteLine(
-                    $"sector: {spaceShip.GetPositionInWorld().GetSectorCoordinate().CoordinateToString()} \t " +
-                    $"coordinate: {spaceShip.GetPositionInSector().CoordinateToString()} \tfuel: {spaceShip.GetFuel()} ");
+                    $"sector: {world.GetPlayerSpaceship().GetPosition().GetSector().GetSectorCoordinate().CoordinateToString()} \t " +
+                    $"coordinate: {world.GetPlayerSpaceship().GetPosition().GetCoordinate().CoordinateToString()} \tfuel: {world.GetPlayerSpaceship().GetFuel()} ");
                 Console.WriteLine();
                 Console.WriteLine("1 = travel in Sector \t 2 = travel to new Sector \t 0 = return");
                 string userInput = Console.ReadLine();
                 Console.Clear();
                 if (userInput == "1")
                 {
-                    Travel(spaceShip, new TravelingInSector());
+                    Travel(world, new TravelingInSector());
                     travelMenu = false;
                 }
                 else if (userInput == "2")
                 {
-                    Travel(spaceShip, new TravelingInWorld());
+                    Travel(world, new TravelingInWorld());
                     travelMenu = false;
                 }
                 else if (userInput == "0")
@@ -96,13 +94,13 @@
                 }
             }
         }
-        static void Travel(Spaceship spaceShip, ITravelingType travelingType)
+        static void Travel(World world, ITravelingType travelingType)
         {
             Console.WriteLine("travel destination: (\"x,y,z\") between -50 and +50");
             Coordinate destination = userInputToCoordinate();
-            if (spaceShip.GetFuel() - spaceShip.CalcTravelingFuelConsumption(travelingType, destination) >= 0)
+            if (world.GetPlayerSpaceship().GetFuel() - world.GetPlayerSpaceship().CalcTravelingFuelConsumption(travelingType, destination) >= 0)
             {
-                spaceShip.Travel(travelingType, destination);
+                world.GetPlayerSpaceship().Travel(travelingType, destination);
             }
             else
             {

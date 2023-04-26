@@ -13,7 +13,7 @@ namespace Spaceship
         string newPositionInWorld;
         Random rand = new Random();
 
-        public TravelAnimation(double travelTime, Coordinate positionInSector, Sector positionInWorld)
+        public TravelAnimation(double travelTime, Coordinate positionInSector, Coordinate positionInWorld)
         {
             this.travelTime = travelTime;
             this.newPositionInSector =
@@ -21,9 +21,9 @@ namespace Spaceship
                                         $"{positionInSector.GetCoordinateY(),3}|" +
                                         $"{positionInSector.GetCoordinateZ(),3}";
             this.newPositionInWorld =
-                                        $"{positionInWorld.GetSectorCoordinate().GetCoordinateX(),3}|" +
-                                        $"{positionInWorld.GetSectorCoordinate().GetCoordinateY(),3}|" +
-                                        $"{positionInWorld.GetSectorCoordinate().GetCoordinateZ(),3}";
+                                        $"{positionInWorld.GetCoordinateX(),3}|" +
+                                        $"{positionInWorld.GetCoordinateY(),3}|" +
+                                        $"{positionInWorld.GetCoordinateZ(),3}";
         }
         public void StartTravelAnimation()
         {

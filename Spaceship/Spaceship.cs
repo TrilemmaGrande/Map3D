@@ -9,10 +9,11 @@
         private double fuel;
         private double weight;
         private double fuelConsumption;
-        private Coordinate positionInSector;
-        private Sector sector;
+        private Position position;
 
-        public Spaceship(string name, double speedMax, double weight, double fuelMax, double enginePower, Coordinate positionInSector, Sector sector)
+        public event EventHandler<TravelingEventArgs> OnTraveling;
+
+        public Spaceship(string name, double speedMax, double weight, double fuelMax, double enginePower, Position position)
         {
             this.name = name;
             this.speedMax = speedMax;
@@ -21,15 +22,13 @@
             this.fuel = fuelMax;
             this.weight = weight;
             fuelConsumption = weight / 1000 * enginePower;
-            this.positionInSector = positionInSector;
-            this.sector = sector;
-        
+            this.position = position;        
         }
         public void Travel(ITravelingType travelingType, Coordinate destination)
         {
-            Traveling travel = new Traveling(travelingType, this, destination);      
-            sector = travel.GetNewPositionInWorld();
-            positionInSector = travel.GetNewPositionInSector();
+            Traveling travel = new Traveling(travelingType, this, destination);
+            OnTraveling?.Invoke(this, new TravelingEventArgs(travel.GetNewPositionInWorld()));
+            position.SetCoordinate(travel.GetNewPositionInSector());
             fuel -= travel.CalcFuelConsumption();
             travel.TravelAnimation();
         }
@@ -37,13 +36,9 @@
         {
             return new Traveling(travelingType, this, destination).CalcFuelConsumption();
         }
-        public Sector GetPositionInWorld()
+        public Position GetPosition()
         {
-            return sector;
-        }
-        public Coordinate GetPositionInSector()
-        {
-            return positionInSector;
+            return position;
         }
         public void SetFuel(double fuel)
         {

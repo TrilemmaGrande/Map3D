@@ -1,10 +1,12 @@
-﻿namespace Spaceship
+﻿using System.Runtime.CompilerServices;
+
+namespace Spaceship
 {
     class World
     {
-        private static List<Sector> sectors = new List<Sector>();
-        private static Spaceship playerSpaceShip;
-        private static List<Spaceship> spaceships = new List<Spaceship>();
+        private List<Sector> sectors = new List<Sector>();
+        private Spaceship playerSpaceship;
+        private List<Spaceship> spaceships = new List<Spaceship>();
 
         public void CreateSector(Coordinate SectorCoordinate)
         {
@@ -36,26 +38,45 @@
             }
             return null;
         }
-        public List<Sector> GetSectors()
+        public void CreatePlayerSpaceship(string name, double speedMax, double weight, double fuelMax, double enginePower, Position position)
         {
-            return sectors;
+            MergePositionWithSectorList(position);
+            playerSpaceship = new Spaceship(name, speedMax, weight, fuelMax, enginePower, position);
+            spaceships.Add(playerSpaceship);
+            this.playerSpaceship.OnTraveling += OnTraveling_MergeCoordinate;
         }
-        public void CreatePlayerSpaceship(string name, double speedMax, double weight, double fuelMax, double enginePower, Coordinate positionInSector, Sector sector)
+        private void MergePositionWithSectorList(Position position)
         {
-            if (SectorListContains(sector))
+            if (SectorListContains(position.GetSector()))
             {
-                sector = GetSectorFromSectorList(sector.GetSectorCoordinate());
+                position.SetSector(GetSectorFromSectorList(position.GetSector().GetSectorCoordinate()));
             }
             else
             {
-                sectors.Add(sector);
+                sectors.Add(position.GetSector());
             }
-            playerSpaceShip = new Spaceship(name, speedMax, weight, fuelMax, enginePower, positionInSector, sector);
-            spaceships.Add(playerSpaceShip);            
+        }
+        public void OnTraveling_MergeCoordinate(object sender, TravelingEventArgs e)
+        {
+            MergeCoordinateWithPositionSector(e.GetCoordinate());
+        }
+        private void MergeCoordinateWithPositionSector(Coordinate coordinate)
+        {
+            Sector newSector = GetSectorFromSectorList(coordinate);
+            if (newSector != null)
+            {
+                playerSpaceship.GetPosition().SetSector(newSector);
+            }
+            else
+            {
+                CreateSector(coordinate);
+                newSector = GetSectorFromSectorList(coordinate);
+                playerSpaceship.GetPosition().SetSector(newSector);
+            }
         }
         public Spaceship GetPlayerSpaceship()
         {
-            return playerSpaceShip;
+            return playerSpaceship;
         }
     }
 }
