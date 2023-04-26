@@ -8,17 +8,25 @@ namespace Spaceship
 {
     internal class StellarObject
     {
-        private Coordinate coordinate;
-        
+        protected Coordinate coordinate;
+        protected string owner;
+        protected string type;
         public StellarObject(Coordinate coordinate)
         {
             this.coordinate = coordinate;
         }
 
-        public Coordinate GetCoordinate()
+        public virtual Coordinate GetCoordinate()
         {
             return coordinate;
+        } 
+        public virtual string GetType()
+        {
+            return type;
         }
-        
+        public virtual string GetOwner()
+        {
+            return owner;
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Spaceship
+﻿using ProjectSpaceship;
+
+namespace Spaceship
 {
     class Sector
     {
@@ -34,24 +36,38 @@
         }
         public void SetStellarObjectCoordinate(int x, int y, int z)
         {
-            stellarObjects.Add(new StellarObject(new Coordinate(x, y, z)));
+            Random rand = new Random();
+
+            StellarObject[] stellarObjectsArray = {
+                new StellarObjectBlackHole(new Coordinate(x, y, z), "TestOwner"),
+                new StellarObjectPlanet(new Coordinate(x, y, z), "TestOwner"),
+                new StellarObjectSpaceStation(new Coordinate(x, y, z), "TestOwner" )};
+
+
+            stellarObjects.Add(stellarObjectsArray[rand.Next(3)]);           
+        }
+        public void OrderStellarObjectsByCoordinates()
+        {
             stellarObjects = stellarObjects.OrderBy(p => p.GetCoordinate().GetCoordinateX())
-                                     .ThenBy(p => p.GetCoordinate().GetCoordinateY())
-                                     .ThenBy(p => p.GetCoordinate().GetCoordinateZ())
-                                     .ToList();
+                                    .ThenBy(p => p.GetCoordinate().GetCoordinateY())
+                                    .ThenBy(p => p.GetCoordinate().GetCoordinateZ())
+                                    .ToList();
         }
         public void PrintStellarObjectsCoordinates()
         {
+            OrderStellarObjectsByCoordinates();
             foreach (var stellarObject in stellarObjects)
             {
                 Console.WriteLine(
                     $"{stellarObject.GetCoordinate().GetCoordinateX(),3} \t" +
                     $"{stellarObject.GetCoordinate().GetCoordinateY(),3} \t" +
-                    $"{stellarObject.GetCoordinate().GetCoordinateZ(),3}");
+                    $"{stellarObject.GetCoordinate().GetCoordinateZ(),3} \t" +
+                    $"{stellarObject.GetType()}");
             }
         }
         public void PrintStellarObjectsMap()
         {
+            OrderStellarObjectsByCoordinates();
             bool stellarObjectPrinted = false;
             for (int y = sectorMinY; y <= sectorMaxY; y++)
             {
