@@ -31,10 +31,15 @@
             position.SetCoordinate(travel.GetNewPositionInSector());
             fuel -= travel.CalcFuelConsumption();
             travel.TravelAnimation();
+            travel = null;
         }
         public double CalcTravelingFuelConsumption(ITravelingType travelingType, Coordinate destination)
         {
-            return new Traveling(travelingType, this, destination).CalcFuelConsumption();
+            Traveling travel = new Traveling(travelingType, this, destination);
+            travel.CalcFuelConsumption();
+            double fuelConsumption = travel.CalcFuelConsumption();
+            travel = null;
+            return fuelConsumption;
         }
         public Position GetPosition()
         {
