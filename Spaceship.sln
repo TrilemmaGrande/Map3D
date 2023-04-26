@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spaceship", "Spaceship\Spaceship.csproj", "{DE0A0281-E5A0-4532-8B38-C3DEE58ECAD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectSpaceship", "Spaceship\ProjectSpaceship.csproj", "{DE0A0281-E5A0-4532-8B38-C3DEE58ECAD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

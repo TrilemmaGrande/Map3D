@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using ProjectSpaceship;
+using System.Runtime.CompilerServices;
 
 namespace Spaceship
 {
@@ -38,10 +39,10 @@ namespace Spaceship
             }
             return null;
         }
-        public void CreatePlayerSpaceship(string name, double speedMax, double weight, double fuelMax, double enginePower, Position position)
+        public void CreatePlayerSpaceship(string name, double weight, SpaceshipTank spaceshipTank, SpaceshipEngine spaceshipEngine, Position position)
         {
             MergePositionWithSectorList(position);
-            playerSpaceship = new Spaceship(name, speedMax, weight, fuelMax, enginePower, position);
+            playerSpaceship = new Spaceship(name, weight, spaceshipTank, spaceshipEngine, position);
             spaceships.Add(playerSpaceship);
             this.playerSpaceship.OnTraveling += OnTraveling_MergeCoordinate;
         }

@@ -1,8 +1,10 @@
-﻿namespace Spaceship
+﻿using ProjectSpaceship;
+
+namespace Spaceship
 {
     //TODO:
 
-    //Maybe in Traveling dynamically adjust time/fuelConsumption with enginePower and speedMax for EcoTraveling (more Time = less Fuelconsumption), only MaxSpeed right now.
+    //Maybe in Traveling dynamically adjust time/fuelConsumption with EngineSpeed for EcoTraveling (more Time = less Fuelconsumption), only MaxSpeed right now.
     //Code is written, make it beautiful!
 
 
@@ -17,15 +19,19 @@
             Sector spaceShipSpawnSector = new Sector(new Coordinate(1, 1, 1));
 
             string spaceShipName = "Apollo1";
-            double spaceShipSpeedMax = 10.00;
             double spaceShipWeight = 120.00;
             double spaceShipFuelMax = 1000.00;
-            double spaceShipEnginePower = 100.00;
 
             World world = new World();
             Spaceship spaceship;
 
-            world.CreatePlayerSpaceship(spaceShipName, spaceShipSpeedMax, spaceShipWeight, spaceShipFuelMax, spaceShipEnginePower, new Position(spaceShipSpawnSector, spaceShipSpawnPoint));
+            world.CreatePlayerSpaceship(
+                spaceShipName, 
+                spaceShipWeight, 
+                new SpaceshipTank(100, 100, 70, 2, 10, 30), 
+                new SpaceshipEngine(150, 100, 100, 5, 20, 50), 
+                new Position(spaceShipSpawnSector, spaceShipSpawnPoint));
+
             spaceship = world.GetPlayerSpaceship();
 
             while (gameRunning)
