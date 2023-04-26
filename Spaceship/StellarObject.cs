@@ -20,10 +20,6 @@ namespace ProjectSpaceship
         {
             return coordinate;
         } 
-        public virtual string GetType()
-        {
-            return type;
-        }
         public virtual string GetOwner()
         {
             return owner;
