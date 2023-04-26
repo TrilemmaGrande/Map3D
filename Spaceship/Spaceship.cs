@@ -20,7 +20,7 @@ namespace Spaceship
             this.spaceshipTank = spaceshipTank;
             this.weight = weight + spaceshipTank.GetWeight() + spaceshipEngine.GetWeight();
             fuelConsumption = weight / 1000 * spaceshipEngine.GetSpeedMax();
-            this.position = position;        
+            this.position = position;
         }
         public void Travel(ITravelingType travelingType, Coordinate destination)
         {
@@ -51,6 +51,10 @@ namespace Spaceship
         {
             return spaceshipTank.GetFuel();
         }
+        public double GetFuelMax()
+        {
+            return spaceshipTank.GetFuelMax();
+        }
         public double GetSpeedMax()
         {
             return spaceshipEngine.GetSpeedMax();
@@ -66,6 +70,6 @@ namespace Spaceship
         public double GetFuelConsumption()
         {
             return fuelConsumption;
-        }    
+        }
     }
 }

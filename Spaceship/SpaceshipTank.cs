@@ -47,7 +47,7 @@ namespace ProjectSpaceship
         {
             this.fuel = fuel;
         }
-        public double GetFuelmax()
+        public double GetFuelMax()
         {
             return fuelMax;
         }

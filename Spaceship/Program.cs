@@ -20,7 +20,6 @@ namespace Spaceship
 
             string spaceShipName = "Apollo1";
             double spaceShipWeight = 120.00;
-            double spaceShipFuelMax = 1000.00;
 
             World world = new World();
             Spaceship spaceship;
@@ -54,7 +53,7 @@ namespace Spaceship
                 }
                 else if (userInput == "3")
                 {
-                    world.GetPlayerSpaceship().SetFuel(spaceShipFuelMax);
+                    world.GetPlayerSpaceship().SetFuel(spaceship.GetFuelMax());
                 }
                 else if (userInput == "0")
                 {
