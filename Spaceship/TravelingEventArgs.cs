@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spaceship
+namespace ProjectSpaceship
 {
     internal class TravelingEventArgs : EventArgs
     {

@@ -1,6 +1,6 @@
 ﻿using ProjectSpaceship;
 
-namespace Spaceship
+namespace ProjectSpaceship
 {
     class Sector
     {

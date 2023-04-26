@@ -1,4 +1,4 @@
-﻿namespace Spaceship
+﻿namespace ProjectSpaceship
 {
     class Traveling
     {

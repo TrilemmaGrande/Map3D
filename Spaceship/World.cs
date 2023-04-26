@@ -1,7 +1,7 @@
 ﻿using ProjectSpaceship;
 using System.Runtime.CompilerServices;
 
-namespace Spaceship
+namespace ProjectSpaceship
 {
     class World
     {
