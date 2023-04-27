@@ -29,7 +29,7 @@ namespace ProjectSpaceship
                 spaceShipName, 
                 spaceShipWeight, 
                 new SpaceshipTank(100, 100, 70, 2, 10, 30), 
-                new SpaceshipEngine(150, 100, 100, 5, 20, 50), 
+                new SpaceshipEngine(150, 10, 100, 5, 20, 50), 
                 new Position(spaceShipSpawnSector, spaceShipSpawnPoint));
 
             spaceship = world.GetPlayerSpaceship();
@@ -51,6 +51,7 @@ namespace ProjectSpaceship
                             Console.Clear();
                             if (userInput == "1")
                             {
+                                inSpacestation = false;
                                 TravelMenu(world);
                             }
                             else if (userInput == "2")
