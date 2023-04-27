@@ -62,7 +62,7 @@ namespace ProjectSpaceship
                             }
                             else if (userInput == "3")
                             {
-                                world.GetPlayerSpaceship().SetFuel(spaceship.GetFuelMax());
+                                spaceship.SetFuel(spaceship.GetFuelMax());
                             }
                             else if (userInput == "0")
                             {
