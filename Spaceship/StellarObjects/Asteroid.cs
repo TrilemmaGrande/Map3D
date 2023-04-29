@@ -15,6 +15,22 @@ namespace ProjectSpaceship.StellarObjects
         {
             stellarType = "Asteroid";
             this.owner = owner;
+            Random rand = new Random();
+            CreateRandomResources(rand.Next(5), rand.Next(4));
+        }
+        private void CreateRandomResources(int amountOfResourceNodes, int amountOfResourceTypes)
+        {
+            Random rand = new Random();
+            
+            for (int i = 0; i < amountOfResourceNodes; i++)
+            {
+                Resource[] resourcesArray = { new Copper(rand.Next(10000)), new Silver(rand.Next(5000)), new Gold(rand.Next(1000)) };
+                resources.Add(resourcesArray[rand.Next(amountOfResourceTypes)]);               
+            }
+        }
+        public List<Resource> GetResourceList()
+        {
+            return resources;
         }
     }
 }

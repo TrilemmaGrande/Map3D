@@ -34,10 +34,44 @@ namespace ProjectSpaceship.Spaceships.Modules
         {
             return resources;
         }
-        public void AddResource(Resource resource)
+        public bool ResourceListContains(Resource searchedResource)
         {
-            this.resources.Add(resource);
+            foreach (Resource resource in resources)
+            {
+                if (searchedResource.GetResourceType() == resource.GetResourceType())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public Resource GetResourceFromResourceList(Resource searchedResource)
+        {
+            foreach (Resource resource in resources)
+            {
+                if (searchedResource.GetResourceType() == resource.GetResourceType())
+                {
+                    return resource;
+                }
+            }
+            return null;
+        }
+        public void MergeAddResource(Resource resource)
+        {
+            if (ResourceListContains(resource))
+            {
+                GetResourceFromResourceList(resource).IncreaseAmount(resource.GetAmount());
+            }
+            else
+            {
+                this.resources.Add(resource);
+            }
             cargoSpaceUsed += resource.GetAmount() * resource.GetWeightPerAmount();
+        }
+        public void RemoveResource(Resource resource)
+        {
+            this.resources.Remove(resource);
+            cargoSpaceUsed -= resource.GetAmount() * resource.GetWeightPerAmount();
         }
         public double GetLoadWeight()
         {

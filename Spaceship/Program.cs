@@ -35,16 +35,16 @@ namespace ProjectSpaceship
             spaceship = world.GetPlayerSpaceship();
 
             while (gameRunning)
-            {
-                string userInput;
-                bool inSpacestation = true;
+            {                
                 if (spaceship.GetPosition().GetSector().StellarObjectListContains(spaceship.GetPosition().GetCoordinate()))
                 {
                     if (spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()).GetStellarType() == "Spacestation")
                     {
                         Console.WriteLine("we found a spacestation!");
+                        bool inSpacestation = true;
                         while (inSpacestation)
                         {
+                            string userInput;
                             PrintHeader(spaceship);
                             Console.WriteLine("1 = travel \t 2 = scan sector \t 3 = refuel \t 0 = back to universe");
                             userInput = Console.ReadLine();

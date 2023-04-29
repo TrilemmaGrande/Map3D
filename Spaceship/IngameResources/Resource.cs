@@ -12,9 +12,9 @@
             this.amount = amount;
         }
 
-        public string GetName()
+        public string GetResourceType()
         {
-            return name;
+            return resourceType;
         }
         public double GetAmount()
         {
@@ -23,6 +23,14 @@
         public void SetAmount(double amount)
         {
             this.amount = amount;
+        }
+        public void IncreaseAmount(double amountToAdd)
+        {
+            this.amount += amountToAdd;
+        }
+        public void DecreaseAmount(double amountToSub)
+        {
+            this.amount -= amountToSub;
         }
         public double GetValue()
         {
