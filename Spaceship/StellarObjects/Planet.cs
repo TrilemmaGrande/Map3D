@@ -11,5 +11,9 @@ namespace ProjectSpaceship.StellarObjects
         {
             this.owner = owner;
         }
+        public Merchant GetMerchant()
+        {
+            return merchant;
+        }
     }
 }
