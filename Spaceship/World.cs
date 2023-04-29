@@ -1,5 +1,5 @@
-﻿using ProjectSpaceship;
-using System.Runtime.CompilerServices;
+﻿using ProjectSpaceship.Spaceships;
+using ProjectSpaceship.Travel;
 
 namespace ProjectSpaceship
 {

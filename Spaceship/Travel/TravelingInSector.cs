@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectSpaceship
+﻿namespace ProjectSpaceship.Travel
 {
     internal class TravelingInSector : ITravelingType
     {
@@ -20,7 +14,7 @@ namespace ProjectSpaceship
         }
 
         public Coordinate CalcNewPositionInSector(Traveling traveling)
-        {           
+        {
             return traveling.GetDestination();
         }
         public Coordinate CalcNewPositionInWorld(Traveling traveling)

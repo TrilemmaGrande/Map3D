@@ -1,4 +1,6 @@
-﻿namespace ProjectSpaceship
+﻿using ProjectSpaceship.Spaceships;
+
+namespace ProjectSpaceship.Travel
 {
     class Traveling
     {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectSpaceship
+﻿namespace ProjectSpaceship.StellarObjects
 {
     internal class StellarObject
     {
@@ -19,7 +13,7 @@ namespace ProjectSpaceship
         public virtual Coordinate GetStellarObjectCoordinate()
         {
             return coordinate;
-        } 
+        }
         public virtual string GetOwner()
         {
             return owner;

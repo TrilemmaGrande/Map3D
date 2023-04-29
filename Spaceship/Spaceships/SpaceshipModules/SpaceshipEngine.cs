@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectSpaceship
+﻿namespace ProjectSpaceship.Spaceships
 {
-    internal class SpaceshipTank
+    internal class SpaceshipEngine
     {
         private double priceValue;
-        private double fuel;
-        private double fuelMax;
+        private double speed;
+        private double speedMax;
         private double health;
         private double healthMax;
         private double armor;
@@ -18,16 +12,16 @@ namespace ProjectSpaceship
         private double shield;
         private double shieldMax;
 
-        public SpaceshipTank(double priceValue, double fuelMax, double healthMax, double armor, double weight, double shieldMax)
+        public SpaceshipEngine(double priceValue, double speedMax, double healthMax, double armor, double weight, double shieldMax)
         {
             this.priceValue = priceValue;
-            this.fuel = fuelMax;
-            this.fuelMax = fuelMax;
-            this.health = healthMax;
+            speed = 0;
+            this.speedMax = speedMax;
+            health = healthMax;
             this.healthMax = healthMax;
             this.armor = armor;
             this.weight = weight;
-            this.shield = shieldMax;
+            shield = shieldMax;
             this.shieldMax = shieldMax;
         }
 
@@ -39,17 +33,17 @@ namespace ProjectSpaceship
         {
             this.priceValue = priceValue;
         }
-        public double GetFuel()
+        public double GetSpeed()
         {
-            return fuel;
+            return speed;
         }
-        public void SetFuel(double fuel)
+        public void SetSpeed(double speed)
         {
-            this.fuel = fuel;
+            this.speed = speed;
         }
-        public double GetFuelMax()
+        public double GetSpeedMax()
         {
-            return fuelMax;
+            return speedMax;
         }
         public double GetHealth()
         {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectSpaceship
+﻿namespace ProjectSpaceship.Travel
 {
     internal class TravelAnimation
     {
@@ -16,11 +10,11 @@ namespace ProjectSpaceship
         public TravelAnimation(double travelTime, Coordinate positionInSector, Coordinate positionInWorld)
         {
             this.travelTime = travelTime;
-            this.newPositionInSector =
+            newPositionInSector =
                                         $"{positionInSector.GetCoordinateX(),3}|" +
                                         $"{positionInSector.GetCoordinateY(),3}|" +
                                         $"{positionInSector.GetCoordinateZ(),3}";
-            this.newPositionInWorld =
+            newPositionInWorld =
                                         $"{positionInWorld.GetCoordinateX(),3}|" +
                                         $"{positionInWorld.GetCoordinateY(),3}|" +
                                         $"{positionInWorld.GetCoordinateZ(),3}";
@@ -29,12 +23,12 @@ namespace ProjectSpaceship
         {
             Console.SetCursorPosition('\b', '\b');
             for (int i = 0; i < travelTime; i++)
-            {                
+            {
                 PrintTravelAnimation();
-                Console.SetCursorPosition('\b','\b');
+                Console.SetCursorPosition('\b', '\b');
             }
             Console.Clear();
-        }       
+        }
         public void PrintTravelAnimation()
         {
             string[] bottomLeft = { "  ", "  ", " /", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " };

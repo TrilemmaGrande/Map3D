@@ -1,10 +1,10 @@
-﻿namespace ProjectSpaceship
+﻿namespace ProjectSpaceship.Spaceships
 {
-    internal class SpaceshipEngine
+    internal class SpaceshipTank
     {
         private double priceValue;
-        private double speed;
-        private double speedMax;
+        private double fuel;
+        private double fuelMax;
         private double health;
         private double healthMax;
         private double armor;
@@ -12,16 +12,16 @@
         private double shield;
         private double shieldMax;
 
-        public SpaceshipEngine(double priceValue, double speedMax, double healthMax, double armor, double weight, double shieldMax)
+        public SpaceshipTank(double priceValue, double fuelMax, double healthMax, double armor, double weight, double shieldMax)
         {
             this.priceValue = priceValue;
-            this.speed = 0;
-            this.speedMax = speedMax;
-            this.health = healthMax;
+            fuel = fuelMax;
+            this.fuelMax = fuelMax;
+            health = healthMax;
             this.healthMax = healthMax;
             this.armor = armor;
             this.weight = weight;
-            this.shield = shieldMax;
+            shield = shieldMax;
             this.shieldMax = shieldMax;
         }
 
@@ -33,17 +33,17 @@
         {
             this.priceValue = priceValue;
         }
-        public double GetSpeed()
+        public double GetFuel()
         {
-            return speed;
+            return fuel;
         }
-        public void SetSpeed(double speed)
+        public void SetFuel(double fuel)
         {
-            this.speed = speed;
+            this.fuel = fuel;
         }
-        public double GetSpeedMax()
+        public double GetFuelMax()
         {
-            return speedMax;
+            return fuelMax;
         }
         public double GetHealth()
         {

@@ -1,4 +1,5 @@
-﻿using ProjectSpaceship;
+﻿using ProjectSpaceship.Spaceships;
+using ProjectSpaceship.Travel;
 
 namespace ProjectSpaceship
 {
@@ -25,10 +26,10 @@ namespace ProjectSpaceship
             Spaceship spaceship;
 
             world.CreatePlayerSpaceship(
-                spaceShipName, 
-                spaceShipWeight, 
-                new SpaceshipTank(100, 100, 70, 2, 10, 30), 
-                new SpaceshipEngine(150, 100, 100, 5, 20, 50), 
+                spaceShipName,
+                spaceShipWeight,
+                new SpaceshipTank(100, 100, 70, 2, 10, 30),
+                new SpaceshipEngine(150, 100, 100, 5, 20, 50),
                 new Position(spaceShipSpawnSector, spaceShipSpawnPoint));
 
             spaceship = world.GetPlayerSpaceship();
@@ -70,7 +71,7 @@ namespace ProjectSpaceship
                             }
                             else
                             {
-                                Console.WriteLine("input invalid!");                                
+                                Console.WriteLine("input invalid!");
                                 continue;
                             }
                         }
@@ -91,7 +92,7 @@ namespace ProjectSpaceship
                     world.GetSectorFromSectorList(spaceship.GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsMap();
                     world.GetSectorFromSectorList(spaceship.GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsCoordinates();
                     Console.WriteLine();
-                }            
+                }
                 else if (userInput == "0")
                 {
                     gameRunning = false;

@@ -1,4 +1,4 @@
-﻿using ProjectSpaceship;
+﻿using ProjectSpaceship.StellarObjects;
 
 namespace ProjectSpaceship
 {
@@ -39,12 +39,12 @@ namespace ProjectSpaceship
             Random rand = new Random();
 
             StellarObject[] stellarObjectsArray = {
-                new StellarObjectBlackHole(new Coordinate(x, y, z), "TestOwner"),
-                new StellarObjectPlanet(new Coordinate(x, y, z), "TestOwner"),
-                new StellarObjectSpaceStation(new Coordinate(x, y, z), "TestOwner" )};
+                new BlackHole(new Coordinate(x, y, z), "TestOwner"),
+                new Planet(new Coordinate(x, y, z), "TestOwner"),
+                new SpaceStation(new Coordinate(x, y, z), "TestOwner" )};
 
 
-            stellarObjects.Add(stellarObjectsArray[rand.Next(3)]);           
+            stellarObjects.Add(stellarObjectsArray[rand.Next(3)]);
         }
         public void OrderStellarObjectsByCoordinates()
         {
