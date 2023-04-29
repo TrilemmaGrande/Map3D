@@ -19,6 +19,14 @@
         {
             this.fuel = fuel;
         }
+        public void IncreaseFuel(double fuelToAdd)
+        {
+            fuel += fuelToAdd;
+        }
+        public void DecreaseFuel(double fuelToSub)
+        {
+            fuel -= fuelToSub;
+        }
         public double GetFuelMax()
         {
             return fuelMax;

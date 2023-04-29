@@ -1,5 +1,4 @@
-﻿using ProjectSpaceship.IngameResources;
-using ProjectSpaceship.Spaceships;
+﻿using ProjectSpaceship.Spaceships;
 using ProjectSpaceship.Spaceships.Modules;
 using ProjectSpaceship.StellarObjects;
 using ProjectSpaceship.Travel;
@@ -25,18 +24,21 @@ namespace ProjectSpaceship
             string spaceshipName = "Apollo1";
 
             World world = new World();
-            Spaceship spaceship;
+            Player player = new Player("TestPlayer");
+            Spaceship spaceship;          
 
             world.CreatePlayerSpaceship(
-                spaceshipName, 
-                new Tank(100, 100, 70, 2, 10, 30), 
-                new Engine(150, 10, 100, 5, 20, 50), 
+                spaceshipName,
+                new Tank(100, 100, 70, 2, 10, 30),
+                new Engine(150, 10, 100, 5, 20, 50),
                 new Cargo(50, 100, 50, 2, 5, 20),
                 new Position(spaceShipSpawnSector, spaceShipSpawnPoint));
 
             spaceship = world.GetPlayerSpaceship();
+            player.SetSpaceship(spaceship);
+
             while (gameRunning)
-            {                
+            {
                 if (spaceship.GetPosition().GetSector().StellarObjectListContains(spaceship.GetPosition().GetCoordinate()))
                 {
                     if (spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) is SpaceStation)
@@ -81,12 +83,14 @@ namespace ProjectSpaceship
         private static void SpaceStationMenu(World world, Spaceship spaceship)
         {
             Console.WriteLine("we found a spacestation!");
+            SpaceStation spacestation = spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) as SpaceStation;
             bool inSpacestation = true;
+            string refuelOption = "";
             while (inSpacestation)
             {
                 string userInput;
                 PrintHeader(spaceship);
-                Console.WriteLine("1 = travel \t 2 = scan sector  \t 3 = scan spacestation \t  4 = refuel \t 0 = back to universe");
+                Console.WriteLine($"1 = travel \t 2 = scan sector  \t 3 = scan spacestation \t {refuelOption} \t 0 = back to universe");
                 userInput = Console.ReadLine();
                 Console.Clear();
                 if (userInput == "1")
@@ -102,17 +106,20 @@ namespace ProjectSpaceship
                 }
                 else if (userInput == "3")
                 {
-                    Console.WriteLine($"Owner: {spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()).GetOwner()}");
-                    //this must be done...
+                    refuelOption = "4 refuel";
+                    Console.WriteLine($"Owner: {spacestation.GetOwner()}");
+                    Console.WriteLine($"Fuel: {spacestation.GetFuelstation().GetFuel()}");
+                    Console.WriteLine();
                 }
-                else if (userInput == "4")
+                else if (userInput == "4" || refuelOption != "")
                 {
-                    spaceship.SetFuel(spaceship.GetFuelMax());
-                    //this must be done...
+                    double usedFuel = spaceship.GetFuelMax() - spaceship.GetFuel();
+                    spacestation.GetFuelstation().DecreaseFuel(usedFuel);
+                    spaceship.IncreaseFuel(usedFuel);
                 }
                 else if (userInput == "0")
                 {
-                    inSpacestation = false;
+                    inSpacestation = false;                    
                 }
                 else
                 {
@@ -171,7 +178,7 @@ namespace ProjectSpaceship
             {
                 string userInput;
                 PrintHeader(spaceship);
-                Console.WriteLine("1 = travel \t 2 = scan sector \t 3 = scan planet \t 4 = mine \t 0 = back to universe");
+                Console.WriteLine("1 = travel \t 2 = scan sector \t 3 = scan planet \t 4 = trade \t 0 = back to universe");
                 userInput = Console.ReadLine();
                 Console.Clear();
                 if (userInput == "1")
@@ -216,6 +223,7 @@ namespace ProjectSpaceship
                 Console.Clear();
                 if (userInput == "1")
                 {
+                    world.GetSectorFromSectorList(world.GetPlayerSpaceship().GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsCoordinates();
                     Travel(world, new TravelingInSector());
                     travelMenu = false;
                 }
@@ -265,7 +273,7 @@ namespace ProjectSpaceship
                  $"coordinate: {spaceship.GetPosition().GetCoordinate().CoordinateToString()} \tfuel: {spaceship.GetFuel()} ");
             Console.WriteLine();
         }
-        static void MiningMenu(World world,Spaceship spaceship)
+        static void MiningMenu(World world, Spaceship spaceship)
         {
             bool mining = true;
             while (mining)

@@ -51,6 +51,14 @@ namespace ProjectSpaceship.Spaceships
         {
             return tank.GetFuel();
         }
+        public void IncreaseFuel(double fuelToAdd)
+        {
+            this.tank.SetFuel(tank.GetFuel() + fuelToAdd);
+        }
+        public void DecreaseFuel(double fuelToSub)
+        {
+            this.tank.SetFuel(tank.GetFuel() - fuelToSub);
+        }
         public double GetFuelMax()
         {
             return tank.GetFuelMax();
