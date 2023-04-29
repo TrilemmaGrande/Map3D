@@ -63,7 +63,7 @@ namespace ProjectSpaceship
                     $"{stellarObject.GetStellarObjectCoordinate().GetCoordinateX(),3} \t" +
                     $"{stellarObject.GetStellarObjectCoordinate().GetCoordinateY(),3} \t" +
                     $"{stellarObject.GetStellarObjectCoordinate().GetCoordinateZ(),3} \t" +
-                    $"{stellarObject.GetStellarType()}");
+                    $"{stellarObject.GetType().Name}");
             }
         }
         public void PrintStellarObjectsMap()

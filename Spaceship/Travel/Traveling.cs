@@ -16,11 +16,11 @@ namespace ProjectSpaceship.Travel
             this.travelingType = travelingType;
             this.destination = destination;
             travelDistance = travelingType.CalcDistance(this);
-            travelTime = travelDistance / spaceship.GetSpeedMax();
+            travelTime = travelDistance / spaceship.GetPowerMax();
         }
         public double CalcFuelConsumption()
         {
-            return travelDistance / spaceship.GetSpeedMax() * spaceship.GetFuelConsumption();
+            return travelDistance / spaceship.GetPowerMax() * spaceship.GetFuelConsumption();
         }
         public Coordinate GetNewPositionInSector()
         {
