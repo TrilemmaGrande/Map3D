@@ -5,7 +5,7 @@ namespace ProjectSpaceship.StellarObjects
 {
     internal class Planet : StellarObject
     {
-        private Merchant merchant;
+        private Merchant merchant = new Merchant();
 
         public Planet(Coordinate coordinate, string owner) : base(coordinate)
         {
