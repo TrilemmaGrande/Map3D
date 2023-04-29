@@ -35,23 +35,19 @@ namespace ProjectSpaceship
                 new Position(spaceShipSpawnSector, spaceShipSpawnPoint));
 
             spaceship = world.GetPlayerSpaceship();
-            Sector spaceshipSector = spaceship.GetPosition().GetSector();
-            Coordinate spaceshipSectorCoordinate = spaceship.GetPosition().GetSector().GetSectorCoordinate();
-            Coordinate spaceshipCoordinateInSector = spaceship.GetPosition().GetCoordinate();
-
             while (gameRunning)
             {                
-                if (spaceshipSector.StellarObjectListContains(spaceshipCoordinateInSector))
+                if (spaceship.GetPosition().GetSector().StellarObjectListContains(spaceship.GetPosition().GetCoordinate()))
                 {
-                    if (spaceshipSector.GetStellarObjectFromSectorList(spaceshipCoordinateInSector) is SpaceStation)
+                    if (spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) is SpaceStation)
                     {
                         SpaceStationMenu(world, spaceship);
                     }
-                    if (spaceshipSector.GetStellarObjectFromSectorList(spaceshipCoordinateInSector) is Asteroid)
+                    if (spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) is Asteroid)
                     {
                         AsteroidMenu(world, spaceship);
                     }
-                    if (spaceshipSector.GetStellarObjectFromSectorList(spaceshipCoordinateInSector) is Planet)
+                    if (spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) is Planet)
                     {
                         PlanetMenu(world, spaceship);
                     }
@@ -66,8 +62,8 @@ namespace ProjectSpaceship
                 }
                 else if (userInput == "2")
                 {
-                    world.GetSectorFromSectorList(spaceshipSectorCoordinate).PrintStellarObjectsMap();
-                    world.GetSectorFromSectorList(spaceshipSectorCoordinate).PrintStellarObjectsCoordinates();
+                    world.GetSectorFromSectorList(spaceship.GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsMap();
+                    world.GetSectorFromSectorList(spaceship.GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsCoordinates();
                     Console.WriteLine();
                 }
                 else if (userInput == "0")
@@ -85,9 +81,6 @@ namespace ProjectSpaceship
         private static void SpaceStationMenu(World world, Spaceship spaceship)
         {
             Console.WriteLine("we found a spacestation!");
-            Sector spaceshipSector = spaceship.GetPosition().GetSector();
-            Coordinate spaceshipSectorCoordinate = spaceship.GetPosition().GetSector().GetSectorCoordinate();
-            Coordinate spaceshipCoordinateInSector = spaceship.GetPosition().GetCoordinate();
             bool inSpacestation = true;
             while (inSpacestation)
             {
@@ -103,18 +96,19 @@ namespace ProjectSpaceship
                 }
                 else if (userInput == "2")
                 {
-                    world.GetSectorFromSectorList(spaceshipSectorCoordinate).PrintStellarObjectsMap();
-                    world.GetSectorFromSectorList(spaceshipSectorCoordinate).PrintStellarObjectsCoordinates();
+                    world.GetSectorFromSectorList(spaceship.GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsMap();
+                    world.GetSectorFromSectorList(spaceship.GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsCoordinates();
                     Console.WriteLine();
                 }
                 else if (userInput == "3")
                 {
-                    Console.WriteLine($"Owner: {spaceshipSector.GetStellarObjectFromSectorList(spaceshipCoordinateInSector).GetOwner()}");
+                    Console.WriteLine($"Owner: {spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()).GetOwner()}");
                     //this must be done...
                 }
                 else if (userInput == "4")
                 {
                     spaceship.SetFuel(spaceship.GetFuelMax());
+                    //this must be done...
                 }
                 else if (userInput == "0")
                 {
@@ -130,9 +124,6 @@ namespace ProjectSpaceship
         private static void AsteroidMenu(World world, Spaceship spaceship)
         {
             Console.WriteLine("we found an Asteroid!");
-            Sector spaceshipSector = spaceship.GetPosition().GetSector();
-            Coordinate spaceshipSectorCoordinate = spaceship.GetPosition().GetSector().GetSectorCoordinate();
-            Coordinate spaceshipCoordinateInSector = spaceship.GetPosition().GetCoordinate();
             bool onAsteroid = true;
             while (onAsteroid)
             {
@@ -148,13 +139,13 @@ namespace ProjectSpaceship
                 }
                 else if (userInput == "2")
                 {
-                    world.GetSectorFromSectorList(spaceshipSectorCoordinate).PrintStellarObjectsMap();
-                    world.GetSectorFromSectorList(spaceshipSectorCoordinate).PrintStellarObjectsCoordinates();
+                    world.GetSectorFromSectorList(spaceship.GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsMap();
+                    world.GetSectorFromSectorList(spaceship.GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsCoordinates();
                     Console.WriteLine();
                 }
                 else if (userInput == "3")
                 {
-                    Console.WriteLine($"Owner: {spaceshipSector.GetStellarObjectFromSectorList(spaceshipCoordinateInSector).GetOwner()}");
+                    Console.WriteLine($"Owner: {spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()).GetOwner()}");
                     //this must be done...
                 }
                 else if (userInput == "4")
@@ -175,9 +166,6 @@ namespace ProjectSpaceship
         private static void PlanetMenu(World world, Spaceship spaceship)
         {
             Console.WriteLine("we found a Planet!");
-            Sector spaceshipSector = spaceship.GetPosition().GetSector();
-            Coordinate spaceshipSectorCoordinate = spaceship.GetPosition().GetSector().GetSectorCoordinate();
-            Coordinate spaceshipCoordinateInSector = spaceship.GetPosition().GetCoordinate();
             bool onPlanet = true;
             while (onPlanet)
             {
@@ -193,13 +181,13 @@ namespace ProjectSpaceship
                 }
                 else if (userInput == "2")
                 {
-                    world.GetSectorFromSectorList(spaceshipSectorCoordinate).PrintStellarObjectsMap();
-                    world.GetSectorFromSectorList(spaceshipSectorCoordinate).PrintStellarObjectsCoordinates();
+                    world.GetSectorFromSectorList(spaceship.GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsMap();
+                    world.GetSectorFromSectorList(spaceship.GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsCoordinates();
                     Console.WriteLine();
                 }
                 else if (userInput == "3")
                 {
-                    Console.WriteLine($"Owner: {spaceshipSector.GetStellarObjectFromSectorList(spaceshipCoordinateInSector).GetOwner()}");
+                    Console.WriteLine($"Owner: {spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()).GetOwner()}");
                     //this must be done...
                 }
                 else if (userInput == "4")
