@@ -82,7 +82,8 @@ namespace ProjectSpaceship
 
         private static void SpaceStationMenu(World world, Spaceship spaceship)
         {
-            Console.WriteLine("we found a spacestation!");
+            Console.Clear();
+            Console.WriteLine("we found a spacestation! \n");
             SpaceStation spacestation = spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) as SpaceStation;
             bool inSpacestation = true;
             string refuelOption = "";
@@ -130,7 +131,8 @@ namespace ProjectSpaceship
         }
         private static void AsteroidMenu(World world, Spaceship spaceship)
         {
-            Console.WriteLine("we found an Asteroid!");
+            Console.Clear();
+            Console.WriteLine("we found an Asteroid! \n");
             bool onAsteroid = true;
             while (onAsteroid)
             {
@@ -172,7 +174,9 @@ namespace ProjectSpaceship
         }
         private static void PlanetMenu(World world, Spaceship spaceship)
         {
-            Console.WriteLine("we found a Planet!");
+            Console.Clear();
+            Console.WriteLine("we found a Planet! \n");
+      
             bool onPlanet = true;
             while (onPlanet)
             {
