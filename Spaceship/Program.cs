@@ -25,7 +25,7 @@ namespace ProjectSpaceship
 
             World world = new World();
             Player player = new Player("TestPlayer");
-            Spaceship spaceship;          
+            Spaceship spaceship;
 
             world.CreatePlayerSpaceship(
                 spaceshipName,
@@ -109,6 +109,7 @@ namespace ProjectSpaceship
                 {
                     refuelOption = "4 refuel";
                     Console.WriteLine($"Owner: {spacestation.GetOwner()}");
+                    Console.WriteLine();
                     Console.WriteLine($"Fuel: {spacestation.GetFuelstation().GetFuel()}");
                     Console.WriteLine();
                 }
@@ -120,7 +121,7 @@ namespace ProjectSpaceship
                 }
                 else if (userInput == "0")
                 {
-                    inSpacestation = false;                    
+                    inSpacestation = false;
                 }
                 else
                 {
@@ -133,6 +134,7 @@ namespace ProjectSpaceship
         {
             Console.Clear();
             Console.WriteLine("we found an Asteroid! \n");
+            Asteroid asteroid = spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) as Asteroid;
             bool onAsteroid = true;
             while (onAsteroid)
             {
@@ -155,7 +157,13 @@ namespace ProjectSpaceship
                 else if (userInput == "3")
                 {
                     Console.WriteLine($"Owner: {spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()).GetOwner()}");
-                    //this must be done...
+                    Console.WriteLine();
+                    Console.WriteLine("Resource\tAmount\tValue");
+                    foreach (var resource in asteroid.GetResourceList())
+                    {
+                        Console.Write($"{resource.GetType().Name} - {resource.GetAmount()} - {resource.GetValue}");
+                    }
+                    Console.WriteLine();
                 }
                 else if (userInput == "4")
                 {
@@ -176,7 +184,7 @@ namespace ProjectSpaceship
         {
             Console.Clear();
             Console.WriteLine("we found a Planet! \n");
-      
+            Planet planet = spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) as Planet;
             bool onPlanet = true;
             while (onPlanet)
             {
@@ -199,7 +207,9 @@ namespace ProjectSpaceship
                 else if (userInput == "3")
                 {
                     Console.WriteLine($"Owner: {spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()).GetOwner()}");
-                    //this must be done...
+                    Console.WriteLine();
+                    Console.WriteLine($"Merchant with {planet.GetMerchant().GetCredits()} Credits");
+                    Console.WriteLine();
                 }
                 else if (userInput == "4")
                 {
