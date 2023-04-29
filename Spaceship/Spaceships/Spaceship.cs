@@ -1,25 +1,25 @@
-﻿using ProjectSpaceship.Travel;
+﻿using ProjectSpaceship.Spaceships.Modules;
+using ProjectSpaceship.Travel;
 
 namespace ProjectSpaceship.Spaceships
 {
     class Spaceship
     {
         private string name;
-        private SpaceshipEngine spaceshipEngine;
-        private SpaceshipTank spaceshipTank;
-        private double weight;
+        private Engine engine;
+        private Tank tank;
+        private Cargo cargo;
         private double fuelConsumption;
         private Position position;
-
         public event EventHandler<TravelingEventArgs> OnTraveling;
 
-        public Spaceship(string name, double weight, SpaceshipTank spaceshipTank, SpaceshipEngine spaceshipEngine, Position position)
+        public Spaceship(string name, Tank tank, Engine engine, Cargo cargo, Position position)
         {
             this.name = name;
-            this.spaceshipEngine = spaceshipEngine;
-            this.spaceshipTank = spaceshipTank;
-            this.weight = weight + spaceshipTank.GetWeight() + spaceshipEngine.GetWeight();
-            fuelConsumption = weight / 1000 * spaceshipEngine.GetSpeedMax();
+            this.engine = engine;
+            this.tank = tank;
+            this.cargo = cargo;
+            fuelConsumption = GetWeight() / 1000 * engine.GetPowerMax();
             this.position = position;
         }
         public void Travel(ITravelingType travelingType, Coordinate destination)
@@ -27,7 +27,7 @@ namespace ProjectSpaceship.Spaceships
             Traveling travel = new Traveling(travelingType, this, destination);
             OnTraveling?.Invoke(this, new TravelingEventArgs(travel.GetNewPositionInWorld()));
             position.SetCoordinate(travel.GetNewPositionInSector());
-            spaceshipTank.SetFuel(spaceshipTank.GetFuel() - travel.CalcFuelConsumption());
+            tank.SetFuel(tank.GetFuel() - travel.CalcFuelConsumption());
             travel.TravelAnimation();
             travel = null;
         }
@@ -45,31 +45,35 @@ namespace ProjectSpaceship.Spaceships
         }
         public void SetFuel(double fuel)
         {
-            spaceshipTank.SetFuel(fuel);
+            tank.SetFuel(fuel);
         }
         public double GetFuel()
         {
-            return spaceshipTank.GetFuel();
+            return tank.GetFuel();
         }
         public double GetFuelMax()
         {
-            return spaceshipTank.GetFuelMax();
+            return tank.GetFuelMax();
         }
-        public double GetSpeedMax()
+        public double GetPowerMax()
         {
-            return spaceshipEngine.GetSpeedMax();
+            return engine.GetPowerMax();
         }
-        public double GetSpeed()
+        public double GetPower()
         {
-            return spaceshipEngine.GetSpeed();
+            return engine.GetPower();
         }
-        public void SetSpeed(double speed)
+        public void SetPower(double power)
         {
-            spaceshipEngine.SetSpeed(speed);
+            engine.SetPower(power);
         }
         public double GetFuelConsumption()
         {
             return fuelConsumption;
+        }
+        public double GetWeight()
+        {
+            return tank.GetWeight() + engine.GetWeight() + cargo.GetWeight() + cargo.GetLoadWeight();
         }
     }
 }

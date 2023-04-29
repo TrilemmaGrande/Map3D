@@ -5,6 +5,7 @@
         protected string name;
         protected double amount;
         protected double value;
+        protected double weightPerAmount;
 
         public Resource(double amount)
         {
@@ -30,6 +31,10 @@
         public void SetValue(double value)
         {
             this.value = value;
+        }
+        public double GetWeightPerAmount()
+        {
+            return weightPerAmount;
         }
     }
 }

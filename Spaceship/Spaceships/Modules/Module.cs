@@ -1,22 +1,24 @@
-﻿namespace ProjectSpaceship.Spaceships
-{
-    internal class SpaceshipTank
-    {
-        private double priceValue;
-        private double fuel;
-        private double fuelMax;
-        private double health;
-        private double healthMax;
-        private double armor;
-        private double weight;
-        private double shield;
-        private double shieldMax;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-        public SpaceshipTank(double priceValue, double fuelMax, double healthMax, double armor, double weight, double shieldMax)
+namespace ProjectSpaceship.Spaceships.Modules
+{
+    internal abstract class Module
+    {
+        protected double priceValue;
+        protected double health;
+        protected double healthMax;
+        protected double armor;
+        protected double weight;
+        protected double shield;
+        protected double shieldMax;
+
+        public Module(double priceValue, double healthMax, double armor, double weight, double shieldMax)
         {
             this.priceValue = priceValue;
-            fuel = fuelMax;
-            this.fuelMax = fuelMax;
             health = healthMax;
             this.healthMax = healthMax;
             this.armor = armor;
@@ -32,18 +34,6 @@
         public void SetPriceValue(double priceValue)
         {
             this.priceValue = priceValue;
-        }
-        public double GetFuel()
-        {
-            return fuel;
-        }
-        public void SetFuel(double fuel)
-        {
-            this.fuel = fuel;
-        }
-        public double GetFuelMax()
-        {
-            return fuelMax;
         }
         public double GetHealth()
         {

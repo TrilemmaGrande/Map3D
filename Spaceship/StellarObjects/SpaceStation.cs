@@ -4,8 +4,7 @@ namespace ProjectSpaceship.StellarObjects
 {
     internal class SpaceStation : StellarObject
     {
-        protected Merchant merchant;
-        protected FuelStation fuelStation = new FuelStation();
+        private FuelStation fuelStation = new FuelStation();
 
         public SpaceStation(Coordinate coordinate, string owner) : base(coordinate)
         {

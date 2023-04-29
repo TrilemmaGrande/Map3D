@@ -41,10 +41,11 @@ namespace ProjectSpaceship
             StellarObject[] stellarObjectsArray = {
                 new BlackHole(new Coordinate(x, y, z), "TestOwner"),
                 new Planet(new Coordinate(x, y, z), "TestOwner"),
+                new Asteroid(new Coordinate(x, y, z), "TestOwner"),
                 new SpaceStation(new Coordinate(x, y, z), "TestOwner" )};
 
 
-            stellarObjects.Add(stellarObjectsArray[rand.Next(3)]);
+            stellarObjects.Add(stellarObjectsArray[rand.Next(stellarObjectsArray.Length)]);
         }
         public void OrderStellarObjectsByCoordinates()
         {

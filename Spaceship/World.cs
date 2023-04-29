@@ -1,4 +1,5 @@
 ﻿using ProjectSpaceship.Spaceships;
+using ProjectSpaceship.Spaceships.Modules;
 using ProjectSpaceship.Travel;
 
 namespace ProjectSpaceship
@@ -39,10 +40,10 @@ namespace ProjectSpaceship
             }
             return null;
         }
-        public void CreatePlayerSpaceship(string name, double weight, SpaceshipTank spaceshipTank, SpaceshipEngine spaceshipEngine, Position position)
+        public void CreatePlayerSpaceship(string name, Tank tank, Engine engine, Cargo cargo, Position position)
         {
             MergePositionWithSectorList(position);
-            playerSpaceship = new Spaceship(name, weight, spaceshipTank, spaceshipEngine, position);
+            playerSpaceship = new Spaceship(name, tank, engine, cargo, position);
             spaceships.Add(playerSpaceship);
             this.playerSpaceship.OnTraveling += OnTraveling_MergeCoordinate;
         }

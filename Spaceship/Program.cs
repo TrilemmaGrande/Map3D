@@ -1,4 +1,5 @@
 ﻿using ProjectSpaceship.Spaceships;
+using ProjectSpaceship.Spaceships.Modules;
 using ProjectSpaceship.Travel;
 
 namespace ProjectSpaceship
@@ -19,17 +20,16 @@ namespace ProjectSpaceship
             Coordinate spaceShipSpawnPoint = new Coordinate(5, 10, 10);
             Sector spaceShipSpawnSector = new Sector(new Coordinate(1, 1, 1));
 
-            string spaceShipName = "Apollo1";
-            double spaceShipWeight = 120.00;
+            string spaceshipName = "Apollo1";
 
             World world = new World();
             Spaceship spaceship;
 
             world.CreatePlayerSpaceship(
-                spaceShipName, 
-                spaceShipWeight, 
-                new SpaceshipTank(100, 100, 70, 2, 10, 30), 
-                new SpaceshipEngine(150, 10, 100, 5, 20, 50), 
+                spaceshipName, 
+                new Tank(100, 100, 70, 2, 10, 30), 
+                new Engine(150, 10, 100, 5, 20, 50), 
+                new Cargo(50, 100, 50, 2, 5, 20),
                 new Position(spaceShipSpawnSector, spaceShipSpawnPoint));
 
             spaceship = world.GetPlayerSpaceship();
