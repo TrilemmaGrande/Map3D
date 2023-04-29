@@ -13,10 +13,8 @@ namespace ProjectSpaceship.StellarObjects
         private List<Resource> resources = new List<Resource>();
         public Asteroid(Coordinate coordinate, string owner) : base(coordinate)
         {
-            type = "Asteroid";
+            stellarType = "Asteroid";
             this.owner = owner;
-
-
         }
     }
 }

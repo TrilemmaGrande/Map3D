@@ -4,7 +4,7 @@
     {
         public BlackHole(Coordinate coordinate, string owner) : base(coordinate)
         {
-            type = "Black Hole";
+            stellarType = "Black Hole";
             this.owner = owner;
         }
     }

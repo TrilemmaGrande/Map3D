@@ -4,7 +4,7 @@
     {
         protected Coordinate coordinate;
         protected string owner;
-        protected string type;
+        protected string stellarType;
         public StellarObject(Coordinate coordinate)
         {
             this.coordinate = coordinate;
@@ -20,7 +20,7 @@
         }
         public virtual string GetStellarType()
         {
-            return type;
+            return stellarType;
         }
     }
 }

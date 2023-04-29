@@ -2,7 +2,7 @@
 {
     internal class Resource
     {
-        protected string name;
+        protected string resourceType;
         protected double amount;
         protected double value;
         protected double weightPerAmount;
