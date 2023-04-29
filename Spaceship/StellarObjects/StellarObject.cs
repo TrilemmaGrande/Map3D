@@ -18,9 +18,5 @@
         {
             return owner;
         }
-        public virtual string GetStellarType()
-        {
-            return stellarType;
-        }
     }
 }

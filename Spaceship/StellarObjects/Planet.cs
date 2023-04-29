@@ -9,7 +9,6 @@ namespace ProjectSpaceship.StellarObjects
 
         public Planet(Coordinate coordinate, string owner) : base(coordinate)
         {
-            stellarType = "Planet";
             this.owner = owner;
         }
     }

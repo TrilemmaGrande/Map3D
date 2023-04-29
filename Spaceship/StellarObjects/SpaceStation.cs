@@ -8,7 +8,6 @@ namespace ProjectSpaceship.StellarObjects
 
         public SpaceStation(Coordinate coordinate, string owner) : base(coordinate)
         {
-            stellarType = "Spacestation";
             this.owner = owner;
         }
         public FuelStation GetFuelstation()

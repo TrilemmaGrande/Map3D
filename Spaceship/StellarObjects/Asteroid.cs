@@ -13,7 +13,6 @@ namespace ProjectSpaceship.StellarObjects
         private List<Resource> resources = new List<Resource>();
         public Asteroid(Coordinate coordinate, string owner) : base(coordinate)
         {
-            stellarType = "Asteroid";
             this.owner = owner;
             Random rand = new Random();
             CreateRandomResources(rand.Next(5), rand.Next(4));
