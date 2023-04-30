@@ -38,24 +38,9 @@ namespace ProjectSpaceship
             player.SetSpaceship(spaceship);
 
             while (gameRunning)
-            {
-                if (spaceship.GetPosition().GetSector().StellarObjectListContains(spaceship.GetPosition().GetCoordinate()))
-                {
-                    if (spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) is SpaceStation)
-                    {
-                        SpaceStationMenu(world, spaceship);
-                    }
-                    if (spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) is Asteroid)
-                    {
-                        AsteroidMenu(world, spaceship);
-                    }
-                    if (spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) is Planet)
-                    {
-                        PlanetMenu(world, spaceship);
-                    }
-                }
+            {               
                 PrintHeader(spaceship);
-                Console.WriteLine("1 = travel \t 2 = scan sector \t 0 = quit");
+                Console.WriteLine("1 = travel \t 2 = scan sector \t 3 = scan position \t 0 = quit");
                 string userInput = Console.ReadLine();
                 Console.Clear();
                 if (userInput == "1")
@@ -67,6 +52,29 @@ namespace ProjectSpaceship
                     world.GetSectorFromSectorList(spaceship.GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsMap();
                     world.GetSectorFromSectorList(spaceship.GetPosition().GetSector().GetSectorCoordinate()).PrintStellarObjectsCoordinates();
                     Console.WriteLine();
+                }
+                else if (userInput == "3")
+                {
+                    if (spaceship.GetPosition().GetSector().StellarObjectListContains(spaceship.GetPosition().GetCoordinate()))
+                    {
+                        if (spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) is SpaceStation)
+                        {
+                            SpaceStationMenu(world, spaceship);
+                        }
+                        else if(spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) is Asteroid)
+                        {
+                            AsteroidMenu(world, spaceship);
+                        }
+                        else if(spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) is Planet)
+                        {
+                            PlanetMenu(world, spaceship);
+                        }                      
+                    }
+                    else
+                    {
+                        Console.WriteLine("there is nothing here!");
+                        Console.WriteLine();
+                    }
                 }
                 else if (userInput == "0")
                 {
@@ -91,7 +99,7 @@ namespace ProjectSpaceship
             {
                 string userInput;
                 PrintHeader(spaceship);
-                Console.WriteLine($"1 = travel \t 2 = scan sector  \t 3 = scan spacestation \t {refuelOption} \t 0 = back to universe");
+                Console.WriteLine($"1 = travel \t 2 = scan sector  \t 3 = scan spacestation \t {refuelOption} \t 0 = back to orbit");
                 userInput = Console.ReadLine();
                 Console.Clear();
                 if (userInput == "1")
@@ -140,7 +148,7 @@ namespace ProjectSpaceship
             {
                 string userInput;
                 PrintHeader(spaceship);
-                Console.WriteLine("1 = travel \t 2 = scan sector \t 3 = scan asteroid \t 4 = mine \t 0 = back to universe");
+                Console.WriteLine("1 = travel \t 2 = scan sector \t 3 = scan asteroid \t 4 = mine \t 0 = back to orbit");
                 userInput = Console.ReadLine();
                 Console.Clear();
                 if (userInput == "1")
@@ -158,10 +166,11 @@ namespace ProjectSpaceship
                 {
                     Console.WriteLine($"Owner: {spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()).GetOwner()}");
                     Console.WriteLine();
-                    Console.WriteLine("Resource\tAmount\tValue");
+                    Console.WriteLine("Type\tAmount\tValue");
                     foreach (var resource in asteroid.GetResourceList())
                     {
-                        Console.Write($"{resource.GetType().Name} - {resource.GetAmount()} - {resource.GetValue}");
+                        Console.Write($"{resource.GetType().Name} \t {resource.GetAmount()} \t {resource.GetValue()}");
+                        Console.WriteLine();
                     }
                     Console.WriteLine();
                 }
@@ -190,7 +199,7 @@ namespace ProjectSpaceship
             {
                 string userInput;
                 PrintHeader(spaceship);
-                Console.WriteLine("1 = travel \t 2 = scan sector \t 3 = scan planet \t 4 = trade \t 0 = back to universe");
+                Console.WriteLine("1 = travel \t 2 = scan sector \t 3 = scan planet \t 4 = trade \t 0 = back to orbit");
                 userInput = Console.ReadLine();
                 Console.Clear();
                 if (userInput == "1")
@@ -259,27 +268,63 @@ namespace ProjectSpaceship
         }
         static void Travel(World world, ITravelingType travelingType)
         {
-            PrintHeader(world.GetPlayerSpaceship());
-            Console.WriteLine("travel destination: (\"x,y,z\") between -50 and +50");
-            Coordinate destination = userInputToCoordinate();
-            if (world.GetPlayerSpaceship().GetFuel() - world.GetPlayerSpaceship().CalcTravelingFuelConsumption(travelingType, destination) >= 0)
+            bool inTravelMenu = true;
+            while (inTravelMenu)
             {
-                world.GetPlayerSpaceship().Travel(travelingType, destination);
-            }
-            else
-            {
-                Console.WriteLine("Treibstoff reicht nicht aus");
+                PrintHeader(world.GetPlayerSpaceship());
+                Console.WriteLine("travel destination: (\"x,y,z\") between -50 and +50\t 0 = return");
+                Coordinate destination = userInputToCoordinate();
+                if (destination is null)
+                {
+                    inTravelMenu = false;
+                    Console.Clear();
+                    break;
+                }
+                if (world.GetPlayerSpaceship().GetFuel() - world.GetPlayerSpaceship().CalcTravelingFuelConsumption(travelingType, destination) >= 0)
+                {
+                    world.GetPlayerSpaceship().Travel(travelingType, destination);
+                    inTravelMenu = false;
+                    Console.Clear();
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Treibstoff reicht nicht aus");
+                    continue;
+                }
             }
         }
         static Coordinate userInputToCoordinate()
         {
-            string userInput = Console.ReadLine();
-            string[] destination = userInput.Split(",");
-            Coordinate travelDestination = new Coordinate(
-                Convert.ToInt32(destination[0]),
-                Convert.ToInt32(destination[1]),
-                Convert.ToInt32(destination[2]));
-            return travelDestination;
+            bool inMenu = true;
+            while (inMenu)
+            {
+                string userInput = Console.ReadLine();
+                if (userInput == "0")
+                {
+                    break;
+                }
+                if (userInput.Split(',').Length-1 != 2)
+                {
+                    Console.WriteLine("input invalid! Wrong Coordinate format!");
+                    continue;
+                }
+                string[] destination = userInput.Split(",");
+                foreach (var item in destination)
+                {
+                    if (item == null || Convert.ToInt32(item) < -50 || Convert.ToInt32(item) > 50)
+                    {
+                        Console.WriteLine("input invalid! Coordinate out of range!");
+                        continue;
+                    }
+                }
+                Coordinate travelDestination = new Coordinate(
+                    Convert.ToInt32(destination[0]),
+                    Convert.ToInt32(destination[1]),
+                    Convert.ToInt32(destination[2]));
+                return travelDestination;
+            }
+            return null;
         }
         static void PrintHeader(Spaceship spaceship)
         {
