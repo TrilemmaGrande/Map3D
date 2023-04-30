@@ -121,7 +121,7 @@ namespace ProjectSpaceship
                     Console.WriteLine($"Fuel: {spacestation.GetFuelstation().GetFuel()}");
                     Console.WriteLine();
                 }
-                else if (userInput == "4" || refuelOption != "")
+                else if (userInput == "4" && refuelOption != "")
                 {
                     double usedFuel = spaceship.GetFuelMax() - spaceship.GetFuel();
                     spacestation.GetFuelstation().DecreaseFuel(usedFuel);
