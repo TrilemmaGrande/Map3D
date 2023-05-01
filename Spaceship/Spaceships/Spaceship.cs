@@ -83,5 +83,9 @@ namespace ProjectSpaceship.Spaceships
         {
             return tank.GetWeight() + engine.GetWeight() + cargo.GetWeight() + cargo.GetLoadWeight();
         }
+        public string GetName()
+        {
+            return name;
+        }
     }
 }

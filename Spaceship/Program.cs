@@ -2,6 +2,7 @@
 using ProjectSpaceship.Spaceships.Modules;
 using ProjectSpaceship.StellarObjects;
 using ProjectSpaceship.Travel;
+using System.Numerics;
 
 namespace ProjectSpaceship
 {
@@ -24,7 +25,7 @@ namespace ProjectSpaceship
             string spaceshipName = "Apollo1";
 
             World world = new World();
-            Player player = new Player("TestPlayer");
+            Player player;
             Spaceship spaceship;
 
             world.CreatePlayerSpaceship(
@@ -33,13 +34,15 @@ namespace ProjectSpaceship
                 new Engine(150, 10, 100, 5, 20, 50),
                 new Cargo(50, 100, 50, 2, 5, 20),
                 new Position(spaceShipSpawnSector, spaceShipSpawnPoint));
+            world.CreatePlayer("Testplayer");
 
             spaceship = world.GetPlayerSpaceship();
+            player = world.GetPlayer();
             player.SetSpaceship(spaceship);
 
             while (gameRunning)
             {               
-                PrintHeader(spaceship);
+                PrintHeader(world);
                 Console.WriteLine("1 = travel \t 2 = scan sector \t 3 = scan position \t 0 = quit");
                 string userInput = Console.ReadLine();
                 Console.Clear();
@@ -59,15 +62,15 @@ namespace ProjectSpaceship
                     {
                         if (spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) is SpaceStation)
                         {
-                            SpaceStationMenu(world, spaceship);
+                            SpaceStationMenu(world);
                         }
                         else if(spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) is Asteroid)
                         {
-                            AsteroidMenu(world, spaceship);
+                            AsteroidMenu(world);
                         }
                         else if(spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) is Planet)
                         {
-                            PlanetMenu(world, spaceship);
+                            PlanetMenu(world);
                         }                      
                     }
                     else
@@ -88,17 +91,18 @@ namespace ProjectSpaceship
             }
         }
 
-        private static void SpaceStationMenu(World world, Spaceship spaceship)
+        private static void SpaceStationMenu(World world)
         {
             Console.Clear();
             Console.WriteLine("we found a spacestation! \n");
+            Spaceship spaceship = world.GetPlayerSpaceship();
             SpaceStation spacestation = spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) as SpaceStation;
             bool inSpacestation = true;
             string refuelOption = "";
             while (inSpacestation)
             {
                 string userInput;
-                PrintHeader(spaceship);
+                PrintHeader(world);
                 Console.WriteLine($"1 = travel \t 2 = scan sector  \t 3 = scan spacestation \t {refuelOption} \t 0 = back to orbit");
                 userInput = Console.ReadLine();
                 Console.Clear();
@@ -138,16 +142,17 @@ namespace ProjectSpaceship
                 }
             }
         }
-        private static void AsteroidMenu(World world, Spaceship spaceship)
+        private static void AsteroidMenu(World world)
         {
             Console.Clear();
             Console.WriteLine("we found an Asteroid! \n");
+            Spaceship spaceship = world.GetPlayerSpaceship();
             Asteroid asteroid = spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) as Asteroid;
             bool onAsteroid = true;
             while (onAsteroid)
             {
                 string userInput;
-                PrintHeader(spaceship);
+                PrintHeader(world);
                 Console.WriteLine("1 = travel \t 2 = scan sector \t 3 = scan asteroid \t 4 = mine \t 0 = back to orbit");
                 userInput = Console.ReadLine();
                 Console.Clear();
@@ -176,7 +181,7 @@ namespace ProjectSpaceship
                 }
                 else if (userInput == "4")
                 {
-                    MiningMenu(world, spaceship);
+                    MiningMenu(world);
                 }
                 else if (userInput == "0")
                 {
@@ -189,16 +194,17 @@ namespace ProjectSpaceship
                 }
             }
         }
-        private static void PlanetMenu(World world, Spaceship spaceship)
+        private static void PlanetMenu(World world)
         {
             Console.Clear();
             Console.WriteLine("we found a Planet! \n");
+            Spaceship spaceship = world.GetPlayerSpaceship();
             Planet planet = spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) as Planet;
             bool onPlanet = true;
             while (onPlanet)
             {
                 string userInput;
-                PrintHeader(spaceship);
+                PrintHeader(world);
                 Console.WriteLine("1 = travel \t 2 = scan sector \t 3 = scan planet \t 4 = trade \t 0 = back to orbit");
                 userInput = Console.ReadLine();
                 Console.Clear();
@@ -222,7 +228,7 @@ namespace ProjectSpaceship
                 }
                 else if (userInput == "4")
                 {
-                    MerchantMenu(world, spaceship);
+                    MerchantMenu(world);
                 }
                 else if (userInput == "0")
                 {
@@ -240,7 +246,7 @@ namespace ProjectSpaceship
             bool travelMenu = true;
             while (travelMenu)
             {
-                PrintHeader(world.GetPlayerSpaceship());
+                PrintHeader(world);
                 Console.WriteLine("1 = travel in Sector \t 2 = travel to new Sector \t 0 = return");
                 string userInput = Console.ReadLine();
                 Console.Clear();
@@ -271,7 +277,7 @@ namespace ProjectSpaceship
             bool inTravelMenu = true;
             while (inTravelMenu)
             {
-                PrintHeader(world.GetPlayerSpaceship());
+                PrintHeader(world);
                 Console.WriteLine("travel destination: (\"x,y,z\") between -50 and +50\t 0 = return");
                 Coordinate destination = userInputToCoordinate();
                 if (destination is null)
@@ -326,19 +332,35 @@ namespace ProjectSpaceship
             }
             return null;
         }
-        static void PrintHeader(Spaceship spaceship)
+        static void PrintHeader(World world)
         {
-            Console.WriteLine($"sector: {spaceship.GetPosition().GetSector().GetSectorCoordinate().CoordinateToString()} \t " +
-                 $"coordinate: {spaceship.GetPosition().GetCoordinate().CoordinateToString()} \tfuel: {spaceship.GetFuel()} ");
-            Console.WriteLine();
+            Player player = world.GetPlayer();
+            Spaceship spaceship = world.GetPlayerSpaceship();
+            string line = new String('-', 80);
+
+            string printPlayer =        $"Player:     {player.GetName(),10}";
+            string printLevel =         $"Level:      {player.GetLevel(),10}";
+            string printExperience =    $"Exp:        {player.GetExperience(),10}";
+            string printSpaceshipName = $"Spaceship:  {spaceship.GetName(),10}";
+            string printSpaceshipWeight = $"Weight:     {spaceship.GetWeight(),10}";
+            string printSpaceshipFuel = $"Fuel:       {spaceship.GetFuel(),10}";
+            string printSector =        $"sector:     {spaceship.GetPosition().GetSector().GetSectorCoordinate().CoordinateToString(),15}";
+            string printCoordinate =    $"Coordinate: {spaceship.GetPosition().GetCoordinate().CoordinateToString(),15}";
+            string whiteSpace =     new String(' ',27);
+
+            Console.WriteLine(line);
+            Console.WriteLine($"| {printSector} | {printPlayer} | {printSpaceshipName}|");
+            Console.WriteLine($"| {printCoordinate} | {printLevel} | {printSpaceshipWeight}|");
+            Console.WriteLine($"| {whiteSpace} | {printExperience} | {printSpaceshipFuel}|");
+            Console.WriteLine(line);
         }
-        static void MiningMenu(World world, Spaceship spaceship)
+        static void MiningMenu(World world)
         {
             bool mining = true;
             while (mining)
             {
                 string userInput;
-                PrintHeader(spaceship);
+                PrintHeader(world);
                 Console.WriteLine("1 = select ore vein \t 2 = mine \t 0 = back to Asteroid");
                 userInput = Console.ReadLine();
                 Console.Clear();
@@ -361,13 +383,13 @@ namespace ProjectSpaceship
                 }
             }
         }
-        static void MerchantMenu(World world, Spaceship spaceship)
+        static void MerchantMenu(World world)
         {
             bool trading = true;
             while (trading)
             {
                 string userInput;
-                PrintHeader(spaceship);
+                PrintHeader(world);
                 Console.WriteLine("1 = buy \t 2 = sell \t 0 = back to Planet");
                 userInput = Console.ReadLine();
                 Console.Clear();

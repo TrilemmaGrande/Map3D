@@ -8,6 +8,7 @@ namespace ProjectSpaceship
     {
         private List<Sector> sectors = new List<Sector>();
         private Spaceship playerSpaceship;
+        private Player player;
         private List<Spaceship> spaceships = new List<Spaceship>();
 
         public void CreateSector(Coordinate SectorCoordinate)
@@ -43,9 +44,13 @@ namespace ProjectSpaceship
         public void CreatePlayerSpaceship(string name, Tank tank, Engine engine, Cargo cargo, Position position)
         {
             MergePositionWithSectorList(position);
-            playerSpaceship = new Spaceship(name, tank, engine, cargo, position);
-            spaceships.Add(playerSpaceship);
+            this.playerSpaceship = new Spaceship(name, tank, engine, cargo, position);
+            this.spaceships.Add(playerSpaceship);
             this.playerSpaceship.OnTraveling += OnTraveling_MergeCoordinate;
+        }
+        public void CreatePlayer(string name)
+        {
+            this.player = new Player(name);
         }
         private void MergePositionWithSectorList(Position position)
         {
@@ -79,6 +84,10 @@ namespace ProjectSpaceship
         public Spaceship GetPlayerSpaceship()
         {
             return playerSpaceship;
+        }
+        public Player GetPlayer()
+        {
+            return player;
         }
     }
 }
