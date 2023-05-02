@@ -22,7 +22,7 @@ namespace ProjectSpaceship
             Coordinate spaceShipSpawnPoint = new Coordinate(5, 10, 10);
             Sector spaceShipSpawnSector = new Sector(new Coordinate(1, 1, 1));
 
-            string spaceshipName = "Apollo1";
+            string spaceshipName = "A";
 
             World world = new World();
             Player player;
@@ -336,22 +336,22 @@ namespace ProjectSpaceship
         {
             Player player = world.GetPlayer();
             Spaceship spaceship = world.GetPlayerSpaceship();
-            string line = new String('-', 80);
 
-            string printPlayer =        $"Player:     {player.GetName(),10}";
-            string printLevel =         $"Level:      {player.GetLevel(),10}";
-            string printExperience =    $"Exp:        {player.GetExperience(),10}";
-            string printSpaceshipName = $"Spaceship:  {spaceship.GetName(),10}";
-            string printSpaceshipWeight = $"Weight:     {spaceship.GetWeight(),10}";
-            string printSpaceshipFuel = $"Fuel:       {spaceship.GetFuel(),10}";
-            string printSector =        $"sector:     {spaceship.GetPosition().GetSector().GetSectorCoordinate().CoordinateToString(),15}";
-            string printCoordinate =    $"Coordinate: {spaceship.GetPosition().GetCoordinate().CoordinateToString(),15}";
-            string whiteSpace =     new String(' ',27);
+            string line = new String('-',80);
+            string whiteSpace = new String(' ',20);
+            string printPlayer =        $"{player.GetName(),-10}";
+            string printLevel =         $"{player.GetLevel(),-10}";
+            string printExperience =    $"{player.GetExperience(),-10}";
+            string printSpaceshipName = $"{spaceship.GetName(),-10}";
+            string printSpaceshipWeight = $"{spaceship.GetWeight(),-10}";
+            string printSpaceshipFuel = $"{spaceship.GetFuel().ToString("F2"),-10}";
+            string printSector =        $"{spaceship.GetPosition().GetSector().GetSectorCoordinate().CoordinateToString(),-10}";
+            string printCoordinate =    $"{spaceship.GetPosition().GetCoordinate().CoordinateToString(),-10}";
 
             Console.WriteLine(line);
-            Console.WriteLine($"| {printSector} | {printPlayer} | {printSpaceshipName}|");
-            Console.WriteLine($"| {printCoordinate} | {printLevel} | {printSpaceshipWeight}|");
-            Console.WriteLine($"| {whiteSpace} | {printExperience} | {printSpaceshipFuel}|");
+            Console.WriteLine($"|  Sector:{printSector,15} |  Player:{printPlayer,15} |  Spaceship:{printSpaceshipName,12}  |");
+            Console.WriteLine($"|  Coordinate:{printCoordinate,11} |  Level:{printLevel,16} |  Weight:{printSpaceshipWeight,15}  |");
+            Console.WriteLine($"|  {whiteSpace,22} |  Exp:{printExperience,18} |  Fuel:{printSpaceshipFuel,17}  |");
             Console.WriteLine(line);
         }
         static void MiningMenu(World world)
