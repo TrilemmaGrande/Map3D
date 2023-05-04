@@ -26,7 +26,7 @@
         }
         public string CoordinateToString()
         {
-            return $"{xCoord,3}|{yCoord,3}|{zCoord,3}";
+            return $"{xCoord,3}{yCoord,3}{zCoord,3}";
         }
     }
 }

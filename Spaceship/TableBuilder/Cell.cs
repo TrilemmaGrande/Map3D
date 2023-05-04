@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectSpaceship.TableBuilder
+﻿namespace ProjectSpaceship.TableBuilder
 {
-    enum MergeCellOption
+    enum MergeCell
     {
         MergeTop,
         MergeLeft,
+        MergeTopLeft,
         MergeDefault
     }
     enum Alignment
@@ -21,14 +16,15 @@ namespace ProjectSpaceship.TableBuilder
     internal class Cell
     {
         public Alignment Alignment { get; set; }
-        public MergeCellOption MergeCellOption { get; set; }
+        public MergeCell MergeCellOption { get; set; }
         public string Content { get; set; }
 
-        public Cell(string content, Alignment alignment = Alignment.Left,  MergeCellOption mergeCellOption = MergeCellOption.MergeDefault)
+        public Cell(string content, Alignment alignment = Alignment.Left, MergeCell mergeCellOption = MergeCell.MergeDefault)
         {
             MergeCellOption = mergeCellOption;
             Alignment = alignment;
             Content = content;
         }
+
     }
 }

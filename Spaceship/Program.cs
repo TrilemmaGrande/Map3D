@@ -25,7 +25,7 @@ namespace ProjectSpaceship
             Coordinate spaceShipSpawnPoint = new Coordinate(5, 10, 10);
             Sector spaceShipSpawnSector = new Sector(new Coordinate(1, 1, 1));
 
-            string spaceshipName = "A";
+            string spaceshipName = "Apollo1";
 
             World world = new World();
             Player player;
@@ -37,7 +37,7 @@ namespace ProjectSpaceship
                 new Engine(150, 10, 100, 5, 20, 50),
                 new Cargo(50, 100, 50, 2, 5, 20),
                 new Position(spaceShipSpawnSector, spaceShipSpawnPoint));
-            world.CreatePlayer("Testplayer");
+            world.CreatePlayer("TestPlayer");
 
             spaceship = world.GetPlayerSpaceship();
             player = world.GetPlayer();
@@ -339,35 +339,32 @@ namespace ProjectSpaceship
         {
             Player player = world.GetPlayer();
             Spaceship spaceship = world.GetPlayerSpaceship();
-            string line = new String('-', 80);
-            string whiteSpace = new String(' ', 20);
-            string printPlayer = $"{player.GetName(),-10}";
-            string printLevel = $"{player.GetLevel(),-10}";
-            string printExperience = $"{player.GetExperience(),-10}";
-            string printSpaceshipName = $"{spaceship.GetName(),-10}";
-            string printSpaceshipWeight = $"{spaceship.GetWeight(),-10}";
-            string printSpaceshipFuel = $"{spaceship.GetFuel().ToString("F2"),-10}";
-            string printSector = $"{spaceship.GetPosition().GetSector().GetSectorCoordinate().CoordinateToString(),-10}";
-            string printCoordinate = $"{spaceship.GetPosition().GetCoordinate().CoordinateToString(),-10}";
+            string whiteSpace = (" ");
+            string printPlayer = $"{player.GetName()}";
+            string printLevel = $"{player.GetLevel()}";
+            string printExperience = $"{player.GetExperience()}";
+            string printSpaceshipName = $"{spaceship.GetName()}";
+            string printSpaceshipWeight = $"{spaceship.GetWeight()}";
+            string printSpaceshipFuel = $"{spaceship.GetFuel().ToString("F2")}";
+            string printSector = $"{spaceship.GetPosition().GetSector().GetSectorCoordinate().CoordinateToString()}";
+            string printCoordinate = $"{spaceship.GetPosition().GetCoordinate().CoordinateToString()}";
 
-            Console.WriteLine(line);
-            Console.WriteLine($"|  Sector:{printSector,15} |  Player:{printPlayer,15} |  Spaceship:{printSpaceshipName,12}  |");
-            Console.WriteLine($"|  Coordinate:{printCoordinate,11} |  Level:{printLevel,16} |  Weight:{printSpaceshipWeight,15}  |");
-            Console.WriteLine($"|  {whiteSpace,22} |  Exp:{printExperience,18} |  Fuel:{printSpaceshipFuel,17}  |");
-            Console.WriteLine(line);
+            Table defaultOutputTable = new Table(3, 6);
+            defaultOutputTable.AddCells(
+                new Cell("Sector:"), new Cell(printSector,Alignment.Right,MergeCell.MergeLeft), 
+                new Cell("Player:"), new Cell(printPlayer,Alignment.Right,MergeCell.MergeLeft),
+                new Cell("Spaceship:"), new Cell(printSpaceshipName, Alignment.Right, MergeCell.MergeLeft));
+            defaultOutputTable.AddCells(
+                new Cell("Coord:"), new Cell(printCoordinate, Alignment.Right, MergeCell.MergeLeft), 
+                new Cell("Level:"), new Cell(printLevel, Alignment.Right, MergeCell.MergeLeft),
+                new Cell("Weight:"), new Cell(printSpaceshipWeight, Alignment.Right, MergeCell.MergeLeft));
+            defaultOutputTable.AddCells(
+                new Cell(" ",Alignment.Left,MergeCell.MergeTop), new Cell(whiteSpace, Alignment.Right, MergeCell.MergeTopLeft), 
+                new Cell("Exp:", Alignment.Left, MergeCell.MergeTop), new Cell(printExperience, Alignment.Right, MergeCell.MergeTopLeft),
+                new Cell("Fuel", Alignment.Left, MergeCell.MergeTop), new Cell(printSpaceshipFuel, Alignment.Right, MergeCell.MergeTopLeft));
 
-            Table testTable = new Table(5,2);
-            testTable.AddCells(new Cell(player.GetName()), new Cell(player.GetLevel().ToString()));
-            testTable.AddCells(new Cell(player.GetExperience().ToString(), Alignment.Right,MergeCellOption.MergeLeft));
-            testTable.AddCells(new Cell(spaceship.GetName(),Alignment.Center, MergeCellOption.MergeTop));
-            testTable.AddCells(new Cell(player.GetExperience().ToString()));
-            testTable.AddCells(new Cell(spaceship.GetName()));
-            testTable.AddCells(new Cell(player.GetExperience().ToString()));
-            testTable.AddCells(new Cell(spaceship.GetName(),Alignment.Left,MergeCellOption.MergeTop));
-            testTable.AddCells(new Cell(spaceship.GetWeight().ToString()));
-            testTable.AddCells(new Cell(spaceship.GetFuel().ToString("F2"),Alignment.Left,MergeCellOption.MergeLeft));
             Console.OutputEncoding = Encoding.Unicode;          
-            Console.WriteLine(testTable.GetTable());
+            Console.WriteLine(defaultOutputTable.GetTable());
         }
         static void MiningMenu(World world)
         {
