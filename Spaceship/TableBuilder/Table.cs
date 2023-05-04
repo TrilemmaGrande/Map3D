@@ -91,7 +91,7 @@ namespace ProjectSpaceship.TableBuilder
                     tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] = lineTTop;
                 }
                 // Build middle parts borders.
-                else if (cursorPositionInY > 1 && cursorPositionInY < tableYCount - 2)
+                else if (cursorPositionInY > 1 && cursorPositionInY < tableYCount - 3)
                 {
                     // Left
                     if (cursorPositionInX == 1 && item.MergeCellOption is MergeCellOption.MergeTop)
@@ -235,7 +235,7 @@ namespace ProjectSpaceship.TableBuilder
                     else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 10
                         && item.MergeCellOption is not MergeCellOption.MergeTop
                         && item.MergeCellOption is not MergeCellOption.MergeLeft)
-                    {
+                    {                       
                         for (int i = 0; i < 10; i++)
                         {
                             tableBuilder[cursorPositionInX + i, cursorPositionInY - 1] = lineHorizontal;
@@ -478,7 +478,7 @@ namespace ProjectSpaceship.TableBuilder
                     else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 10
                        && item.MergeCellOption is not MergeCellOption.MergeTop
                        && item.MergeCellOption is not MergeCellOption.MergeLeft)
-                    {
+                    {                     
                         for (int i = 0; i < 10; i++)
                         {
                             tableBuilder[cursorPositionInX + i, cursorPositionInY - 1] = lineHorizontal;
