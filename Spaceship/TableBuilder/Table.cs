@@ -11,18 +11,18 @@ namespace ProjectSpaceship.TableBuilder
         private char[,] tableBuilder;
         private Queue<string> contentQueue = new Queue<string>();
         StringBuilder finalOutputTable = new StringBuilder();
-        private char lineTopLeft = '┌';
-        private char lineTopRight = '┐';
-        private char lineBottomLeft = '└';
-        private char lineBottomRight = '┘';
-        private char lineVertikal = '│';
-        private char lineHorizontal = '─';
-        private char lineTTop = '┬';
-        private char lineTBottom = '┴';
-        private char lineTLeft = '├';
-        private char lineTRight = '┤';
-        private char lineCross = '┼';
-        private char lineSpace = ' ';
+        private const char lineTopLeft = '\u250C';
+        private const char lineTopRight = '\u2510';
+        private const char lineBottomLeft = '\u2514';
+        private const char lineBottomRight = '\u2518';
+        private const char lineVertikal = '\u2502';
+        private const char lineHorizontal = '\u2500';
+        private const char lineTTop = '\u252c';
+        private const char lineTBottom = '\u2534';
+        private const char lineTLeft = '\u251c';
+        private const char lineTRight = '\u2524';
+        private const char lineCross = '\u253c';
+        private const char lineSpace = ' ';
 
         public Table(int rows, int collums)
         {
@@ -30,7 +30,7 @@ namespace ProjectSpaceship.TableBuilder
             int borderCountY = rows + 1;
             int borderCountX = collums + 1;
 
-            this.tableYCount = rows + (borderCountY);
+            this.tableYCount = rows + borderCountY;
             this.tableXCount = (collums * wordLengthMax + borderCountX);
             this.tableBuilder = new char[tableXCount, tableYCount];
             // Build frame borders.
@@ -242,7 +242,6 @@ namespace ProjectSpaceship.TableBuilder
                         }
                         tableBuilder[cursorPositionInX - 1, cursorPositionInY] = lineVertikal;
                         tableBuilder[cursorPositionInX + 10, cursorPositionInY - 1] = lineTRight;
-
                         if (tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] == lineTTop
                            || tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] != lineTLeft
                            || tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] != lineTopLeft)
@@ -286,6 +285,7 @@ namespace ProjectSpaceship.TableBuilder
                             tableBuilder[cursorPositionInX + i, cursorPositionInY - 1] = lineHorizontal;
                         }
                         tableBuilder[cursorPositionInX - 1, cursorPositionInY] = lineSpace;
+                        tableBuilder[cursorPositionInX + 10, cursorPositionInY - 1] = lineTRight;
                         if (tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] == lineTTop)
                         {
                             tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] = lineHorizontal;
@@ -332,7 +332,7 @@ namespace ProjectSpaceship.TableBuilder
                     }
                 }
                 // Build last row borders.
-                else if (cursorPositionInY == tableYCount - 1)
+                else if (cursorPositionInY == tableYCount - 2)
                 {
                     // Left
                     if (cursorPositionInX == 1 && item.MergeCellOption is MergeCellOption.MergeTop)
@@ -529,6 +529,7 @@ namespace ProjectSpaceship.TableBuilder
                             tableBuilder[cursorPositionInX + i, cursorPositionInY - 1] = lineHorizontal;
                         }
                         tableBuilder[cursorPositionInX - 1, cursorPositionInY] = lineSpace;
+                        tableBuilder[cursorPositionInX + 10, cursorPositionInY - 1] = lineTRight;
                         if (tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] == lineTTop)
                         {
                             tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] = lineHorizontal;
@@ -574,14 +575,13 @@ namespace ProjectSpaceship.TableBuilder
                         }
                     }
                 }
-
                 // Set Cursor
-                if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 10 && cursorPositionInY < tableYCount - 2)
+                if (cursorPositionInX >= 1 && cursorPositionInX == tableXCount - 11 && cursorPositionInY <= tableYCount )
                 {
                     cursorPositionInY += 2;
-                    cursorPositionInY = 1;
+                    cursorPositionInX = 1;
                 }
-                else if (cursorPositionInX > 1 && cursorPositionInX < tableXCount - 10 && cursorPositionInY < tableYCount - 2)
+                else if (cursorPositionInX >= 1 && cursorPositionInX < tableXCount - 11 && cursorPositionInY < tableYCount)
                 {
                     cursorPositionInX += 11;
                 }
@@ -595,19 +595,19 @@ namespace ProjectSpaceship.TableBuilder
                 {
                     if (tableBuilder[j, i] == 'L')
                     {
-                        finalOutputTable.Append((contentQueue.Peek().ToString(),10));
-                        contentQueue.Dequeue();
+                        string outputString = contentQueue.Dequeue().ToString();
+                        finalOutputTable.Append($"{outputString,10}");                        
                     }
                     else if (tableBuilder[j, i] == 'R')
                     {
-                        finalOutputTable.Append((contentQueue.Peek().ToString(),-10));
-                        contentQueue.Dequeue();
+                        string outputString = contentQueue.Dequeue().ToString();
+                        finalOutputTable.Append($"{ outputString,-10}");                        
                     }
                     else if (tableBuilder[j, i] == 'C')
                     {
                         int padding = (10 - contentQueue.Peek().Length) / 2;
-                        finalOutputTable.Append((contentQueue.Peek().ToString().PadLeft(padding),10));
-                        contentQueue.Dequeue();
+                        string outputString = contentQueue.Dequeue().ToString().PadLeft(padding);
+                        finalOutputTable.Append($"{outputString,10}");                        
                     }
                     else
                     {

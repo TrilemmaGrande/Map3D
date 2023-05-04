@@ -3,6 +3,8 @@ using ProjectSpaceship.Spaceships.Modules;
 using ProjectSpaceship.StellarObjects;
 using ProjectSpaceship.TableBuilder;
 using ProjectSpaceship.Travel;
+using System.Text;
+using System.Threading.Channels;
 
 namespace ProjectSpaceship
 {
@@ -14,9 +16,10 @@ namespace ProjectSpaceship
 
     // BELOW IS JUST FOR TESTING (maybe use chunks of this later).
     internal class Program
-    {
+    {        
         static void Main(string[] args)
         {
+        
             bool gameRunning = true;
 
             Coordinate spaceShipSpawnPoint = new Coordinate(5, 10, 10);
@@ -336,7 +339,6 @@ namespace ProjectSpaceship
         {
             Player player = world.GetPlayer();
             Spaceship spaceship = world.GetPlayerSpaceship();
-
             string line = new String('-', 80);
             string whiteSpace = new String(' ', 20);
             string printPlayer = $"{player.GetName(),-10}";
@@ -354,13 +356,17 @@ namespace ProjectSpaceship
             Console.WriteLine($"|  {whiteSpace,22} |  Exp:{printExperience,18} |  Fuel:{printSpaceshipFuel,17}  |");
             Console.WriteLine(line);
 
-            Table testTable = new Table(4,2);
-            testTable.AddCells(new Cell(player.GetName()));
-            testTable.AddCells(new Cell(player.GetLevel().ToString()));
+            Table testTable = new Table(5,2);
+            testTable.AddCells(new Cell(player.GetName()), new Cell(player.GetLevel().ToString()));
+            testTable.AddCells(new Cell(player.GetExperience().ToString()));
+            testTable.AddCells(new Cell(spaceship.GetName()));
+            testTable.AddCells(new Cell(player.GetExperience().ToString()));
+            testTable.AddCells(new Cell(spaceship.GetName()));
             testTable.AddCells(new Cell(player.GetExperience().ToString()));
             testTable.AddCells(new Cell(spaceship.GetName()));
             testTable.AddCells(new Cell(spaceship.GetWeight().ToString()));
             testTable.AddCells(new Cell(spaceship.GetFuel().ToString("F2")));
+            Console.OutputEncoding = Encoding.Unicode;          
             Console.WriteLine(testTable.GetTable());
         }
         static void MiningMenu(World world)
