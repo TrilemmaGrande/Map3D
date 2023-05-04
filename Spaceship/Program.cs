@@ -358,14 +358,14 @@ namespace ProjectSpaceship
 
             Table testTable = new Table(5,2);
             testTable.AddCells(new Cell(player.GetName()), new Cell(player.GetLevel().ToString()));
+            testTable.AddCells(new Cell(player.GetExperience().ToString(), Alignment.Right,MergeCellOption.MergeLeft));
+            testTable.AddCells(new Cell(spaceship.GetName(),Alignment.Center, MergeCellOption.MergeTop));
             testTable.AddCells(new Cell(player.GetExperience().ToString()));
             testTable.AddCells(new Cell(spaceship.GetName()));
             testTable.AddCells(new Cell(player.GetExperience().ToString()));
-            testTable.AddCells(new Cell(spaceship.GetName()));
-            testTable.AddCells(new Cell(player.GetExperience().ToString()));
-            testTable.AddCells(new Cell(spaceship.GetName()));
+            testTable.AddCells(new Cell(spaceship.GetName(),Alignment.Left,MergeCellOption.MergeTop));
             testTable.AddCells(new Cell(spaceship.GetWeight().ToString()));
-            testTable.AddCells(new Cell(spaceship.GetFuel().ToString("F2")));
+            testTable.AddCells(new Cell(spaceship.GetFuel().ToString("F2"),Alignment.Left,MergeCellOption.MergeLeft));
             Console.OutputEncoding = Encoding.Unicode;          
             Console.WriteLine(testTable.GetTable());
         }

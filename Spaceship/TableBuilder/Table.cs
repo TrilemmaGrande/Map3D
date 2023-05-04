@@ -119,7 +119,7 @@ namespace ProjectSpaceship.TableBuilder
                         tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] = lineTLeft;
                     }
                     // Middle                   
-                    else if (cursorPositionInX > 1 && cursorPositionInX < tableXCount - 10
+                    else if (cursorPositionInX > 1 && cursorPositionInX < tableXCount - 11
                         && item.MergeCellOption is not MergeCellOption.MergeTop
                         && item.MergeCellOption is not MergeCellOption.MergeLeft)
                     {
@@ -135,7 +135,7 @@ namespace ProjectSpaceship.TableBuilder
                             tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] = lineCross;
                         }
                     }
-                    else if (cursorPositionInX > 1 && cursorPositionInX < tableXCount - 10
+                    else if (cursorPositionInX > 1 && cursorPositionInX < tableXCount - 11
                         && item.MergeCellOption is MergeCellOption.MergeTop
                         && item.MergeCellOption is not MergeCellOption.MergeLeft)
                     {
@@ -169,7 +169,7 @@ namespace ProjectSpaceship.TableBuilder
                             tableBuilder[cursorPositionInX + 10, cursorPositionInY - 1] = lineTLeft;
                         }
                     }
-                    else if (cursorPositionInX > 1 && cursorPositionInX < tableXCount - 10
+                    else if (cursorPositionInX > 1 && cursorPositionInX < tableXCount - 11
                     && item.MergeCellOption is not MergeCellOption.MergeTop
                     && item.MergeCellOption is MergeCellOption.MergeLeft)
                     {
@@ -196,7 +196,7 @@ namespace ProjectSpaceship.TableBuilder
                             tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] = lineTBottom;
                         }
                     }
-                    else if (cursorPositionInX > 1 && cursorPositionInX < tableXCount - 10
+                    else if (cursorPositionInX > 1 && cursorPositionInX < tableXCount - 11
                     && item.MergeCellOption is MergeCellOption.MergeTop
                     && item.MergeCellOption is MergeCellOption.MergeLeft)
                     {
@@ -232,7 +232,7 @@ namespace ProjectSpaceship.TableBuilder
                         }
                     }
                     // Right
-                    else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 10
+                    else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 11
                         && item.MergeCellOption is not MergeCellOption.MergeTop
                         && item.MergeCellOption is not MergeCellOption.MergeLeft)
                     {                       
@@ -249,7 +249,7 @@ namespace ProjectSpaceship.TableBuilder
                             tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] = lineCross;
                         }
                     }
-                    else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 10
+                    else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 11
                         && item.MergeCellOption is MergeCellOption.MergeTop
                         && item.MergeCellOption is not MergeCellOption.MergeLeft)
                     {
@@ -276,7 +276,7 @@ namespace ProjectSpaceship.TableBuilder
                             tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] = lineTRight;
                         }
                     }
-                    else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 10
+                    else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 11
                     && item.MergeCellOption is not MergeCellOption.MergeTop
                     && item.MergeCellOption is MergeCellOption.MergeLeft)
                     {
@@ -303,7 +303,7 @@ namespace ProjectSpaceship.TableBuilder
                             tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] = lineTBottom;
                         }
                     }
-                    else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 10
+                    else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 11
                     && item.MergeCellOption is MergeCellOption.MergeTop
                     && item.MergeCellOption is MergeCellOption.MergeLeft)
                     {
@@ -360,7 +360,7 @@ namespace ProjectSpaceship.TableBuilder
                         tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] = lineTLeft;
                     }
                     // Middle
-                    else if (cursorPositionInX > 1 && cursorPositionInX < tableXCount - 10
+                    else if (cursorPositionInX > 1 && cursorPositionInX < tableXCount - 11
                         && item.MergeCellOption is not MergeCellOption.MergeTop
                         && item.MergeCellOption is not MergeCellOption.MergeLeft)
                     {
@@ -412,7 +412,7 @@ namespace ProjectSpaceship.TableBuilder
                             tableBuilder[cursorPositionInX + 10, cursorPositionInY - 1] = lineTLeft;
                         }
                     }
-                    else if (cursorPositionInX > 1 && cursorPositionInX < tableXCount - 10
+                    else if (cursorPositionInX > 1 && cursorPositionInX < tableXCount - 11
                     && item.MergeCellOption is not MergeCellOption.MergeTop
                     && item.MergeCellOption is MergeCellOption.MergeLeft)
                     {
@@ -439,7 +439,7 @@ namespace ProjectSpaceship.TableBuilder
                             tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] = lineTBottom;
                         }
                     }
-                    else if (cursorPositionInX > 1 && cursorPositionInX < tableXCount - 10
+                    else if (cursorPositionInX > 1 && cursorPositionInX < tableXCount - 11
                     && item.MergeCellOption is MergeCellOption.MergeTop
                     && item.MergeCellOption is MergeCellOption.MergeLeft)
                     {
@@ -475,7 +475,7 @@ namespace ProjectSpaceship.TableBuilder
                         }
                     }
                     // Right
-                    else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 10
+                    else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 11
                        && item.MergeCellOption is not MergeCellOption.MergeTop
                        && item.MergeCellOption is not MergeCellOption.MergeLeft)
                     {                     
@@ -493,7 +493,7 @@ namespace ProjectSpaceship.TableBuilder
                             tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] = lineCross;
                         }
                     }
-                    else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 10
+                    else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 11
                         && item.MergeCellOption is MergeCellOption.MergeTop
                         && item.MergeCellOption is not MergeCellOption.MergeLeft)
                     {
@@ -520,7 +520,7 @@ namespace ProjectSpaceship.TableBuilder
                             tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] = lineTRight;
                         }
                     }
-                    else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 10
+                    else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 11
                     && item.MergeCellOption is not MergeCellOption.MergeTop
                     && item.MergeCellOption is MergeCellOption.MergeLeft)
                     {
@@ -547,7 +547,7 @@ namespace ProjectSpaceship.TableBuilder
                             tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] = lineTBottom;
                         }
                     }
-                    else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 10
+                    else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 11
                     && item.MergeCellOption is MergeCellOption.MergeTop
                     && item.MergeCellOption is MergeCellOption.MergeLeft)
                     {
@@ -596,18 +596,18 @@ namespace ProjectSpaceship.TableBuilder
                     if (tableBuilder[j, i] == 'L')
                     {
                         string outputString = contentQueue.Dequeue().ToString();
-                        finalOutputTable.Append($"{outputString,10}");                        
+                        finalOutputTable.Append($"{outputString,-10}");                        
                     }
                     else if (tableBuilder[j, i] == 'R')
                     {
                         string outputString = contentQueue.Dequeue().ToString();
-                        finalOutputTable.Append($"{ outputString,-10}");                        
+                        finalOutputTable.Append($"{ outputString,10}");                        
                     }
                     else if (tableBuilder[j, i] == 'C')
                     {
                         int padding = (10 - contentQueue.Peek().Length) / 2;
                         string outputString = contentQueue.Dequeue().ToString().PadLeft(padding);
-                        finalOutputTable.Append($"{outputString,10}");                        
+                        finalOutputTable.Append($"{outputString,-10}");                        
                     }
                     else
                     {
