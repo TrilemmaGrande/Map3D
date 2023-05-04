@@ -65,7 +65,7 @@ namespace ProjectSpaceship.TableBuilder
         {
             foreach (var item in cellContent)
             {
-                contentQueue.Enqueue(item.Content);
+                contentQueue.Enqueue((string)item.Content);
                 if (item.Alignment is Alignment.Left)
                 {
                     tableBuilder[cursorPositionInX, cursorPositionInY] = 'L';
@@ -575,7 +575,7 @@ namespace ProjectSpaceship.TableBuilder
                     }
                 }
 
-                // New Line
+                // Set Cursor
                 if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - 10 && cursorPositionInY < tableYCount - 2)
                 {
                     cursorPositionInY += 2;
@@ -595,16 +595,19 @@ namespace ProjectSpaceship.TableBuilder
                 {
                     if (tableBuilder[j, i] == 'L')
                     {
-                        finalOutputTable.Append((contentQueue.Dequeue().ToString(),10));
+                        finalOutputTable.Append((contentQueue.Peek().ToString(),10));
+                        contentQueue.Dequeue();
                     }
                     else if (tableBuilder[j, i] == 'R')
                     {
-                        finalOutputTable.Append((contentQueue.Dequeue().ToString(),-10));
+                        finalOutputTable.Append((contentQueue.Peek().ToString(),-10));
+                        contentQueue.Dequeue();
                     }
                     else if (tableBuilder[j, i] == 'C')
                     {
                         int padding = (10 - contentQueue.Peek().Length) / 2;
-                        finalOutputTable.Append((contentQueue.Dequeue().ToString().PadLeft(padding),10));
+                        finalOutputTable.Append((contentQueue.Peek().ToString().PadLeft(padding),10));
+                        contentQueue.Dequeue();
                     }
                     else
                     {

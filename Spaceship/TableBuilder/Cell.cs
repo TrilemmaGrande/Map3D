@@ -24,7 +24,7 @@ namespace ProjectSpaceship.TableBuilder
         public MergeCellOption MergeCellOption { get; set; }
         public string Content { get; set; }
 
-        public Cell(MergeCellOption mergeCellOption = MergeCellOption.MergeDefault, Alignment alignment = Alignment.Left, string content = null)
+        public Cell(string content, Alignment alignment = Alignment.Left,  MergeCellOption mergeCellOption = MergeCellOption.MergeDefault)
         {
             MergeCellOption = mergeCellOption;
             Alignment = alignment;
