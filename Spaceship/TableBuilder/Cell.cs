@@ -19,7 +19,7 @@
         public MergeCell MergeCellOption { get; set; }
         public string Content { get; set; }
 
-        public Cell(string content, Alignment alignment = Alignment.Left, MergeCell mergeCellOption = MergeCell.MergeDefault)
+        public Cell(string content, Alignment alignment = Alignment.Left, MergeCell mergeCell = MergeCell.MergeDefault)
         {
             MergeCellOption = mergeCellOption;
             Alignment = alignment;
