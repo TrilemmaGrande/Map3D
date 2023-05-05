@@ -346,6 +346,7 @@ namespace ProjectSpaceship
                 inputOptionTable.AddCells(new Cell(item,Alignment.Left,MergeCell.MergeLeft));
             }
             Console.OutputEncoding = Encoding.Unicode;
+            Console.SetCursorPosition(0, 2);
             Console.WriteLine(inputOptionTable.GetTable());
         }
         static void PrintHeader(World world)
@@ -376,7 +377,8 @@ namespace ProjectSpaceship
                 new Cell("Exp:", Alignment.Left, MergeCell.MergeTop), new Cell(printExperience, Alignment.Right, MergeCell.MergeTopLeft),
                 new Cell("Fuel", Alignment.Left, MergeCell.MergeTop), new Cell(printSpaceshipFuel, Alignment.Right, MergeCell.MergeTopLeft));
 
-            Console.OutputEncoding = Encoding.Unicode;          
+            Console.OutputEncoding = Encoding.Unicode;
+            Console.SetCursorPosition(0, 2);
             Console.WriteLine(defaultOutputTable.GetTable());
         }
         static void MiningMenu(World world)

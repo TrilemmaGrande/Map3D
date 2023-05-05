@@ -68,10 +68,12 @@ namespace ProjectSpaceship
                         $"{stellarObject.GetStellarObjectCoordinate().GetCoordinateZ(),3}"),
                     new Cell(stellarObject.GetType().Name));
             }
+            Console.SetCursorPosition(0, 15);
             Console.WriteLine(coordinateTable.GetTable());
         }
         public void PrintStellarObjectsMap()
         {
+            Console.SetCursorPosition(0, 30);
             OrderStellarObjectsByCoordinates();
             bool stellarObjectPrinted = false;
             for (int y = sectorMinY; y <= sectorMaxY; y++)
