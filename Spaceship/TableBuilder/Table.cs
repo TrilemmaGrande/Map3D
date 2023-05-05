@@ -578,12 +578,12 @@ namespace ProjectSpaceship.TableBuilder
                     }
                 }
                 // Set Cursor
-                if (cursorPositionInX >= 1 && cursorPositionInX == tableXCount - wordLengthMax + 1 && cursorPositionInY <= tableYCount)
+                if (cursorPositionInX >= 1 && cursorPositionInX == tableXCount - wordLengthMax - 1 && cursorPositionInY <= tableYCount)
                 {
                     cursorPositionInY += 2;
                     cursorPositionInX = 1;
                 }
-                else if (cursorPositionInX >= 1 && cursorPositionInX < tableXCount - wordLengthMax + 1 && cursorPositionInY < tableYCount)
+                else if (cursorPositionInX >= 1 && cursorPositionInX < tableXCount - wordLengthMax - 1 && cursorPositionInY < tableYCount)
                 {
                     cursorPositionInX += wordLengthMax + 1;
                 }
@@ -617,7 +617,6 @@ namespace ProjectSpaceship.TableBuilder
                     }
                 }
                 finalOutputTable.Append('\n');
-                Console.WriteLine(wordLengthMax + " " + tableXCount + " " + tableYCount);
             }
             return finalOutputTable.ToString();
         }
