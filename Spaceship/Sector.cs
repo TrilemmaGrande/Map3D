@@ -58,7 +58,7 @@ namespace ProjectSpaceship
         public void PrintStellarObjectsCoordinates()
         {
             OrderStellarObjectsByCoordinates();
-            Table coordinateTable = new Table(stellarObjects.Count(), 2, 13);
+            Table coordinateTable = new Table(stellarObjects.Count(), 2, 15);
             foreach (var stellarObject in stellarObjects)
             {
                 coordinateTable.AddCells(

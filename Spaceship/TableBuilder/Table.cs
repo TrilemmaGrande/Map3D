@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 
 namespace ProjectSpaceship.TableBuilder
 {
@@ -31,7 +32,7 @@ namespace ProjectSpaceship.TableBuilder
             int borderCountX = collums + 1;
             this.wordLengthMax = wordLengthMax;
             this.tableYCount = rows + borderCountY;
-            this.tableXCount = (collums * wordLengthMax + borderCountX);
+            this.tableXCount = (collums * (wordLengthMax + borderCountX));
             this.tableBuilder = new char[tableXCount, tableYCount];
             // Build frame borders.
             for (int i = 0; i < tableXCount; i++)
@@ -100,7 +101,7 @@ namespace ProjectSpaceship.TableBuilder
                 else if (cursorPositionInY > 1 && cursorPositionInY < tableYCount - 3 && tableYCount > 3)
                 {
                     // Left
-                    if (cursorPositionInX == 1 && item.MergeCellOption is MergeCell.MergeTop && tableXCount > 12)
+                    if (cursorPositionInX == 1 && item.MergeCellOption is MergeCell.MergeTop && tableXCount > wordLengthMax + 2)
                     {
                         for (int i = 0; i < wordLengthMax; i++)
                         {
@@ -445,7 +446,7 @@ namespace ProjectSpaceship.TableBuilder
                             tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] = lineTBottom;
                         }
                     }
-                    else if (cursorPositionInX > 1 && cursorPositionInX < tableXCount - wordLengthMax - 1
+                    else if (cursorPositionInX > 1 && cursorPositionInX < tableXCount - wordLengthMax + 1
                     && item.MergeCellOption is MergeCell.MergeTopLeft)
                     {
                         for (int i = 0; i < wordLengthMax; i++)
@@ -476,7 +477,7 @@ namespace ProjectSpaceship.TableBuilder
                         }
                         else
                         {
-                            tableBuilder[cursorPositionInX + 10, cursorPositionInY - 1] = lineTLeft;
+                            tableBuilder[cursorPositionInX + wordLengthMax, cursorPositionInY - 1] = lineTLeft;
                         }
                     }
                     // Right
@@ -606,7 +607,7 @@ namespace ProjectSpaceship.TableBuilder
                     }
                     else if (tableBuilder[j, i] == 'C')
                     {
-                        int padding = (10 - contentQueue.Peek().Length) / 2;
+                        int padding = (wordLengthMax - contentQueue.Peek().Length) / 2;
                         string outputString = contentQueue.Dequeue().ToString().PadLeft(padding);
                         finalOutputTable.Append($"{outputString.PadRight(wordLengthMax)}");
                     }
@@ -616,6 +617,7 @@ namespace ProjectSpaceship.TableBuilder
                     }
                 }
                 finalOutputTable.Append('\n');
+                Console.WriteLine(wordLengthMax + " " + tableXCount + " " + tableYCount);
             }
             return finalOutputTable.ToString();
         }
