@@ -282,7 +282,7 @@ namespace ProjectSpaceship
             {
                 PrintHeader(world);
                 Console.WriteLine("travel destination: (\"x,y,z\") between -50 and +50\t 0 = return");
-                Coordinate destination = userInputToCoordinate();
+                Coordinate destination = UserInputToCoordinate();
                 if (destination is null)
                 {
                     inTravelMenu = false;
@@ -303,7 +303,7 @@ namespace ProjectSpaceship
                 }
             }
         }
-        static Coordinate userInputToCoordinate()
+        static Coordinate UserInputToCoordinate()
         {
             bool inMenu = true;
             while (inMenu)
