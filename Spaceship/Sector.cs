@@ -1,4 +1,5 @@
 ﻿using ProjectSpaceship.StellarObjects;
+using ProjectSpaceship.TableBuilder;
 
 namespace ProjectSpaceship
 {
@@ -42,7 +43,7 @@ namespace ProjectSpaceship
                 new BlackHole(new Coordinate(x, y, z), "TestOwner"),
                 new Planet(new Coordinate(x, y, z), "TestOwner"),
                 new Asteroid(new Coordinate(x, y, z), "TestOwner"),
-                new SpaceStation(new Coordinate(x, y, z), "TestOwner" )};
+                new Station(new Coordinate(x, y, z), "TestOwner" )};
 
 
             stellarObjects.Add(stellarObjectsArray[rand.Next(stellarObjectsArray.Length)]);
@@ -57,14 +58,17 @@ namespace ProjectSpaceship
         public void PrintStellarObjectsCoordinates()
         {
             OrderStellarObjectsByCoordinates();
+            Table coordinateTable = new Table(stellarObjects.Count(), 2, 13);
             foreach (var stellarObject in stellarObjects)
             {
-                Console.WriteLine(
-                    $"{stellarObject.GetStellarObjectCoordinate().GetCoordinateX(),3} \t" +
-                    $"{stellarObject.GetStellarObjectCoordinate().GetCoordinateY(),3} \t" +
-                    $"{stellarObject.GetStellarObjectCoordinate().GetCoordinateZ(),3} \t" +
-                    $"{stellarObject.GetType().Name}");
+                coordinateTable.AddCells(
+                    new Cell(
+                        $"{stellarObject.GetStellarObjectCoordinate().GetCoordinateX(),3} |" +
+                        $"{stellarObject.GetStellarObjectCoordinate().GetCoordinateY(),3} |" +
+                        $"{stellarObject.GetStellarObjectCoordinate().GetCoordinateZ(),3}"),
+                    new Cell(stellarObject.GetType().Name));
             }
+            Console.WriteLine(coordinateTable.GetTable());
         }
         public void PrintStellarObjectsMap()
         {
