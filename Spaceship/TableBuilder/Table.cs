@@ -32,7 +32,7 @@ namespace ProjectSpaceship.TableBuilder
             int borderCountX = collums + 1;
             this.wordLengthMax = wordLengthMax;
             this.tableYCount = rows + borderCountY;
-            this.tableXCount = (collums * (wordLengthMax + borderCountX));
+            this.tableXCount = (collums * wordLengthMax + borderCountX);
             this.tableBuilder = new char[tableXCount, tableYCount];
             // Build frame borders.
             for (int i = 0; i < tableXCount; i++)
