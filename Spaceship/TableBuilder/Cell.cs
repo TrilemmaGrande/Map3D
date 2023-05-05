@@ -21,7 +21,7 @@
 
         public Cell(string content, Alignment alignment = Alignment.Left, MergeCell mergeCell = MergeCell.MergeDefault)
         {
-            MergeCellOption = mergeCellOption;
+            MergeCellOption = mergeCell;
             Alignment = alignment;
             Content = content;
         }
