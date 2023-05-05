@@ -47,6 +47,7 @@ namespace ProjectSpaceship
             {
                 PrintHeader(world);
                 Console.WriteLine("1 = travel \t 2 = scan sector \t 3 = scan position \t 0 = quit");
+                PrintInputOption("1 travel", "2 scan sec", "3 scan pos", "0 quit");
                 string userInput = Console.ReadLine();
                 Console.Clear();
                 if (userInput == "1")
@@ -334,6 +335,16 @@ namespace ProjectSpaceship
                 return travelDestination;
             }
             return null;
+        }
+        static void PrintInputOption(params string[] inputOption)
+        {
+            Table inputOptionTable = new Table(1, inputOption.Length);
+            foreach (var item in inputOption)
+            {
+                inputOptionTable.AddCells(new Cell(item));
+            }
+            Console.OutputEncoding = Encoding.Unicode;
+            Console.WriteLine(inputOptionTable.GetTable());
         }
         static void PrintHeader(World world)
         {
