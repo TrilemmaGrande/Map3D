@@ -91,17 +91,11 @@ namespace ProjectSpaceship.TableBuilder
                     tableBuilder[cursorPositionInX - 1, cursorPositionInY] = lineVertikal;
                     tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] = lineTTop;
                 }
-                if (cursorPositionInX > 1 && cursorPositionInY == 1 && item.MergeCellOption is not MergeCell.MergeLeft && tableYCount == 3)
-                {
-                    tableBuilder[cursorPositionInX - 1, cursorPositionInY] = lineVertikal;
-                    tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] = lineTTop;
-                    tableBuilder[cursorPositionInX - 1, cursorPositionInY + 1] = lineTBottom;
-                }
                 // Build middle parts borders.
                 else if (cursorPositionInY > 1 && cursorPositionInY < tableYCount - 3 && tableYCount > 3)
                 {
                     // Left
-                    if (cursorPositionInX == 1 && item.MergeCellOption is MergeCell.MergeTop && tableXCount < wordLengthMax - 1)
+                    if (cursorPositionInX == 1 && item.MergeCellOption is MergeCell.MergeTop)
                     {
                         for (int i = 0; i < wordLengthMax; i++)
                         {
@@ -132,7 +126,7 @@ namespace ProjectSpaceship.TableBuilder
                     }
                     // Middle                   
                     else if (cursorPositionInX > 1 && cursorPositionInX < tableXCount - wordLengthMax - 1
-                        && item.MergeCellOption is MergeCell.MergeDefault && tableXCount > wordLengthMax + 2)
+                        && item.MergeCellOption is MergeCell.MergeDefault)
                     {
                         for (int i = 0; i < wordLengthMax; i++)
                         {
@@ -309,7 +303,7 @@ namespace ProjectSpaceship.TableBuilder
                             tableBuilder[cursorPositionInX - 1, cursorPositionInY - 1] = lineTBottom;
                         }
                     }
-                    else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - wordLengthMax + 1
+                    else if (cursorPositionInX > 1 && cursorPositionInX == tableXCount - wordLengthMax - 1
                     && item.MergeCellOption is MergeCell.MergeTopLeft)
                     {
                         for (int i = 0; i < wordLengthMax; i++)
