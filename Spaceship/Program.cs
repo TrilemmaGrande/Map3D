@@ -62,7 +62,7 @@ namespace ProjectSpaceship
                 {
                     if (spaceship.GetPosition().GetSector().StellarObjectListContains(spaceship.GetPosition().GetCoordinate()))
                     {
-                        if (spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) is Station)
+                        if (spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) is SpaceStation)
                         {
                             SpaceStationMenu(world);
                         }
@@ -98,7 +98,7 @@ namespace ProjectSpaceship
             Console.Clear();
             Console.WriteLine("we found a spacestation! \n");
             Spaceship spaceship = world.GetPlayerSpaceship();
-            Station spacestation = spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) as Station;
+            SpaceStation spacestation = spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()) as SpaceStation;
             bool inSpacestation = true;
             string refuelOption = "";
             while (inSpacestation)
@@ -122,16 +122,17 @@ namespace ProjectSpaceship
                 else if (userInput == "3")
                 {
                     refuelOption = "  |  4 refuel";
+                    Console.SetCursorPosition(0, 18);
                     Console.WriteLine($"Owner: {spacestation.GetOwner()}");
-                    Console.WriteLine();
                     Console.WriteLine($"Fuel: {spacestation.GetFuelstation().GetFuel()}");
-                    Console.WriteLine();
+                    Console.WriteLine($"Price: { spacestation.GetFuelstation().GetFuelPrice()}");
                 }
                 else if (userInput == "4" && refuelOption != "")
                 {
                     double usedFuel = spaceship.GetFuelMax() - spaceship.GetFuel();
                     spacestation.GetFuelstation().DecreaseFuel(usedFuel);
                     spaceship.IncreaseFuel(usedFuel);
+                    world.GetPlayer().DecreaseCredits(usedFuel * spacestation.GetFuelstation().GetFuelPrice());
                 }
                 else if (userInput == "0")
                 {
@@ -173,8 +174,8 @@ namespace ProjectSpaceship
                 else if (userInput == "3")
                 {
                     mineOption = "  |  4 mine";
+                    Console.SetCursorPosition(0, 18);
                     Console.WriteLine($"Owner: {spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()).GetOwner()}");
-                    Console.WriteLine();
                     Console.WriteLine("Type\tAmount\tValue");
                     foreach (var resource in asteroid.GetResourceList())
                     {
@@ -227,8 +228,8 @@ namespace ProjectSpaceship
                 else if (userInput == "3")
                 {
                     tradeOption = "  |  4 trade";
+                    Console.SetCursorPosition(0, 18);
                     Console.WriteLine($"Owner: {spaceship.GetPosition().GetSector().GetStellarObjectFromSectorList(spaceship.GetPosition().GetCoordinate()).GetOwner()}");
-                    Console.WriteLine();
                     Console.WriteLine($"Merchant with {planet.GetMerchant().GetCredits()} Credits");
                     Console.WriteLine();
                 }
@@ -356,26 +357,32 @@ namespace ProjectSpaceship
             string whiteSpace = (" ");
             string printPlayer = $"{player.GetName()}";
             string printLevel = $"{player.GetLevel()}";
-            string printExperience = $"{player.GetExperience()}";
+            string printExperience = $"{player.GetExperience().ToString("F2")}";
+            string printCredits = $"{player.GetCredits().ToString("F2")}";
             string printSpaceshipName = $"{spaceship.GetName()}";
-            string printSpaceshipWeight = $"{spaceship.GetWeight()}";
+            string printSpaceshipWeight = $"{spaceship.GetWeight().ToString("F2")}";
+            string printSpaceshipHealth = $"{spaceship.GetHealth().ToString("F2")}";
             string printSpaceshipFuel = $"{spaceship.GetFuel().ToString("F2")}";
             string printSector = $"{spaceship.GetPosition().GetSector().GetSectorCoordinate().CoordinateToString()}";
             string printCoordinate = $"{spaceship.GetPosition().GetCoordinate().CoordinateToString()}";
 
-            Table defaultOutputTable = new Table(3, 6, 15);
+            Table defaultOutputTable = new Table(4, 6, 15);
             defaultOutputTable.AddCells(
                 new Cell("Sector:"), new Cell(printSector,Alignment.Right,MergeCell.MergeLeft), 
                 new Cell("Player:"), new Cell(printPlayer,Alignment.Right,MergeCell.MergeLeft),
                 new Cell("Spaceship:"), new Cell(printSpaceshipName, Alignment.Right, MergeCell.MergeLeft));
             defaultOutputTable.AddCells(
-                new Cell("Coord:"), new Cell(printCoordinate, Alignment.Right, MergeCell.MergeLeft), 
+                new Cell("Coord:"), new Cell(printCoordinate, Alignment.Right, MergeCell.MergeLeft),
                 new Cell("Level:"), new Cell(printLevel, Alignment.Right, MergeCell.MergeLeft),
-                new Cell("Weight:"), new Cell(printSpaceshipWeight, Alignment.Right, MergeCell.MergeLeft));
+                new Cell("Health:"), new Cell(printSpaceshipHealth, Alignment.Right, MergeCell.MergeLeft));
             defaultOutputTable.AddCells(
-                new Cell(" ",Alignment.Left,MergeCell.MergeTop), new Cell(whiteSpace, Alignment.Right, MergeCell.MergeTopLeft), 
+                new Cell(" ",Alignment.Left,MergeCell.MergeTop), new Cell(whiteSpace, Alignment.Right, MergeCell.MergeTopLeft),
                 new Cell("Exp:", Alignment.Left, MergeCell.MergeTop), new Cell(printExperience, Alignment.Right, MergeCell.MergeTopLeft),
                 new Cell("Fuel", Alignment.Left, MergeCell.MergeTop), new Cell(printSpaceshipFuel, Alignment.Right, MergeCell.MergeTopLeft));
+            defaultOutputTable.AddCells(
+                new Cell(" ", Alignment.Left, MergeCell.MergeTop), new Cell(whiteSpace, Alignment.Right, MergeCell.MergeTopLeft),
+                new Cell("Credits:", Alignment.Left, MergeCell.MergeTop), new Cell(printCredits, Alignment.Right, MergeCell.MergeTopLeft),
+                new Cell("Weight:", Alignment.Left, MergeCell.MergeTop), new Cell(printSpaceshipWeight, Alignment.Right, MergeCell.MergeTopLeft));
 
             Console.OutputEncoding = Encoding.Unicode;
             Console.SetCursorPosition(0, 2);

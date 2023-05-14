@@ -4,13 +4,22 @@
     {
         double fuel;
         double fuelMax;
+        double fuelPrice;
         public FuelStation()
         {
             Random rand = new Random();
             this.fuelMax = rand.Next(1000, 10000);
             this.fuel = fuelMax;
+            this.fuelPrice = 0.05;
         }
-
+        public double GetFuelPrice()
+        {
+            return fuelPrice;
+        }
+        public void SetFuelPrice(double fuel)
+        {
+            this.fuelPrice = fuelPrice;
+        }
         public double GetFuel()
         {
             return fuel;

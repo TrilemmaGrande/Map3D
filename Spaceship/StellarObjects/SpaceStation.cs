@@ -2,11 +2,11 @@
 
 namespace ProjectSpaceship.StellarObjects
 {
-    internal class Station : StellarObject
+    internal class SpaceStation : StellarObject
     {
         private FuelStation fuelStation = new FuelStation();
 
-        public Station(Coordinate coordinate, string owner) : base(coordinate)
+        public SpaceStation(Coordinate coordinate, string owner) : base(coordinate)
         {
             this.owner = owner;
         }

@@ -20,7 +20,7 @@ namespace ProjectSpaceship
             this.name = name;
             this.level = 0;
             this.experience = 0;
-            this.credits = 0;
+            this.credits = 100;
         }
 
         public string GetName()

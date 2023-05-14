@@ -43,7 +43,7 @@ namespace ProjectSpaceship
                 new BlackHole(new Coordinate(x, y, z), "TestOwner"),
                 new Planet(new Coordinate(x, y, z), "TestOwner"),
                 new Asteroid(new Coordinate(x, y, z), "TestOwner"),
-                new Station(new Coordinate(x, y, z), "TestOwner" )};
+                new SpaceStation(new Coordinate(x, y, z), "TestOwner" )};
 
 
             stellarObjects.Add(stellarObjectsArray[rand.Next(stellarObjectsArray.Length)]);
@@ -68,7 +68,7 @@ namespace ProjectSpaceship
                         $"{stellarObject.GetStellarObjectCoordinate().GetCoordinateZ(),3}"),
                     new Cell(stellarObject.GetType().Name));
             }
-            Console.SetCursorPosition(0, 15);
+            Console.SetCursorPosition(0, 18);
             Console.WriteLine(coordinateTable.GetTable());
         }
         public void PrintStellarObjectsMap()

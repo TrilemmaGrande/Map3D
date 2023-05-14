@@ -6,6 +6,7 @@ namespace ProjectSpaceship.Spaceships
     class Spaceship
     {
         private string name;
+        private double health;
         private Engine engine;
         private Tank tank;
         private Cargo cargo;
@@ -21,6 +22,7 @@ namespace ProjectSpaceship.Spaceships
             this.cargo = cargo;
             fuelConsumption = GetWeight() / 1000 * engine.GetPowerMax();
             this.position = position;
+            this.health = 100;
         }
         public void Travel(ITravelingType travelingType, Coordinate destination)
         {
@@ -42,6 +44,14 @@ namespace ProjectSpaceship.Spaceships
         public Position GetPosition()
         {
             return position;
+        }
+        public double GetHealth()
+        {
+            return health;
+        }
+        public void SetHealth(double health)
+        {
+            this.health = health;
         }
         public void SetFuel(double fuel)
         {
